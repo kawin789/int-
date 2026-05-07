@@ -226,7 +226,7 @@ const Products = () => {
     return (
         <div className="relative min-h-screen pt-20">
             <SEO 
-                title="Our Products | SaaS Products & Solutions by Integer.IO Solutions"
+                title="Our Products in Madurai, Coimbatore & Chennai | SaaS Products by Integer.IO Solutions"
                 description="Explore SaaS products developed by Integer.IO Solutions, one of the top Madurai IT companies. We build cost efficient web development and AI automation tools."
                 page="products"
             />
@@ -239,10 +239,7 @@ const Products = () => {
                     className="text-center mb-8 sm:mb-16"
                 >
                     <h1
-                        className={`text-2xl sm:text-4xl md:text-6xl font-bold mb-3 sm:mb-6 ${isDark
-                            ? 'bg-gradient-to-r from-emerald-400 via-purple-400 to-pink-400 bg-clip-text text-transparent'
-                            : 'bg-gradient-to-r from-purple-900 via-indigo-800 to-emerald-800 bg-clip-text text-transparent'
-                            }`}
+                        className={`text-2xl sm:text-4xl md:text-6xl font-bold mb-3 sm:mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}
                     >
                         Our Products
                     </h1>
@@ -272,7 +269,7 @@ const Products = () => {
 
                                     {/* Product Details */}
                                     <div className="lg:w-1/2 flex flex-col justify-center">
-                                        <span className={`text-${product.color}-400 text-[10px] sm:text-xs lg:text-sm font-semibold uppercase tracking-wider mb-1 sm:mb-2`}>
+                                        <span className={`text-[10px] sm:text-xs lg:text-sm font-semibold uppercase tracking-wider mb-1 sm:mb-2 ${isDark ? `text-${product.color}-400` : 'text-emerald-700'}`}>
                                             {product.subtitle}
                                         </span>
                                         <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-4">
@@ -343,10 +340,7 @@ const Products = () => {
                     className="mt-10 sm:mt-16 lg:mt-20"
                 >
                     <InteractiveCard className="!p-4 sm:!p-8 lg:!p-12 text-center">
-                        <h2 className={`text-xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-6 bg-gradient-to-r bg-clip-text text-transparent ${isDark
-                            ? 'from-emerald-400 to-purple-400'
-                            : 'from-purple-800 to-emerald-700'
-                            }`}>
+                        <h2 className={`text-xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
                             Need a Custom Solution?
                         </h2>
                         <p

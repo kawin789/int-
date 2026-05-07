@@ -8,6 +8,8 @@ import {
   Instagram,
   Linkedin,
   Youtube,
+  Facebook,
+  Twitter,
   ArrowRight,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -201,6 +203,28 @@ const Footer: React.FC = () => {
               >
                 <Linkedin className="h-4 w-4" />
               </a>
+              <a
+                href="https://www.facebook.com/profile.php?id=61588744035428"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`p-1.5 rounded-lg transition-colors border ${isDark
+                  ? 'text-gray-200 border-white/10 hover:text-blue-500'
+                  : 'text-gray-600 border-gray-200 hover:text-blue-700'
+                  }`}
+              >
+                <Facebook className="h-4 w-4" />
+              </a>
+              <a
+                href="https://x.com/Integer_IO"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`p-1.5 rounded-lg transition-colors border ${isDark
+                  ? 'text-gray-200 border-white/10 hover:text-gray-400'
+                  : 'text-gray-600 border-gray-200 hover:text-gray-800'
+                  }`}
+              >
+                <Twitter className="h-4 w-4" />
+              </a>
             </div>
           </motion.div>
 
@@ -348,19 +372,25 @@ const Footer: React.FC = () => {
           className={`mt-4 sm:mt-10 pt-4 sm:pt-8 border-t flex justify-center items-center ${isDark ? 'border-gray-800' : 'border-gray-200'
             }`}
         >
-          <p
-            className={`text-xs sm:text-sm flex flex-wrap justify-center items-center ${isDark ? 'text-gray-400' : 'text-gray-500'
-              }`}
-          >
-            © 2026 Integer.IO Solutions. Crafted with{' '}
-            <Heart className={`h-3 w-3 sm:h-4 sm:w-4 mx-1 animate-pulse ${isDark ? 'text-red-400' : 'text-red-600'}`} /> by
-            <Link
-              to="/admin"
-              className={`ml-1 hover:text-emerald-400 transition-colors ${isDark ? 'text-gray-200' : 'text-gray-600'}`}
+          <div className="flex flex-col items-center">
+            <p
+              className={`text-xs sm:text-sm font-medium ${isDark ? 'text-gray-400' : 'text-gray-500'}`}
             >
-              MS Kawin
-            </Link>
-          </p>
+              © 2026 Integer.IO Solutions. All rights reserved.
+            </p>
+            <p
+              className={`text-[10px] sm:text-xs mt-1 flex flex-wrap justify-center items-center ${isDark ? 'text-gray-500' : 'text-gray-400'}`}
+            >
+              Crafted with{' '}
+              <Heart className={`h-2.5 w-2.5 sm:h-3 sm:w-3 mx-1 animate-pulse ${isDark ? 'text-red-400' : 'text-red-600'}`} /> by
+              <Link
+                to="/admin"
+                className={`ml-1 hover:text-emerald-400 transition-colors ${isDark ? 'text-gray-400' : 'text-gray-500'}`}
+              >
+                MS Kawin
+              </Link>
+            </p>
+          </div>
         </motion.div>
       </div>
     </footer>

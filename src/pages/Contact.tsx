@@ -10,10 +10,13 @@ import {
   Instagram,
   Linkedin,
   Youtube,
+  Facebook,
+  Twitter,
   Globe,
   Users,
   Star,
   XCircle,
+  ChevronDown,
 } from 'lucide-react';
 import InteractiveCard from '../components/InteractiveCard';
 import { useTheme } from '../contexts/ThemeContext';
@@ -34,6 +37,7 @@ const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [validationError, setValidationError] = useState('');
   const [showServiceDropdown, setShowServiceDropdown] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   // Auto-scroll to form if hash is present
   useEffect(() => {
@@ -163,7 +167,7 @@ const Contact = () => {
   return (
     <div className="relative min-h-screen pt-20">
       <SEO 
-        title="Contact Us | Integer.IO Solutions - Madurai IT Companies"
+        title="Contact Us | Integer.IO Solutions - Madurai, Coimbatore & Chennai"
         description="Get in touch with Integer.IO Solutions for cost efficient web development, SaaS products, and final year projects overall TamilNadu. Based in Madurai, serving clients globally."
         page="contact"
       />
@@ -174,10 +178,7 @@ const Contact = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-8 sm:mb-16"
         >
-          <h1 className={`text-2xl sm:text-4xl md:text-6xl font-bold mb-3 sm:mb-6 ${isDark
-            ? 'bg-gradient-to-r from-emerald-400 via-purple-400 to-pink-400 bg-clip-text text-transparent'
-            : 'bg-gradient-to-r from-purple-900 via-indigo-800 to-emerald-800 bg-clip-text text-transparent'
-            }`}>
+          <h1 className={`text-2xl sm:text-4xl md:text-6xl font-bold mb-3 sm:mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Contact Us
           </h1>
           <p className={`text-sm sm:text-lg md:text-xl font-medium ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
@@ -194,137 +195,72 @@ const Contact = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex flex-col"
           >
-            <h2 className={`text-xl sm:text-3xl font-bold mb-4 sm:mb-8 bg-gradient-to-r bg-clip-text text-transparent ${isDark
-              ? 'from-emerald-400 to-purple-400'
-              : 'from-purple-800 to-emerald-700'
-              }`}>
+            <h2 className={`text-xl sm:text-3xl font-bold mb-4 sm:mb-8 ${isDark ? 'text-white' : 'text-gray-900'}`}>
               Get In Touch
             </h2>
 
             <div className="space-y-3 sm:space-y-6 mb-4 sm:mb-8">
+              {/* Contact Details Card */}
               <InteractiveCard glowColor="emerald" className="hover-3d">
-                <div className="flex items-center space-x-3 sm:space-x-4">
-                  <Phone className="h-5 w-5 sm:h-8 sm:w-8 text-emerald-400 flex-shrink-0" />
-                  <div>
-                    <h3
-                      className={`text-sm sm:text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-800'
-                        }`}
-                    >
-                      Phone / WhatsApp
-                    </h3>
-                    <a
-                      href="tel:8015355914"
-                      className="text-xs sm:text-base text-emerald-400 hover:text-emerald-300 transition-colors"
-                    >
-                      +91 8015355914
+                <h3 className={`text-sm sm:text-lg font-bold mb-3 sm:mb-4 ${isDark ? 'text-white' : 'text-gray-800'}`}>
+                  Contact Details
+                </h3>
+                <div className="space-y-2.5 sm:space-y-4">
+                  <a href="tel:8015355914" className="flex items-center space-x-3 sm:space-x-4 group">
+                    <Phone className="h-4 w-4 sm:h-6 sm:w-6 text-emerald-400 flex-shrink-0" />
+                    <span className={`text-xs sm:text-base transition-colors ${isDark ? 'text-gray-200 group-hover:text-emerald-400' : 'text-gray-700 group-hover:text-emerald-600'}`}>+91 8015355914</span>
+                  </a>
+                  <a href="mailto:integer.io.ai@gmail.com" className="flex items-center space-x-3 sm:space-x-4 group">
+                    <Mail className="h-4 w-4 sm:h-6 sm:w-6 text-purple-400 flex-shrink-0" />
+                    <span className={`text-xs sm:text-base transition-colors break-all ${isDark ? 'text-gray-200 group-hover:text-purple-400' : 'text-gray-700 group-hover:text-purple-600'}`}>integer.io.ai@gmail.com</span>
+                  </a>
+                  <div className="flex items-center space-x-3 sm:space-x-4">
+                    <MapPin className="h-4 w-4 sm:h-6 sm:w-6 text-teal-400 flex-shrink-0" />
+                    <span className={`text-xs sm:text-base ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>Madurai, Coimbatore, Chennai</span>
+                  </div>
+                </div>
+
+                {/* Social Media Icons */}
+                <div className={`mt-4 sm:mt-6 pt-3 sm:pt-4 border-t ${isDark ? 'border-white/10' : 'border-gray-200'}`}>
+                  <h4 className={`text-xs sm:text-sm font-semibold mb-2 sm:mb-3 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>Follow Us</h4>
+                  <div className="flex flex-wrap gap-2 sm:gap-3">
+                    <a href="https://instagram.com/Integer.IO.services" target="_blank" rel="noopener noreferrer"
+                      className={`p-2 sm:p-2.5 rounded-xl border transition-all duration-300 hover:scale-110 ${isDark ? 'border-white/10 hover:bg-pink-500/20 hover:border-pink-500/50' : 'border-gray-200 hover:bg-pink-50 hover:border-pink-400'}`}>
+                      <Instagram className={`h-4 w-4 sm:h-5 sm:w-5 ${isDark ? 'text-pink-400' : 'text-pink-600'}`} />
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61588744035428" target="_blank" rel="noopener noreferrer"
+                      className={`p-2 sm:p-2.5 rounded-xl border transition-all duration-300 hover:scale-110 ${isDark ? 'border-white/10 hover:bg-blue-500/20 hover:border-blue-500/50' : 'border-gray-200 hover:bg-blue-50 hover:border-blue-400'}`}>
+                      <Facebook className={`h-4 w-4 sm:h-5 sm:w-5 ${isDark ? 'text-blue-400' : 'text-blue-700'}`} />
+                    </a>
+                    <a href="https://www.linkedin.com/company/integer-io-services/" target="_blank" rel="noopener noreferrer"
+                      className={`p-2 sm:p-2.5 rounded-xl border transition-all duration-300 hover:scale-110 ${isDark ? 'border-white/10 hover:bg-blue-500/20 hover:border-blue-500/50' : 'border-gray-200 hover:bg-blue-50 hover:border-blue-400'}`}>
+                      <Linkedin className={`h-4 w-4 sm:h-5 sm:w-5 ${isDark ? 'text-blue-400' : 'text-blue-600'}`} />
+                    </a>
+                    <a href="https://www.youtube.com/@integer-io" target="_blank" rel="noopener noreferrer"
+                      className={`p-2 sm:p-2.5 rounded-xl border transition-all duration-300 hover:scale-110 ${isDark ? 'border-white/10 hover:bg-red-500/20 hover:border-red-500/50' : 'border-gray-200 hover:bg-red-50 hover:border-red-400'}`}>
+                      <Youtube className={`h-4 w-4 sm:h-5 sm:w-5 ${isDark ? 'text-red-400' : 'text-red-600'}`} />
+                    </a>
+                    <a href="https://x.com/Integer_IO" target="_blank" rel="noopener noreferrer"
+                      className={`p-2 sm:p-2.5 rounded-xl border transition-all duration-300 hover:scale-110 ${isDark ? 'border-white/10 hover:bg-gray-500/20 hover:border-gray-500/50' : 'border-gray-200 hover:bg-gray-50 hover:border-gray-400'}`}>
+                      <Twitter className={`h-4 w-4 sm:h-5 sm:w-5 ${isDark ? 'text-gray-300' : 'text-gray-700'}`} />
                     </a>
                   </div>
                 </div>
               </InteractiveCard>
 
+              {/* Service Areas Card */}
               <InteractiveCard glowColor="purple" className="hover-3d">
                 <div className="flex items-center space-x-3 sm:space-x-4">
-                  <Mail className="h-5 w-5 sm:h-8 sm:w-8 text-purple-400 flex-shrink-0" />
+                  <MapPin className={`h-5 w-5 sm:h-8 sm:w-8 flex-shrink-0 ${isDark ? 'text-emerald-400' : 'text-purple-700'}`} />
                   <div>
-                    <h3
-                      className={`text-sm sm:text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-800'
-                        }`}
-                    >
-                      Email
-                    </h3>
-                    <a
-                      href="mailto:integer.io.ai@gmail.com"
-                      className="text-xs sm:text-base text-purple-400 hover:text-purple-300 transition-colors break-all"
-                    >
-                      integer.io.ai@gmail.com
-                    </a>
-                  </div>
-                </div>
-              </InteractiveCard>
-
-              <InteractiveCard glowColor="pink" className="hover-3d">
-                <div className="flex items-center space-x-3 sm:space-x-4">
-                  <Youtube className={`h-5 w-5 sm:h-8 sm:w-8 flex-shrink-0 ${isDark ? 'text-red-400' : 'text-red-600'}`} />
-                  <div>
-                    <h3
-                      className={`text-sm sm:text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-800'
-                        }`}
-                    >
-                      YouTube Channel
-                    </h3>
-                    <a
-                      href="https://www.youtube.com/@integer-io"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`text-xs sm:text-base transition-colors ${isDark ? 'text-red-400 hover:text-red-300' : 'text-red-600 hover:text-red-500'}`}
-                    >
-                      @integerio
-                    </a>
-                  </div>
-                </div>
-              </InteractiveCard>
-
-              <InteractiveCard glowColor="pink" className="hover-3d">
-                <div className="flex items-center space-x-3 sm:space-x-4">
-                  <Instagram className="h-5 w-5 sm:h-8 sm:w-8 text-pink-400 flex-shrink-0" />
-                  <div>
-                    <h3
-                      className={`text-sm sm:text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-800'
-                        }`}
-                    >
-                      Instagram
-                    </h3>
-                    <a
-                      href="https://instagram.com/Integer.IO.services"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs sm:text-base text-pink-400 hover:text-pink-300 transition-colors"
-                    >
-                      @Integer.IO.services
-                    </a>
-                  </div>
-                </div>
-              </InteractiveCard>
-
-              <InteractiveCard glowColor="blue" className="hover-3d">
-                <div className="flex items-center space-x-3 sm:space-x-4">
-                  <Linkedin className="h-5 w-5 sm:h-8 sm:w-8 text-blue-400 flex-shrink-0" />
-                  <div>
-                    <h3
-                      className={`text-sm sm:text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-800'
-                        }`}
-                    >
-                      LinkedIn
-                    </h3>
-                    <a
-                      href="https://linkedin.com/company/integer-io-services"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs sm:text-base text-blue-400 hover:text-blue-300 transition-colors"
-                    >
-                      Integer.IO Solutions
-                    </a>
-                  </div>
-                </div>
-              </InteractiveCard>
-
-              <InteractiveCard glowColor="cyan" className="hover-3d">
-                <div className="flex items-center space-x-3 sm:space-x-4">
-                  <MapPin className="h-5 w-5 sm:h-8 sm:w-8 text-teal-400 flex-shrink-0" />
-                  <div>
-                    <h3
-                      className={`text-sm sm:text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-800'
-                        }`}
-                    >
-                      Service Areas
-                    </h3>
+                    <h3 className={`text-sm sm:text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-800'}`}>Service Areas</h3>
                     <div className="space-y-0.5 sm:space-y-1">
-                      <p className="text-xs sm:text-base text-teal-400 flex items-center">
-                        <Globe className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 flex-shrink-0" />
+                      <p className={`text-xs sm:text-base flex items-center ${isDark ? 'text-emerald-400' : 'text-purple-700'}`}>
+                        <Globe className={`h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 flex-shrink-0 ${isDark ? 'text-emerald-400' : 'text-purple-700'}`} />
                         Online Clients: Worldwide
                       </p>
-                      <p className="text-xs sm:text-base text-teal-400 flex items-center">
-                        <Users className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 flex-shrink-0" />
+                      <p className={`text-xs sm:text-base flex items-center ${isDark ? 'text-emerald-400' : 'text-purple-700'}`}>
+                        <Users className={`h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 flex-shrink-0 ${isDark ? 'text-emerald-400' : 'text-purple-700'}`} />
                         Offline Clients: Madurai, Coimbatore, Chennai
                       </p>
                     </div>
@@ -618,51 +554,54 @@ const Contact = () => {
           </motion.div>
         </div>
 
-        {/* Business Hours */}
+        {/* FAQ Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="mt-8 sm:mt-16"
         >
-          <InteractiveCard className="!p-4 sm:!p-6 md:!p-8 text-center hover-3d">
-            <h2 className={`text-lg sm:text-2xl font-bold mb-4 sm:mb-6 bg-gradient-to-r bg-clip-text text-transparent ${isDark
-              ? 'from-emerald-400 to-purple-400'
-              : 'from-purple-800 to-emerald-700'
-              }`}>
-              Business Hours
-            </h2>
-            <div className="grid md:grid-cols-2 gap-4 sm:gap-8">
-              <div>
-                <h3
-                  className={`text-sm sm:text-lg font-semibold mb-1 sm:mb-2 ${isDark ? 'text-white' : 'text-gray-800'
-                    }`}
+          <h2 className={`text-lg sm:text-2xl font-bold mb-4 sm:mb-8 text-center ${isDark ? 'text-white' : 'text-gray-900'}`}>
+            Frequently Asked Questions
+          </h2>
+          <div className="space-y-3 sm:space-y-4 max-w-3xl mx-auto">
+            {[
+              {
+                q: 'How long does it take to build a website?',
+                a: 'Depending on the complexity, a standard website takes 1–2 weeks. Custom web apps or SaaS products may take 3–6 weeks. We provide regular progress updates throughout.',
+              },
+              {
+                q: 'Do you provide support after project delivery?',
+                a: 'Yes! We offer 24/7 WhatsApp support for all our clients. We also provide free bug fixes for 30 days after delivery and affordable maintenance plans.',
+              },
+              {
+                q: 'What is the cost for a final year project?',
+                a: 'Our student project packages are highly affordable starting from ₹1,500. We offer group discounts, early bird pricing, and include complete documentation with presentation support.',
+              },
+            ].map((faq, index) => (
+              <InteractiveCard key={index} glowColor="emerald" className="!p-0 overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  className={`w-full flex items-center justify-between p-3 sm:p-5 text-left transition-colors ${isDark ? 'hover:bg-white/5' : 'hover:bg-gray-50/50'}`}
                 >
-                  Regular Hours
-                </h3>
-                <p className={`text-xs sm:text-base ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>
-                  Monday - Saturday: 9:00 AM - 8:00 PM
-                </p>
-                <p className={`text-xs sm:text-base ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>
-                  Sunday: 10:00 AM - 6:00 PM
-                </p>
-              </div>
-              <div>
-                <h3
-                  className={`text-sm sm:text-lg font-semibold mb-1 sm:mb-2 ${isDark ? 'text-white' : 'text-gray-800'
-                    }`}
+                  <span className={`text-xs sm:text-base font-semibold pr-4 ${isDark ? 'text-white' : 'text-gray-800'}`}>
+                    {faq.q}
+                  </span>
+                  <ChevronDown className={`h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 transition-transform duration-300 ${isDark ? 'text-gray-400' : 'text-gray-500'} ${openFaq === index ? 'rotate-180' : ''}`} />
+                </button>
+                <motion.div
+                  initial={false}
+                  animate={{ height: openFaq === index ? 'auto' : 0, opacity: openFaq === index ? 1 : 0 }}
+                  transition={{ duration: 0.3, ease: 'easeInOut' }}
+                  className="overflow-hidden"
                 >
-                  Emergency Support
-                </h3>
-                <p className={`text-xs sm:text-base ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>
-                  24/7 WhatsApp support for urgent queries
-                </p>
-                <p className={`text-xs sm:text-base ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>
-                  Response within 2-4 hours
-                </p>
-              </div>
-            </div>
-          </InteractiveCard>
+                  <div className={`px-3 sm:px-5 pb-3 sm:pb-5 text-xs sm:text-sm leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                    {faq.a}
+                  </div>
+                </motion.div>
+              </InteractiveCard>
+            ))}
+          </div>
         </motion.div>
 
         {/* Review Form Modal */}

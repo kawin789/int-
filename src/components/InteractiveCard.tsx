@@ -18,12 +18,12 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({
   const { isDark } = useTheme();
 
   const glowColors = {
-    emerald: isDark ? 'shadow-emerald-500/15' : 'shadow-emerald-300/25',
-    purple: isDark ? 'shadow-purple-500/15' : 'shadow-purple-300/25',
-    blue: isDark ? 'shadow-blue-500/15' : 'shadow-blue-300/25',
-    pink: isDark ? 'shadow-pink-500/15' : 'shadow-pink-300/25',
-    indigo: isDark ? 'shadow-indigo-500/15' : 'shadow-indigo-300/25',
-    cyan: isDark ? 'shadow-cyan-500/15' : 'shadow-cyan-300/25',
+    emerald: isDark ? 'shadow-black/20' : 'shadow-black/10',
+    purple: isDark ? 'shadow-black/20' : 'shadow-black/10',
+    blue: isDark ? 'shadow-black/20' : 'shadow-black/10',
+    pink: isDark ? 'shadow-black/20' : 'shadow-black/10',
+    indigo: isDark ? 'shadow-black/20' : 'shadow-black/10',
+    cyan: isDark ? 'shadow-black/20' : 'shadow-black/10',
   };
 
   return (
@@ -34,11 +34,11 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({
           ? 'bg-white/5 border-white/10 hover:bg-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]'
           : 'bg-white/40 border-white/50 hover:bg-white/50 shadow-[0_8px_32px_0_rgba(31,38,135,0.15)]'
         }
-        hover:shadow-xl ${glowColors[glowColor]}
+        hover:shadow-2xl ${glowColors[glowColor]}
         ${className}
       `}
-      whileHover={{ scale: 1.015 }}
-      whileTap={{ scale: 0.985 }}
+      whileHover={{ scale: 1.005 }}
+      whileTap={{ scale: 0.99 }}
       transition={{ type: "spring", stiffness: 250, damping: 25 }}
     >
       {/* Enhanced glow effect */}

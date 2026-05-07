@@ -59,7 +59,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  background-color: #f0f4ff;
+  background-color: #fafbff;
 }
 
 #root {
@@ -250,6 +250,36 @@ body {
   animation: rocketLaunch 3.5s ease-in-out forwards;
 }
 
+/* Optimized Infinite Scroll for Projects Page */
+@keyframes scrollLeft {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes scrollRight {
+  from { transform: translate3d(-50%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+.animate-scroll-left {
+  animation: scrollLeft 45s linear infinite;
+  will-change: transform;
+}
+
+.animate-scroll-right {
+  animation: scrollRight 50s linear infinite;
+  will-change: transform;
+}
+
+.pause-on-hover:hover {
+  /* Removed animation-play-state: paused to keep carousel moving as per user request */
+}
+
+.carousel-mask {
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
 /* Enhanced hover effects with performance optimization */
 .hover-3d {
   transition: transform var(--transition-normal),
@@ -395,13 +425,13 @@ button:hover {
     will-change: transform;
   }
 
-  /* Simplified grid layouts for mobile */
+  /* Simplified grid layouts for mobile — keep 2 cols */
   .grid.lg\:grid-cols-3 {
-    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 
   .grid.md\:grid-cols-2.lg\:grid-cols-3 {
-    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 
   /* Reduce complex animations */
@@ -601,6 +631,21 @@ html {
   .card-section {
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
+  }
+}
+
+/* Force 2-columns on mobile and 3-columns on desktop */
+@media (max-width: 1023px) {
+  .force-cols-2-mobile {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .force-cols-3-desktop {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   }
 }
 

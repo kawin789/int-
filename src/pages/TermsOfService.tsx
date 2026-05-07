@@ -4,6 +4,7 @@ import { Scale, AlertCircle, CheckCircle } from 'lucide-react';
 import InteractiveCard from '../components/InteractiveCard';
 import SEO from '../components/SEO';
 import { useTheme } from '../contexts/ThemeContext';
+import termsImage from '../assets/careers_hero.webp';
 
 const TermsOfService = () => {
   const { isDark } = useTheme();
@@ -20,10 +21,16 @@ const TermsOfService = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
-          <Scale className="h-16 w-16 text-emerald-400 mx-auto mb-6" />
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-emerald-400 to-purple-400 bg-clip-text text-transparent">
+          <div className="relative w-full max-w-3xl mx-auto h-40 sm:h-64 mb-8 sm:mb-10 rounded-2xl overflow-hidden shadow-2xl">
+            <img src={termsImage} alt="Terms of Service" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] flex items-center justify-center">
+              <Scale className="h-16 w-16 sm:h-24 sm:w-24 text-emerald-400" />
+            </div>
+          </div>
+          
+          <h1 className={`text-4xl md:text-5xl font-extrabold mb-4 sm:mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Terms of Service
           </h1>
           <p className={`text-xl ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>

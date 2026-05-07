@@ -13,7 +13,7 @@ const Careers: React.FC = () => {
   return (
     <div className="relative min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8">
       <SEO 
-        title="Careers | Join Integer.IO Solutions - Madurai IT Companies"
+        title="Careers | Join Integer.IO Solutions - Madurai, Coimbatore & Chennai"
         description="Join the team at Integer.IO Solutions. We are looking for passionate individuals to help us build SaaS products and provide cost efficient web development."
         page="careers"
       />

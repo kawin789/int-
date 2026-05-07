@@ -53,7 +53,8 @@ const SpaceBackground: React.FC = () => {
     const createStars = () => {
       starsRef.current = [];
       const starCount = window.innerWidth < 768 ? 60 : 180; // Increased for realism
-      const colors = ['#ffffff', '#cce6ff', '#ffe4b5', '#add8e6', '#ffefd5']; // White, light blue, peach, sky blue, papaya
+      const darkColors = ['#ffffff', '#cce6ff', '#ffe4b5', '#add8e6', '#ffefd5']; // White, light blue, peach
+      const lightColors = ['#1e3a8a', '#312e81', '#065f46', '#4c1d95', '#0f766e']; // Deep blue, indigo, emerald, purple, teal
       for (let i = 0; i < starCount; i++) {
         starsRef.current.push({
           x: Math.random() * canvas.width,
@@ -63,7 +64,7 @@ const SpaceBackground: React.FC = () => {
           speed: Math.random() * 0.3 + 0.05, // Slower for depth
           opacity: Math.random() * 0.6 + 0.3,
           twinkle: Math.random() * Math.PI * 2,
-          color: colors[Math.floor(Math.random() * colors.length)], // Random color
+          color: '', // Will be dynamically selected in drawStar based on theme
         });
       }
     };
@@ -119,10 +120,15 @@ const SpaceBackground: React.FC = () => {
       star.twinkle += 0.015; // Slower twinkle
       const twinkleOpacity = star.opacity * (0.6 + 0.4 * Math.sin(star.twinkle));
 
-      ctx.globalAlpha = twinkleOpacity;
+      ctx.globalAlpha = isDark ? twinkleOpacity : twinkleOpacity * 0.15;
 
-      // Use star's individual color (fallback for type safety)
-      const starColor = (star as any).color || (isDark ? '#ffffff' : '#4338ca');
+      // Use theme-aware colors
+      const darkColors = ['#ffffff', '#cce6ff', '#ffe4b5', '#add8e6', '#ffefd5'];
+      const lightColors = ['#1e3a8a', '#312e81', '#065f46', '#4c1d95', '#0f766e'];
+      // Deterministically pick a color based on the star's initial twinkle value so it doesn't flicker
+      const colorIndex = Math.floor((star.twinkle * 10) % darkColors.length);
+      const starColor = isDark ? darkColors[colorIndex] : lightColors[colorIndex];
+      
       ctx.fillStyle = starColor;
       ctx.shadowBlur = 6 * scale; // Reduced blur for performance
       ctx.shadowColor = starColor;
@@ -251,7 +257,7 @@ const SpaceBackground: React.FC = () => {
       style={{
         background: isDark
           ? 'radial-gradient(ellipse at 20% 30%, rgba(30, 50, 100, 0.3) 0%, transparent 60%), radial-gradient(ellipse at 80% 70%, rgba(40, 30, 80, 0.3) 0%, transparent 60%), linear-gradient(135deg, #050510 0%, #0a1025 35%, #101530 70%, #050510 100%)'
-          : 'radial-gradient(ellipse at 30% 40%, rgba(199, 210, 254, 0.6) 0%, transparent 70%), radial-gradient(ellipse at 70% 60%, rgba(221, 214, 254, 0.5) 0%, transparent 70%), linear-gradient(135deg, #f0f4f8 0%, #eef2ff 40%, #e0e7ff 100%)'
+          : 'radial-gradient(ellipse at 30% 40%, rgba(199, 210, 254, 0.2) 0%, transparent 70%), radial-gradient(ellipse at 70% 60%, rgba(221, 214, 254, 0.10) 0%, transparent 70%), linear-gradient(135deg, #e2e8ffff 10%, #f2f5ffff 40%, #e7ecffff 80%)'
       }}
     />
   );

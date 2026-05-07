@@ -1,14 +1,41 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
-import { Code, Brain, FileText, Megaphone, Search, Globe, Shield, MessageCircle } from 'lucide-react';
+import { Code, Brain, FileText, Megaphone, Search, Globe, Shield, MessageCircle, CheckCircle2 } from 'lucide-react';
 import InteractiveCard from '../components/InteractiveCard';
 import { useTheme } from '../contexts/ThemeContext';
 import SEO from '../components/SEO';
 
+/* Safelist for dynamic Tailwind classes used in Services:
+   from-emerald-500/10 to-emerald-500/10 text-emerald-400 bg-emerald-400
+   from-purple-500/10 to-purple-500/10 text-purple-400 bg-purple-400
+   from-blue-500/10 to-blue-500/10 text-blue-400 bg-blue-400
+   from-pink-500/10 to-pink-500/10 text-pink-400 bg-pink-400
+   from-indigo-500/10 to-indigo-500/10 text-indigo-400 bg-indigo-400
+   from-orange-500/10 to-orange-500/10 text-orange-400 bg-orange-400
+   from-teal-500/10 to-teal-500/10 text-teal-400 bg-teal-400
+*/
+
 const Services = () => {
   const { isDark } = useTheme();
   const location = useLocation();
+
+  // Returns light-mode-safe color classes (no light green, pink, or sky blue)
+  const iconColor = (color: string) => isDark
+    ? `text-${color}-400`
+    : ({
+      emerald: 'text-emerald-700', purple: 'text-purple-700', blue: 'text-blue-700',
+      pink: 'text-violet-700', indigo: 'text-indigo-700', cyan: 'text-teal-700',
+      teal: 'text-teal-700', orange: 'text-orange-700'
+    }[color] ?? 'text-gray-700');
+
+  const dotColor = (color: string) => isDark
+    ? `bg-${color}-400`
+    : ({
+      emerald: 'bg-emerald-700', purple: 'bg-purple-700', blue: 'bg-blue-700',
+      pink: 'bg-violet-700', indigo: 'bg-indigo-700', cyan: 'bg-teal-700',
+      teal: 'bg-teal-700', orange: 'bg-orange-700'
+    }[color] ?? 'bg-gray-700');
   const [searchQuery, setSearchQuery] = useState('');
   const [highlightedService, setHighlightedService] = useState<string | null>(null);
   const serviceRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
@@ -177,11 +204,15 @@ const Services = () => {
 
   return (
     <div className="relative min-h-screen pt-20">
-      <SEO 
-        title="Our Services | SaaS Products & Cost Efficient Web Development"
+      <SEO
+        title="Our Services in Madurai, Coimbatore & Chennai | SaaS Products & Web Development"
         description="Integer.IO Solutions offers cost efficient web development, custom SaaS products, AI automation, and final year projects overall TamilNadu."
         page="services"
       />
+
+      {/* Tailwind Safelist (Hidden) - Required for dynamic colors */}
+      <div className="hidden text-pink-400 bg-pink-400 from-pink-500/10 to-pink-500/10 text-emerald-400 bg-emerald-400 from-emerald-500/10 to-emerald-500/10 text-purple-400 bg-purple-400 from-purple-500/10 to-purple-500/10 text-blue-400 bg-blue-400 from-blue-500/10 to-blue-500/10 text-indigo-400 bg-indigo-400 from-indigo-500/10 to-indigo-500/10 text-orange-400 bg-orange-400 from-orange-500/10 to-orange-500/10 text-teal-400 bg-teal-400 from-teal-500/10 to-teal-500/10 text-cyan-400 bg-cyan-400 from-cyan-500/10 to-cyan-500/10 text-emerald-700 bg-emerald-700 text-purple-700 bg-purple-700 text-blue-700 bg-blue-700 text-violet-700 bg-violet-700 text-indigo-700 bg-indigo-700 text-teal-700 bg-teal-700 text-orange-700 bg-orange-700" aria-hidden="true"></div>
+
       <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-4 py-6 sm:py-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -189,10 +220,7 @@ const Services = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-8 sm:mb-16"
         >
-          <h1 className={`text-2xl sm:text-4xl md:text-6xl font-bold mb-3 sm:mb-6 bg-gradient-to-r bg-clip-text text-transparent ${isDark
-            ? 'from-emerald-400 via-purple-400 to-pink-400'
-            : 'from-purple-900 via-indigo-800 to-emerald-800'
-            }`}>
+          <h1 className={`text-2xl sm:text-4xl md:text-6xl font-bold mb-3 sm:mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Our Services
           </h1>
           <p className={`text-xs sm:text-lg md:text-xl max-w-3xl mx-auto font-medium mb-4 sm:mb-8 ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
@@ -234,11 +262,8 @@ const Services = () => {
           className="mb-20"
         >
           <div className="text-center mb-6 sm:mb-12">
-            <h2 className={`text-xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-4 bg-gradient-to-r bg-clip-text text-transparent ${isDark
-              ? 'from-emerald-400 to-purple-400'
-              : 'from-purple-800 to-emerald-700'
-              }`}>
-              🏆 Our Services
+            <h2 className={`text-xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              Core Services
             </h2>
             <p className={`text-xs sm:text-lg ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
               {filteredServices.length} service{filteredServices.length !== 1 ? 's' : ''} available
@@ -247,7 +272,8 @@ const Services = () => {
 
           {filteredServices.length > 0 ? (
             <motion.div
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-16"
+              key={filteredServices.length}
+              className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8 mb-8 sm:mb-16"
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
@@ -260,19 +286,19 @@ const Services = () => {
                     ref={(el) => { serviceRefs.current[service.key] = el; }}
                     variants={itemVariants}
                     whileHover={{
-                      y: -12,
-                      scale: 1.03,
-                      rotateX: 5,
-                      rotateY: 5,
+                      y: -2,
+                      scale: 1.008,
+                      rotateX: 0.8,
+                      rotateY: 0.8,
                       transition: { type: "spring", stiffness: 300, damping: 20 }
                     }}
                     className="group"
                   >
                     <div className={`
-                    relative p-4 sm:p-6 md:p-8 rounded-2xl backdrop-blur-lg border transition-all duration-500 h-full
+                    relative p-4 sm:p-6 md:p-8 rounded-2xl backdrop-blur-xl border transition-all duration-500 h-full
                     ${isDark
-                        ? 'bg-gray-900/70 border-gray-700/50 hover:bg-gray-800/80'
-                        : 'bg-white/90 border-gray-300/50 hover:bg-white/95'
+                        ? 'bg-white/5 border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:bg-white/10'
+                        : 'bg-white/40 border-white/50 shadow-[0_8px_32px_0_rgba(31,38,135,0.15)] hover:bg-white/60'
                       }
                     ${highlightedService === service.key
                         ? 'ring-4 ring-emerald-500 ring-opacity-50'
@@ -289,7 +315,7 @@ const Services = () => {
 
                       <div className="relative z-10 flex flex-col h-full">
                         <motion.div
-                          className={`text-${service.color}-400 mb-3 sm:mb-6 flex justify-center lg:justify-start`}
+                          className={`${iconColor(service.color)} mb-3 sm:mb-6 flex justify-center lg:justify-start`}
                           whileHover={{ scale: 1.1, rotate: 5 }}
                           transition={{ type: "spring", stiffness: 300 }}
                         >
@@ -298,7 +324,7 @@ const Services = () => {
                         <h3 className={`text-base sm:text-xl md:text-2xl font-bold mb-1.5 sm:mb-3 text-center lg:text-left ${isDark ? 'text-white' : 'text-gray-800'}`}>
                           {service.category}
                         </h3>
-                        <p className={`text-[10px] sm:text-xs md:text-sm mb-2 sm:mb-4 font-medium text-center lg:text-left text-${service.color}-400`}>
+                        <p className={`text-[10px] sm:text-xs md:text-sm mb-2 sm:mb-4 font-medium text-center lg:text-left ${iconColor(service.color)}`}>
                           {service.description}
                         </p>
                         <ul className="space-y-1 sm:space-y-2 mb-3 sm:mb-6 flex-grow">
@@ -310,7 +336,7 @@ const Services = () => {
                               whileInView={{ opacity: 1, x: 0 }}
                               transition={{ delay: featureIdx * 0.1 }}
                             >
-                              <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full mr-2 sm:mr-3 flex-shrink-0 bg-${service.color}-400`} />
+                              <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full mr-2 sm:mr-3 flex-shrink-0 ${dotColor(service.color)}`} />
                               {feature}
                             </motion.li>
                           ))}
@@ -336,7 +362,40 @@ const Services = () => {
           )}
         </motion.div>
 
-        {/* Student Project Packages - From Students Page */}
+        {/* ── Start Today CTA Banner ── */}
+        {!searchQuery && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-10 sm:mb-16"
+          >
+            <div className={`flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 rounded-2xl px-5 py-5 sm:px-10 sm:py-7 border ${isDark
+              ? 'bg-white/5 border-white/10 backdrop-blur-xl'
+              : 'bg-gradient-to-r from-emerald-50 to-purple-50 border-emerald-200/60'
+              }`}>
+              <div className="text-center sm:text-left">
+                <p className={`text-[11px] sm:text-sm font-semibold uppercase tracking-widest mb-1 ${isDark ? 'text-emerald-400' : 'text-emerald-700'}`}>
+                  ⚡ Start Today
+                </p>
+                <h3 className={`text-base sm:text-xl font-bold mb-0.5 sm:mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  Let's build something amazing together.
+                </h3>
+                <p className={`text-[11px] sm:text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                  Tell us your requirements — we'll craft the perfect solution for you.
+                </p>
+              </div>
+              <a
+                href="/contact#contact-form"
+                className="shrink-0 inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-5 py-2.5 sm:px-7 sm:py-3.5 rounded-xl font-semibold text-sm transition-all duration-300 shadow-lg hover:scale-105"
+              >
+                Get in Touch
+              </a>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Student Project Packages */}
         {showStudentSection && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -344,14 +403,14 @@ const Services = () => {
             transition={{ duration: 0.6 }}
             className="mb-16"
           >
-            <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-center mb-2 sm:mb-4 bg-gradient-to-r from-emerald-400 to-purple-400 bg-clip-text text-transparent">
+            <h2 className={`text-xl sm:text-3xl md:text-4xl font-extrabold text-center mb-2 sm:mb-4 ${isDark ? 'text-white drop-shadow-md' : 'text-gray-900 drop-shadow-sm'}`}>
               🎓 Final Year Student Corner
             </h2>
-            <p className={`text-center text-xs sm:text-lg mb-6 sm:mb-12 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+            <p className={`text-center text-xs sm:text-lg mb-4 sm:mb-8 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
               Dedicated support for college students with affordable project packages and expert guidance
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-4 sm:mb-8">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-4 sm:mb-8">
               {/* Web Development */}
               <InteractiveCard glowColor="emerald">
                 <Code className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 text-emerald-400 mb-2 sm:mb-4" />
@@ -362,7 +421,7 @@ const Services = () => {
                   <li className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-sm"><div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-emerald-400 rounded-full" />E-commerce Websites</li>
                   <li className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-sm"><div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-emerald-400 rounded-full" />Portfolio Websites</li>
                 </ul>
-                <span className={`text-[10px] sm:text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Duration: 1-3 weeks</span>
+                <span className={`text-[10px] sm:text-xs font-bold px-2 py-0.5 rounded-full ${isDark ? 'bg-emerald-500/15 text-emerald-400' : 'bg-emerald-100 text-emerald-700'}`}>⏱ 100–150 hrs</span>
               </InteractiveCard>
 
               {/* AI Automation & GenAI */}
@@ -375,7 +434,7 @@ const Services = () => {
                   <li className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-sm"><div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-purple-400 rounded-full" />Chatbot Development</li>
                   <li className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-sm"><div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-purple-400 rounded-full" />Computer Vision</li>
                 </ul>
-                <span className={`text-[10px] sm:text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Duration: 2-4 weeks</span>
+                <span className={`text-[10px] sm:text-xs font-bold px-2 py-0.5 rounded-full ${isDark ? 'bg-purple-500/15 text-purple-400' : 'bg-purple-100 text-purple-700'}`}>⏱ 100–150 hrs</span>
               </InteractiveCard>
 
               {/* Data Science & Analysis */}
@@ -388,70 +447,117 @@ const Services = () => {
                   <li className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-sm"><div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-blue-400 rounded-full" />Business Intelligence</li>
                   <li className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-sm"><div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-blue-400 rounded-full" />Statistical Analysis</li>
                 </ul>
-                <span className={`text-[10px] sm:text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Duration: 1-2 weeks</span>
+                <span className={`text-[10px] sm:text-xs font-bold px-2 py-0.5 rounded-full ${isDark ? 'bg-blue-500/15 text-blue-400' : 'bg-blue-100 text-blue-700'}`}>⏱ 50–100 hrs</span>
+              </InteractiveCard>
+
+              {/* Documentation Process */}
+              <InteractiveCard glowColor="indigo">
+                <FileText className="h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10 text-indigo-400 mb-2 sm:mb-4" />
+                <h3 className={`text-sm sm:text-lg md:text-xl font-bold mb-1.5 sm:mb-3 ${isDark ? 'text-white' : 'text-gray-800'}`}>Documentation Process</h3>
+                <ul className={`space-y-1 sm:space-y-2 mb-2 sm:mb-4 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                  <li className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-sm"><div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-indigo-400 rounded-full" />Full Report Documentation</li>
+                  <li className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-sm"><div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-indigo-400 rounded-full" />Softcopy Delivery</li>
+                  <li className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-sm"><div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-indigo-400 rounded-full" />Data Flow Diagrams</li>
+                  <li className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-sm"><div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-indigo-400 rounded-full" />Structured Tables</li>
+                </ul>
+                <span className={`text-[10px] sm:text-xs font-bold px-2 py-0.5 rounded-full ${isDark ? 'bg-indigo-500/15 text-indigo-400' : 'bg-indigo-100 text-indigo-700'}`}>⏱ 15–50 hrs</span>
               </InteractiveCard>
             </div>
 
-            {/* Register Button for Final Year Projects */}
-            <div className="text-center mt-4 sm:mt-8 mb-6 sm:mb-12">
+          </motion.div>
+        )}
+
+        {/* Project Deliverables Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-16 sm:mb-24"
+        >
+          <h2 className={`text-xl sm:text-3xl md:text-4xl font-extrabold text-center mb-6 sm:mb-12 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+            What's Included in Your Project?
+          </h2>
+
+          {/* Single unified card with 2x2 grid inside */}
+          <InteractiveCard glowColor="emerald" className="!p-4 sm:!p-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+
+              {/* Point 1: Complete Documentation */}
+              <div className={`flex items-start gap-3 p-3 sm:p-4 rounded-xl border ${isDark ? 'border-emerald-500/20 bg-emerald-500/5' : 'border-emerald-500/20 bg-emerald-50/60'}`}>
+                <div className="p-1.5 bg-emerald-500/15 rounded-lg shrink-0 mt-0.5">
+                  <CheckCircle2 className={`w-4 h-4 sm:w-5 sm:h-5 ${isDark ? 'text-emerald-400' : 'text-emerald-700'}`} />
+                </div>
+                <div>
+                  <h4 className={`font-bold text-sm sm:text-base mb-0.5 sm:mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                    Complete Documentation
+                  </h4>
+                  <p className={`text-[11px] sm:text-xs leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                    Full docs, softcopy, data flow diagrams, and structured tables included.
+                  </p>
+                </div>
+              </div>
+
+              {/* Point 2: Fast Delivery */}
+              <div className={`flex items-start gap-3 p-3 sm:p-4 rounded-xl border ${isDark ? 'border-emerald-500/20 bg-emerald-500/5' : 'border-emerald-500/20 bg-emerald-50/60'}`}>
+                <div className="p-1.5 bg-emerald-500/15 rounded-lg shrink-0 mt-0.5">
+                  <CheckCircle2 className={`w-4 h-4 sm:w-5 sm:h-5 ${isDark ? 'text-emerald-400' : 'text-emerald-700'}`} />
+                </div>
+                <div>
+                  <h4 className={`font-bold text-sm sm:text-base mb-0.5 sm:mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                    Fast Delivery
+                  </h4>
+                  <p className={`text-[11px] sm:text-xs leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                    Delivered efficiently within a strict maximum 150-hour timeline.
+                  </p>
+                </div>
+              </div>
+
+              {/* Point 3: Resume-Level Quality */}
+              <div className={`flex items-start gap-3 p-3 sm:p-4 rounded-xl border ${isDark ? 'border-purple-500/20 bg-purple-500/5' : 'border-purple-500/20 bg-purple-50/60'}`}>
+                <div className="p-1.5 bg-purple-500/15 rounded-lg shrink-0 mt-0.5">
+                  <CheckCircle2 className={`w-4 h-4 sm:w-5 sm:h-5 ${isDark ? 'text-purple-400' : 'text-purple-700'}`} />
+                </div>
+                <div>
+                  <h4 className={`font-bold text-sm sm:text-base mb-0.5 sm:mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                    Resume-Level Quality
+                  </h4>
+                  <p className={`text-[11px] sm:text-xs leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                    Enterprise-standard projects ready to showcase professionally on your resume.
+                  </p>
+                </div>
+              </div>
+
+              {/* Point 4: Bonus Benefits */}
+              <div className={`flex items-start gap-3 p-3 sm:p-4 rounded-xl border ${isDark ? 'border-purple-500/20 bg-purple-500/5' : 'border-purple-500/20 bg-purple-50/60'}`}>
+                <div className="p-1.5 bg-purple-500/15 rounded-lg shrink-0 mt-0.5">
+                  <CheckCircle2 className={`w-4 h-4 sm:w-5 sm:h-5 ${isDark ? 'text-purple-400' : 'text-purple-700'}`} />
+                </div>
+                <div>
+                  <h4 className={`font-bold text-sm sm:text-base mb-0.5 sm:mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                    Bonus Benefits
+                  </h4>
+                  <p className={`text-[11px] sm:text-xs leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                    Free cloud deployment for web projects + exclusive referral discounts.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Register Button */}
+            <div className="text-center mt-5 sm:mt-8">
               <a
                 href="https://integer-io-projectportal.netlify.app/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 sm:gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-5 py-2.5 sm:px-8 sm:py-4 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 shadow-lg hover:scale-105"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-5 py-2.5 sm:px-8 sm:py-4 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 shadow-lg hover:scale-105"
               >
                 <Brain className="h-4 w-4 sm:h-5 sm:w-5" />
                 Register for Final Year Project
               </a>
             </div>
-
-            {/* ATS Resume + Portfolio in one line */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-              {/* ATS Resume */}
-              <InteractiveCard glowColor="indigo">
-                <div className="flex items-start gap-2.5 sm:gap-4">
-                  <FileText className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-indigo-400 flex-shrink-0" />
-                  <div>
-                    <h3 className={`text-sm sm:text-lg md:text-xl font-bold mb-1 sm:mb-2 ${isDark ? 'text-white' : 'text-gray-800'}`}>ATS-Friendly Resume</h3>
-                    <p className={`text-[10px] sm:text-xs md:text-sm mb-2 sm:mb-4 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                      Get professional, ATS-optimized resumes that pass automated screening systems.
-                    </p>
-                    <a
-                      href="https://wa.me/918015355914?text=Hi, I need help with ATS-friendly resume making"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 sm:gap-2 bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all duration-300"
-                    >
-                      Order Resume
-                    </a>
-                  </div>
-                </div>
-              </InteractiveCard>
-
-              {/* Portfolio */}
-              <InteractiveCard glowColor="pink">
-                <div className="flex items-start gap-2.5 sm:gap-4">
-                  <Globe className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-pink-400 flex-shrink-0" />
-                  <div>
-                    <h3 className={`text-sm sm:text-lg md:text-xl font-bold mb-1 sm:mb-2 ${isDark ? 'text-white' : 'text-gray-800'}`}>Portfolio Website</h3>
-                    <p className={`text-[10px] sm:text-xs md:text-sm mb-2 sm:mb-4 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                      Showcase your work with a stunning professional portfolio website.
-                    </p>
-                    <a
-                      href="https://wa.me/918015355914?text=Hi, I need help with creating a portfolio website"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 sm:gap-2 bg-pink-500 hover:bg-pink-600 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all duration-300"
-                    >
-                      Get Portfolio
-                    </a>
-                  </div>
-                </div>
-              </InteractiveCard>
-            </div>
-          </motion.div>
-        )}
-
+          </InteractiveCard>
+        </motion.div>
 
         {/* CTA Section */}
         <motion.div
@@ -460,22 +566,7 @@ const Services = () => {
           transition={{ duration: 0.6 }}
           className="text-center"
         >
-          <InteractiveCard className="!p-4 sm:!p-8 md:!p-12 hover-3d">
-            <h2 className="text-xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-6 bg-gradient-to-r from-emerald-400 to-purple-400 bg-clip-text text-transparent">
-              Ready to Get Started?
-            </h2>
-            <p className={`text-xs sm:text-lg md:text-xl mb-4 sm:mb-8 ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>
-              Contact us today for a free consultation and custom quote for your project.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-              <a
-                href="mailto:integer.io.ai@gmail.com"
-                className="border-2 border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white px-5 py-2.5 sm:px-8 sm:py-4 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 shadow-lg"
-              >
-                Email Us
-              </a>
-            </div>
-          </InteractiveCard>
+
         </motion.div>
       </div>
     </div>

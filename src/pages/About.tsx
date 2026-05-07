@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Award,
   Mail,
@@ -8,6 +8,9 @@ import {
   Rocket,
   Lightbulb,
   Heart,
+  Briefcase,
+  LineChart,
+  Megaphone,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import InteractiveCard from '../components/InteractiveCard';
@@ -18,57 +21,47 @@ import kawin from '../assets/team/kawin.webp'
 import livan from '../assets/team/livan.webp'
 import hemanth from '../assets/team/hemanth.webp'
 
-// Add these styles to your CSS file or add as a style tag in your component
-const flipCardStyles = `
-.perspective-1000 {
-  perspective: 1000px;
-}
-
-.transform-style-3d {
-  transform-style: preserve-3d;
-}
-
-.backface-hidden {
-  backface-visibility: hidden;
-}
-
-.rotate-y-180 {
-  transform: rotateY(180deg);
-}
-`;
-
 const About = () => {
   const { isDark } = useTheme();
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   const teamMembers = [
     {
-      name: 'Kawin M.S.',
+      name: 'Kawin M.S',
       role: 'CEO / Founder',
-      description: 'Business strategy & decision making. Investment & project approvals.',
+      quotes: [
+        'Business strategy & decision making — vision that drives us forward.',
+        'Investment & project approvals — every big move starts here.'
+      ],
       email: 'integeriokawin@gmail.com',
-      phone: '+91 8015355914',
+      phone: '+91 80153 55914',
       linkedin: 'https://www.linkedin.com/in/kawin-m-s-570961285/',
       portfolio: 'https://kawin-portfolio.netlify.app/',
       image: kawin,
-      color: 'emerald',
+      color: 'indigo',
     },
     {
-      name: 'Hemanth',
+      name: 'Hemanth.K',
       role: 'COO / Sales',
-      description: 'Client handling & deals. Server & operations management.',
+      quotes: [
+        'Client handling & deals — building lasting partnerships.',
+        'Server & operations management — the backbone of our execution.'
+      ],
       email: 'integeriohemanth@gmail.com',
-      phone: '+91 6385279258',
+      phone: '+91 63852 79258',
       linkedin: '#',
+      portfolio: '#',
       image: hemanth,
-      color: 'pink',
+      color: 'indigo',
     },
     {
-      name: 'Livan',
+      name: 'Livan M.G',
       role: 'CMO / Relations',
-      description: 'Social media & branding. Client visits & follow-ups.',
+      quotes: [
+        'Social media & branding — telling our story to the world.',
+        'Client visits & follow-ups — keeping our community connected.'
+      ],
       email: 'integeriolivan@gmail.com',
-      phone: '+91 6385243064',
+      phone: '+91 63852 43064',
       linkedin: 'https://linkedin.com/in/livan',
       portfolio: 'https://livan-portfolio.netlify.app/',
       image: livan,
@@ -117,8 +110,6 @@ const About = () => {
 
   return (
     <div className="relative min-h-screen pt-20">
-      {/* Inject flip card styles */}
-      <style>{flipCardStyles}</style>
 
       <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-4 py-6 sm:py-12">
         {/* Page Title */}
@@ -129,10 +120,7 @@ const About = () => {
           className="text-center mb-6 sm:mb-10 pb-4 sm:pb-8"
         >
           <h1
-            className={`text-2xl sm:text-4xl md:text-6xl font-bold ${isDark
-              ? 'bg-gradient-to-r from-emerald-400 via-purple-400 to-pink-400 bg-clip-text text-transparent'
-              : 'bg-gradient-to-r from-purple-900 via-indigo-800 to-emerald-800 bg-clip-text text-transparent'
-              }`}
+            className={`text-2xl sm:text-4xl md:text-6xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}
             style={{ lineHeight: '1.3', paddingBottom: '0.4rem', letterSpacing: '0.02em' }}
           >
             About Integer.IO
@@ -146,10 +134,7 @@ const About = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mb-16"
         >
-          <h2 className={`text-xl sm:text-3xl md:text-4xl font-bold text-center mb-6 sm:mb-12 bg-gradient-to-r bg-clip-text text-transparent ${isDark
-            ? 'from-emerald-400 to-purple-400'
-            : 'from-purple-800 to-emerald-700'
-            }`}>
+          <h2 className={`text-xl sm:text-3xl md:text-4xl font-bold text-center mb-6 sm:mb-12 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Our Mission
           </h2>
           <InteractiveCard glowColor="emerald" className="!p-4 sm:!p-6 md:!p-12">
@@ -161,7 +146,7 @@ const About = () => {
                 className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 flex-shrink-0"
               >
                 <div
-                  className={`w-full h-full rounded-full flex items-center justify-center border sm:border-4 overflow-hidden shadow-xl ${isDark
+                  className={`w-full h-full rounded-full flex items-center justify-center border overflow-hidden shadow-xl ${isDark
                     ? 'border-emerald-500 shadow-emerald-500/20'
                     : 'bg-white border-emerald-500 shadow-emerald-500/10'
                     }`}
@@ -181,36 +166,76 @@ const About = () => {
                   </h3>
                   <p className={`text-xs sm:text-base lg:text-lg leading-relaxed mb-3 sm:mb-4 ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>
                     Integer.IO Solutions is a leading digital solutions provider founded with a vision to
-                    <span className="text-emerald-400 font-semibold"> democratize technology</span> for
+                    <span className={`font-semibold ${isDark ? 'text-emerald-400' : 'text-emerald-700'}`}> democratize technology</span> for
                     businesses of all sizes. We specialize in web development, AI Automation solutions, billing software,
                     and digital marketing.
                   </p>
                   <p className={`text-xs sm:text-base lg:text-lg leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
                     Our mission is to make cutting-edge technology
-                    <span className="text-purple-400 font-semibold"> accessible and affordable</span> for
+                    <span className={`font-semibold ${isDark ? 'text-purple-400' : 'text-purple-700'}`}> accessible and affordable</span> for
                     everyone—from startups and small businesses to students working on their final year projects.
+                    Founded in <span className={`font-bold ${isDark ? 'text-violet-400' : 'text-violet-700'}`}>2024</span>, our team brings <span className={`font-bold px-2 py-0.5 rounded-md ${isDark ? 'text-emerald-400 bg-emerald-400/10' : 'text-emerald-700 bg-emerald-700/10'}`}>2+ Years</span> of expertise in the field.
                     We transform ideas into reality with innovation, excellence, and personalized support.
                   </p>
                 </div>
 
-                {/* Key Stats */}
-                <div className="grid grid-cols-3 gap-2 sm:gap-4 mt-4 sm:mt-6">
-                  <div className="text-center p-2 sm:p-4 rounded-xl bg-gradient-to-br from-emerald-500/10 to-emerald-500/5 border border-emerald-500/20">
-                    <div className="text-xl sm:text-2xl md:text-3xl font-bold text-emerald-400">30+</div>
-                    <div className={`text-[10px] sm:text-xs md:text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Happy Clients</div>
-                  </div>
-                  <div className="text-center p-2 sm:p-4 rounded-xl bg-gradient-to-br from-purple-500/10 to-purple-500/5 border border-purple-500/20">
-                    <div className="text-xl sm:text-2xl md:text-3xl font-bold text-purple-400">50+</div>
-                    <div className={`text-[10px] sm:text-xs md:text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Projects Done</div>
-                  </div>
-                  <div className="text-center p-2 sm:p-4 rounded-xl bg-gradient-to-br from-cyan-500/10 to-cyan-500/5 border border-cyan-500/20">
-                    <div className="text-xl sm:text-2xl md:text-3xl font-bold text-cyan-400">24/7</div>
-                    <div className={`text-[10px] sm:text-xs md:text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Support</div>
-                  </div>
-                </div>
               </div>
             </div>
           </InteractiveCard>
+
+          {/* Stats Section - Outside Card */}
+          <div className="grid grid-cols-3 gap-3 sm:gap-6 mt-6 sm:mt-10">
+            {[{ label: 'Happy Clients', target: 100, suffix: '+', color: 'emerald' }, { label: 'Projects Done', target: 110, suffix: '+', color: 'purple' }, { label: 'Support', target: 24, suffix: '/7', color: 'cyan' }].map((stat) => {
+              const CounterStat = () => {
+                const [count, setCount] = useState(0);
+                const ref = useRef<HTMLDivElement>(null);
+                const hasAnimated = useRef(false);
+
+                useEffect(() => {
+                  const observer = new IntersectionObserver(
+                    ([entry]) => {
+                      if (entry.isIntersecting && !hasAnimated.current) {
+                        hasAnimated.current = true;
+                        const duration = 2000;
+                        const start = performance.now();
+                        const animate = (now: number) => {
+                          const elapsed = now - start;
+                          const progress = Math.min(elapsed / duration, 1);
+                          const eased = 1 - Math.pow(1 - progress, 3);
+                          setCount(Math.floor(eased * stat.target));
+                          if (progress < 1) requestAnimationFrame(animate);
+                        };
+                        requestAnimationFrame(animate);
+                      }
+                    },
+                    { threshold: 0.3 }
+                  );
+                  if (ref.current) observer.observe(ref.current);
+                  return () => observer.disconnect();
+                }, []);
+
+                return (
+                  <div ref={ref} className={`text-center p-3 sm:p-6 rounded-2xl backdrop-blur-xl border transition-all duration-300 ${
+                    isDark
+                      ? 'bg-white/5 border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]'
+                      : 'bg-white/40 border-white/50 shadow-[0_8px_32px_0_rgba(31,38,135,0.15)]'
+                  }`}>
+                    <div className={`text-2xl sm:text-3xl md:text-4xl font-bold ${
+                      isDark
+                        ? `text-${stat.color}-400`
+                        : ({ emerald: 'text-emerald-700', purple: 'text-purple-700', cyan: 'text-teal-700' }[stat.color] ?? 'text-gray-700')
+                    }`}>
+                      {count}{stat.suffix}
+                    </div>
+                    <div className={`text-xs sm:text-sm md:text-base font-medium mt-1 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                      {stat.label}
+                    </div>
+                  </div>
+                );
+              };
+              return <CounterStat key={stat.label} />;
+            })}
+          </div>
         </motion.div>
 
         {/* Team Section with Square Cards - 3 in a row on PC */}
@@ -220,133 +245,105 @@ const About = () => {
           transition={{ duration: 0.6 }}
           className="mb-10 sm:mb-16 pt-4 sm:pt-8"
         >
-          <h2 className={`text-xl sm:text-3xl md:text-4xl font-bold text-center mb-6 sm:mb-12 bg-gradient-to-r bg-clip-text text-transparent ${isDark
-            ? 'from-emerald-400 to-purple-400'
-            : 'from-purple-800 to-emerald-700'
-            }`}>
+          <h2 className={`text-xl sm:text-3xl md:text-4xl font-bold text-center mb-6 sm:mb-12 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Our Team
           </h2>
 
-          {/* Square Cards - 3 in a row on PC */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8">
-            {teamMembers.map((member, index) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="relative perspective-1000"
-              >
-                <div
-                  className={`relative w-full transition-transform duration-700 transform-style-3d min-h-[340px] sm:min-h-[420px] ${hoveredCard === index ? 'rotate-y-180' : ''}`}
+          {/* Modern Alternating Team Cards */}
+          <div className="flex flex-col gap-32 sm:gap-24">
+            {teamMembers.map((member, index) => {
+              const isEven = index % 2 !== 0;
+              return (
+                <motion.div
+                  key={member.name}
+                  initial={{ opacity: 0, x: isEven ? 50 : -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.7, delay: index * 0.1 }}
+                  className={`relative pt-16 sm:pt-0 mx-3 sm:mx-0 ${isEven ? 'sm:pr-24 md:pr-32' : 'sm:pl-24 md:pl-32'}`}
                 >
-                  {/* Front Face - Square Card with Border */}
-                  <div
-                    className={`absolute w-full h-full backface-hidden rounded-xl overflow-hidden transition-all duration-300 backdrop-blur-xl ${isDark
-                      ? 'bg-white/5 border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]'
-                      : 'bg-white/40 border border-white/50 shadow-[0_8px_32px_0_rgba(31,38,135,0.15)]'
-                      }`}
-                  >
-                    <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${getColorClasses(member.color)}`} />
-                    <div className="p-3 sm:p-6 h-full flex flex-col items-center justify-between text-center">
-                      <div className="flex flex-col items-center flex-1 justify-center">
-                        <div className={`w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 shrink-0 rounded-full overflow-hidden border-2 mb-3 sm:mb-4 bg-white/50 ${isDark ? 'border-emerald-400/40' : 'border-emerald-500/30'}`}>
-                          <img src={member.image} alt={member.name} className="w-full h-full object-contain" />
-                        </div>
-                        <h3 className={`text-lg sm:text-xl font-bold mb-1 bg-gradient-to-r ${getColorClasses(member.color)} bg-clip-text text-transparent`}>
-                          {member.name}
-                        </h3>
-                        <p className={`text-sm font-medium mb-2 bg-gradient-to-r ${getColorClasses(member.color)} bg-clip-text text-transparent`}>
-                          {member.role}
-                        </p>
-                        <p className={`text-xs sm:text-sm ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-                          {member.description}
-                        </p>
+                  {/* Larger Offset Profile Circle */}
+                  <div className={`absolute ${isEven ? 'right-1/2 translate-x-1/2 sm:translate-x-0 sm:right-[-40px] md:right-[-60px]' : 'left-1/2 -translate-x-1/2 sm:translate-x-0 sm:left-[-40px] md:left-[-60px]'} top-4 sm:top-1/2 -translate-y-1/2 z-20 w-36 h-36 sm:w-48 sm:h-48 md:w-64 md:h-64 rounded-full flex items-center justify-center text-4xl sm:text-6xl md:text-8xl font-bold text-white shadow-[0_0_30px_rgba(99,102,241,0.3)] dark:shadow-[0_0_40px_rgba(255,255,255,0.05)] overflow-hidden border-4 sm:border-8 ${isDark ? 'bg-[#0f172a] border-white/10' : 'bg-white border-white shadow-xl'}`}>
+                    {member.image ? (
+                      <div className="w-full h-full p-1.5 sm:p-2">
+                        <img src={member.image} alt={member.name} className="w-full h-full object-contain rounded-full" />
                       </div>
-                      
-                      <div className="mt-4">
-                        <button
-                          onClick={() => setHoveredCard(index)}
-                          className="inline-flex items-center gap-2 px-6 py-2 rounded-lg font-semibold text-sm transition-all duration-300 shadow-md hover:scale-105 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white"
-                        >
-                          <Mail className="h-4 w-4" />
-                          Contact
-                        </button>
-                      </div>
-                    </div>
+                    ) : (
+                      member.name.charAt(0)
+                    )}
                   </div>
 
-                  {/* Back Face - Contact Details with Border */}
-                  <div
-                    className={`absolute w-full h-full backface-hidden rounded-xl overflow-hidden rotate-y-180 transition-all duration-300 backdrop-blur-xl ${isDark
-                      ? 'bg-white/5 border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]'
-                      : 'bg-white/40 border border-white/50 shadow-[0_8px_32px_0_rgba(31,38,135,0.15)]'
-                      }`}
-                  >
-                    <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${getColorClasses(member.color)}`} />
-                    <div className="p-4 sm:p-6 h-full flex flex-col justify-between">
-                      <div className="flex-1 flex flex-col justify-center">
-                        <h3 className={`text-lg sm:text-xl font-bold mb-3 sm:mb-6 text-center bg-gradient-to-r ${getColorClasses(member.color)} bg-clip-text text-transparent`}>
-                          Contact Details
+                  <InteractiveCard glowColor="indigo" className={`!p-0 overflow-visible ${isDark ? 'bg-gray-800/40 backdrop-blur-md border-white/5' : 'bg-white/60 backdrop-blur-md border-gray-100 shadow-xl'}`}>
+                    <div className={`flex flex-col lg:flex-row items-center gap-4 sm:gap-8 p-4 sm:p-10 md:p-12 pt-16 sm:pt-10 ${isEven ? 'sm:pr-32 lg:pr-40' : 'sm:pl-32 lg:pl-40'}`}>
+                      
+                      {/* Name & Quotes Column (Middle) */}
+                      <div className={`flex-1 text-center sm:text-left w-full ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
+                        {/* Name */}
+                        <h3 className={`text-lg sm:text-2xl md:text-3xl font-extrabold mb-1 sm:mb-3 tracking-tight ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                          {member.name}
                         </h3>
-                        <div className="space-y-3 flex flex-col items-center">
-                          <a 
-                            href={`mailto:${member.email}`} 
-                            className={`flex items-center space-x-3 text-[10px] sm:text-sm px-4 py-2.5 rounded-full transition-all duration-300 shadow-sm border w-full max-w-[240px] justify-center ${isDark 
-                              ? 'bg-white/10 border-white/20 text-white hover:bg-emerald-500/30 hover:border-emerald-500/50' 
-                              : 'bg-white/60 border-gray-200 text-gray-800 hover:bg-emerald-50 hover:border-emerald-500/50'
-                            }`}
+
+                        {/* Role Badge */}
+                        <div className={`inline-block px-3 py-1 rounded-full text-[9px] sm:text-xs font-bold mb-3 sm:mb-6 ${isDark ? 'bg-indigo-500/20 text-indigo-300' : 'bg-indigo-50 text-indigo-700'}`}>
+                          {member.role}
+                        </div>
+
+                        {/* Quotes */}
+                        <div className="space-y-1 mb-4 sm:mb-0">
+                          {member.quotes.map((quote, qIdx) => (
+                            <p key={qIdx} className={`text-[10px] sm:text-base md:text-xl italic font-medium leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                              "{quote}"
+                            </p>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Divider for Desktop - Vertical */}
+                      <div className={`hidden lg:block w-px h-32 ${isDark ? 'bg-gray-700' : 'bg-gray-200'} ${isEven ? 'order-1' : 'order-2'}`} />
+
+                      {/* Contact & Social Column (Side) */}
+                      <div className={`flex flex-col gap-4 sm:gap-6 min-w-[250px] w-full lg:w-auto ${isEven ? 'lg:order-1 text-left' : 'lg:order-3 text-left'}`}>
+                        <div className="flex flex-col gap-2.5">
+                          <div className={`flex items-center justify-center sm:justify-start gap-2.5 px-3 py-2 rounded-xl border text-[10px] sm:text-sm font-semibold transition-all ${isDark ? 'bg-white/5 border-white/10 text-gray-200' : 'bg-white border-gray-200 text-gray-700 shadow-sm'}`}>
+                            <Mail className="w-3.5 h-3.5 text-indigo-500" />
+                            <span className="truncate max-w-[160px] sm:max-w-[180px]">{member.email}</span>
+                          </div>
+                          <div className={`flex items-center justify-center sm:justify-start gap-2.5 px-3 py-2 rounded-xl border text-[10px] sm:text-sm font-semibold transition-all ${isDark ? 'bg-white/5 border-white/10 text-gray-200' : 'bg-white border-gray-200 text-gray-700 shadow-sm'}`}>
+                            <Phone className="w-3.5 h-3.5 text-indigo-500" />
+                            {member.phone}
+                          </div>
+                        </div>
+
+                        <div className="flex gap-3">
+                          <a
+                            href={member.linkedin}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-[#2d336b] text-white text-xs sm:text-sm font-bold transition-all hover:scale-105 hover:bg-[#3d438b] shadow-xl shadow-indigo-900/20"
                           >
-                            <Mail className="h-4 w-4 shrink-0" />
-                            <span className="truncate">{member.email}</span>
-                          </a>
-                          <a 
-                            href={`tel:${member.phone}`} 
-                            className={`flex items-center space-x-3 text-[10px] sm:text-sm px-4 py-2.5 rounded-full transition-all duration-300 shadow-sm border w-full max-w-[240px] justify-center ${isDark 
-                              ? 'bg-white/10 border-white/20 text-white hover:bg-emerald-500/30 hover:border-emerald-500/50' 
-                              : 'bg-white/60 border-gray-200 text-gray-800 hover:bg-emerald-50 hover:border-emerald-500/50'
-                            }`}
-                          >
-                            <Phone className="h-4 w-4 shrink-0" />
-                            <span>{member.phone}</span>
-                          </a>
-                          <a 
-                            href={member.linkedin} 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className={`flex items-center space-x-2 text-xs sm:text-sm hover:underline transition-colors ${isDark ? 'text-emerald-400' : 'text-emerald-600'}`}
-                          >
-                            <Linkedin className="h-4 w-4" />
-                            <span>LinkedIn</span>
+                            <Linkedin className="w-4 h-4" />
+                            LinkedIn
                           </a>
                           {member.portfolio && (
-                            <a 
-                              href={member.portfolio} 
-                              target="_blank" 
-                              rel="noopener noreferrer" 
-                              className={`flex items-center space-x-2 text-xs sm:text-sm hover:underline transition-colors ${isDark ? 'text-purple-400' : 'text-purple-600'}`}
+                            <a
+                              href={member.portfolio}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-[#10b981] text-white text-xs sm:text-sm font-bold transition-all hover:scale-105 hover:bg-[#059669] shadow-xl shadow-emerald-500/20"
                             >
-                              <Globe className="h-4 w-4" />
-                              <span>Portfolio</span>
+                              <Globe className="w-4 h-4" />
+                              Portfolio
                             </a>
                           )}
                         </div>
                       </div>
-                      
-                      <div className="mt-4 flex justify-center">
-                        <button
-                          onClick={() => setHoveredCard(null)}
-                          className="inline-flex items-center gap-2 px-6 py-2 rounded-lg font-semibold text-sm transition-all duration-300 shadow-md hover:scale-105 bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white"
-                        >
-                          Back
-                        </button>
-                      </div>
+
                     </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                  </InteractiveCard>
+                </motion.div>
+              );
+            })}
           </div>
+
         </motion.div>
 
         {/* Client Reviews Section */}
@@ -357,10 +354,7 @@ const About = () => {
           transition={{ duration: 0.6 }}
           className="mb-16 scroll-mt-24"
         >
-          <h2 className={`text-3xl md:text-4xl font-bold text-center mb-12 bg-gradient-to-r bg-clip-text text-transparent ${isDark
-            ? 'from-emerald-400 to-purple-400'
-            : 'from-purple-800 to-emerald-700'
-            }`}>
+          <h2 className={`text-3xl md:text-4xl font-bold text-center mb-12 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Client Reviews
           </h2>
           <ReviewCarousel />
@@ -373,10 +367,7 @@ const About = () => {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <h2 className={`text-xl sm:text-3xl md:text-4xl font-bold text-center mb-6 sm:mb-12 bg-gradient-to-r bg-clip-text text-transparent ${isDark
-            ? 'from-emerald-400 to-purple-400'
-            : 'from-purple-800 to-emerald-700'
-            }`}>
+          <h2 className={`text-xl sm:text-3xl md:text-4xl font-bold text-center mb-6 sm:mb-12 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Our Values
           </h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
@@ -389,7 +380,11 @@ const About = () => {
               >
                 <InteractiveCard glowColor={value.color as 'emerald' | 'purple' | 'pink' | 'blue'} className="h-full">
                   <div className="flex flex-col items-center text-center">
-                    <div className={`mb-2 sm:mb-4 text-${value.color}-400`}>
+                    <div className={`mb-2 sm:mb-4 ${
+                      isDark
+                        ? `text-${value.color}-400`
+                        : ({ emerald: 'text-emerald-700', pink: 'text-violet-700', purple: 'text-purple-700', blue: 'text-blue-700' }[value.color] ?? 'text-gray-700')
+                    }`}>
                       {React.cloneElement(value.icon, { className: 'h-6 w-6 sm:h-8 sm:w-8 md:h-10 md:w-10' })}
                     </div>
                     <h3 className={`text-sm sm:text-base md:text-lg font-bold mb-1 sm:mb-2 ${isDark ? 'text-white' : 'text-gray-800'}`}>

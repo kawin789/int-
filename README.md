@@ -105,7 +105,7 @@ src/
 
 - **Email:** integer.io.ai@gmail.com
 - **Phone:** +91 8015355914
-- **Website:** https://integer.io
+- **Website:** https://integerio.com
 
 ---
 

@@ -167,6 +167,7 @@ const ChatbotWidget: React.FC = () => {
   const navigate = useNavigate();
   const { isDark } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
+  const [hideOnFooter, setHideOnFooter] = useState(false);
   const [isTamil, setIsTamil] = useState(false);
   const [input, setInput] = useState('');
   const [userName, setUserName] = useState('');
@@ -240,6 +241,24 @@ const ChatbotWidget: React.FC = () => {
     }, 3500);
     return () => clearInterval(timer);
   }, [tipVisible]);
+
+  // Hide chatbot button when footer is visible on mobile
+  useEffect(() => {
+    const isMobile = window.innerWidth < 640;
+    if (!isMobile) return;
+
+    const footer = document.querySelector('footer');
+    if (!footer) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setHideOnFooter(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
 
   const toggleLanguage = () => {
     setIsTamil(!isTamil);
@@ -589,10 +608,10 @@ const ChatbotWidget: React.FC = () => {
     <>
       {/* ── CHATBOT FLOATING BUTTON ── */}
       <motion.div
-        className="fixed bottom-6 left-4 sm:left-6 z-[60]"
-        style={{ position: 'fixed', bottom: 24, left: 16 }}
+        className={`fixed bottom-4 left-3 sm:bottom-6 sm:left-6 z-[60] ${hideOnFooter && !isOpen ? 'pointer-events-none' : ''}`}
+        style={{ position: 'fixed', bottom: typeof window !== 'undefined' && window.innerWidth < 640 ? 16 : 24, left: typeof window !== 'undefined' && window.innerWidth < 640 ? 12 : 24 }}
         initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
+        animate={{ scale: hideOnFooter && !isOpen ? 0 : 1, opacity: hideOnFooter && !isOpen ? 0 : 1 }}
         transition={{ delay: 0.5, type: 'spring' }}
       >
         {/* Cycling tooltip — absolutely above the button, doesn't affect button position */}
@@ -616,7 +635,7 @@ const ChatbotWidget: React.FC = () => {
         </AnimatePresence>
 
         {/* The button with wave rings — always at the same position */}
-        <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', width: 64, height: 64 }}>
+        <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', width: typeof window !== 'undefined' && window.innerWidth < 640 ? 48 : 64, height: typeof window !== 'undefined' && window.innerWidth < 640 ? 48 : 64 }}>
 
           {/* Green outer wave ring */}
           <motion.div
@@ -624,7 +643,8 @@ const ChatbotWidget: React.FC = () => {
               position: 'absolute',
               borderRadius: '50%',
               border: '2px solid rgba(16,185,129,0.6)',
-              width: 64, height: 64,
+              width: typeof window !== 'undefined' && window.innerWidth < 640 ? 48 : 64,
+              height: typeof window !== 'undefined' && window.innerWidth < 640 ? 48 : 64,
             }}
             animate={!isOpen ? { scale: [1, 1.7, 1.7], opacity: [0.7, 0, 0] } : {}}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeOut' }}
@@ -636,7 +656,8 @@ const ChatbotWidget: React.FC = () => {
               position: 'absolute',
               borderRadius: '50%',
               border: '2px solid rgba(139,92,246,0.6)',
-              width: 64, height: 64,
+              width: typeof window !== 'undefined' && window.innerWidth < 640 ? 48 : 64,
+              height: typeof window !== 'undefined' && window.innerWidth < 640 ? 48 : 64,
             }}
             animate={!isOpen ? { scale: [1, 1.5, 1.5], opacity: [0.6, 0, 0] } : {}}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeOut', delay: 0.6 }}
@@ -646,11 +667,11 @@ const ChatbotWidget: React.FC = () => {
             <motion.button
               onClick={() => setIsOpen(true)}
               className="relative flex items-center justify-center rounded-full bg-white shadow-xl"
-              style={{ width: 56, height: 56, border: '2px solid rgba(139,92,246,0.3)' }}
+              style={{ width: typeof window !== 'undefined' && window.innerWidth < 640 ? 42 : 56, height: typeof window !== 'undefined' && window.innerWidth < 640 ? 42 : 56, border: '2px solid rgba(139,92,246,0.3)' }}
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.94 }}
             >
-              <img src={logo} alt="Chatbot" className="w-9 h-9 object-contain" />
+              <img src={logo} alt="Chatbot" className="w-7 h-7 sm:w-9 sm:h-9 object-contain" />
               {/* Live dot */}
               <span style={{
                 position: 'absolute', top: 2, right: 2,

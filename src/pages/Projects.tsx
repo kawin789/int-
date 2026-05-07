@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Download, FileText, ExternalLink } from 'lucide-react';
+import { Download, FileText, ExternalLink, CheckCircle2 } from 'lucide-react';
 import InteractiveCard from '../components/InteractiveCard';
 import ModernProjectCarousel from '../components/ModernProjectCarousel';
 import { useTheme } from '../contexts/ThemeContext';
@@ -12,6 +13,28 @@ import sasImg from '../assets/services/sas.webp';
 import floqImg from '../assets/services/floq.webp';
 import karpagamImg from '../assets/services/karpagam.webp';
 import busImg from '../assets/services/bus.webp';
+
+// Import FYP images
+import fyp1 from '../assets/fyp_img/fyp_1.webp';
+import fyp2 from '../assets/fyp_img/fyp_2.webp';
+import fyp3 from '../assets/fyp_img/fyp_3.webp';
+import fyp4 from '../assets/fyp_img/fyp_4.webp';
+import fyp5 from '../assets/fyp_img/fyp_5.webp';
+import fyp6 from '../assets/fyp_img/fyp_6.webp';
+import fyp7 from '../assets/fyp_img/fyp_7.webp';
+import fyp8 from '../assets/fyp_img/fyp_8.webp';
+import fyp9 from '../assets/fyp_img/fyp_9.webp';
+import fyp10 from '../assets/fyp_img/fyp_10.webp';
+import fyp11 from '../assets/fyp_img/fyp_11.webp';
+import fyp12 from '../assets/fyp_img/fyp_12.webp';
+import fyp13 from '../assets/fyp_img/fyp_13.webp';
+import fyp14 from '../assets/fyp_img/fyp_14.webp';
+import fyp15 from '../assets/fyp_img/fyp_15.webp';
+import fyp16 from '../assets/fyp_img/fyp_16.webp';
+import fyp18 from '../assets/fyp_img/fyp_18.webp';
+import fyp19 from '../assets/fyp_img/fyp_19.webp';
+import fyp20 from '../assets/fyp_img/fyp_20.webp';
+import fyp21 from '../assets/fyp_img/fyp_21.webp';
 
 const portfolioProjects = [
   {
@@ -66,129 +89,43 @@ const portfolioProjects = [
   },
 ];
 
-// Import PDFs from assets/pdf
-import DataSciencePDF from '../assets/pdf/Integer_IO_Data_Science_Single_Column_Project_Ideas.pdf';
-import AiMlPDF from '../assets/pdf/Integer_IO_AI_ML_Project_Ideas_Corrected.pdf';
-import WebDevPDF from '../assets/pdf/Integer_IO_Web_Development_Project_Ideas.pdf';
+
+
+const fypBatch1 = [
+  { img: fyp1, domain: 'Web App' },
+  { img: fyp2, domain: 'AI/ML' },
+  { img: fyp3, domain: 'Web App' },
+  { img: fyp4, domain: 'Web App' },
+  { img: fyp5, domain: 'Mobile App' },
+  { img: fyp6, domain: 'Web App' },
+  { img: fyp7, domain: 'AI/ML' },
+  { img: fyp8, domain: 'AI/ML' },
+  { img: fyp9, domain: 'Web App' },
+  { img: fyp10, domain: 'AI/ML' },
+];
+
+const fypBatch2 = [
+  { img: fyp11, domain: 'AI/ML' },
+  { img: fyp12, domain: 'Web App' },
+  { img: fyp13, domain: 'Web App' },
+  { img: fyp14, domain: 'AI/ML' },
+  { img: fyp15, domain: 'AI/ML' },
+  { img: fyp16, domain: 'Web App' },
+  { img: fyp18, domain: 'AI/ML' },
+  { img: fyp19, domain: 'Web App' },
+  { img: fyp20, domain: 'AI/ML' },
+  { img: fyp21, domain: 'Web App' },
+];
 
 const Projects = () => {
   const { isDark } = useTheme();
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [downloading, setDownloading] = useState('');
+  const navigate = useNavigate();
 
-  const projectCategories = [
-    {
-      name: 'Data Science',
-      description:
-        'Advanced data analysis, visualization, and predictive modeling projects',
-      projects: [
-        'Sales Forecasting using Machine Learning',
-        'Customer Segmentation Analysis',
-        'Market Research Data Analysis',
-        'Financial Risk Assessment',
-        'Healthcare Data Analytics',
-        'Social Media Sentiment Analysis',
-      ],
-      color: 'emerald',
-      pdfName: 'Data_Science_Projects.pdf',
-      pdfUrl: DataSciencePDF,
-    },
-    {
-      name: 'AI & ML',
-      description: 'Artificial Intelligence and Machine Learning solutions',
-      projects: [
-        'Face Recognition Attendance System',
-        'AI Chatbot for Customer Service',
-        'Image Classification Systems',
-        'Natural Language Processing Tools',
-        'Recommendation Engines',
-        'Fraud Detection Systems',
-      ],
-      color: 'purple',
-      pdfName: 'AI_ML_Projects.pdf',
-      pdfUrl: AiMlPDF,
-    },
-    {
-      name: 'Web Development',
-      description: 'Modern web applications and responsive websites',
-      projects: [
-        'E-commerce Platforms',
-        'School Management Systems',
-        'Portfolio Websites',
-        'Booking & Reservation Systems',
-        'Content Management Systems',
-        'Real Estate Platforms',
-      ],
-      color: 'blue',
-      pdfName: 'Web_Development_Projects.pdf',
-      pdfUrl: WebDevPDF,
-    },
-  ];
-
-  const categories = ['All', 'Data Science', 'AI & ML', 'Web Development'];
-
-  const filteredCategories =
-    selectedCategory === 'All'
-      ? projectCategories
-      : projectCategories.filter(
-        (category) => category.name === selectedCategory
-      );
-
-  const handlePdfDownload = async (pdfUrl: string, pdfName: string, categoryName: string) => {
-    setDownloading(pdfName);
-    try {
-      const link = document.createElement('a');
-      link.href = pdfUrl;
-      link.download = pdfName;
-      link.setAttribute('download', pdfName);
-      link.setAttribute('target', '_self');
-      link.style.display = 'none';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      setTimeout(() => {
-        console.log(`${categoryName} PDF download initiated successfully!`);
-      }, 100);
-    } catch (error) {
-      console.error('Download failed:', error);
-      try {
-        const response = await fetch(pdfUrl);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const blob = await response.blob();
-        const blobUrl = window.URL.createObjectURL(blob);
-        const fallbackLink = document.createElement('a');
-        fallbackLink.href = blobUrl;
-        fallbackLink.download = pdfName;
-        fallbackLink.style.display = 'none';
-        document.body.appendChild(fallbackLink);
-        fallbackLink.click();
-        document.body.removeChild(fallbackLink);
-        window.URL.revokeObjectURL(blobUrl);
-      } catch (fallbackError) {
-        console.error('Fallback download also failed:', fallbackError);
-        alert(
-          `Download failed for ${categoryName} PDF. Please check if the file exists or try again later.`
-        );
-      }
-    } finally {
-      setTimeout(() => {
-        setDownloading('');
-      }, 1000);
-    }
-  };
-
-  const handleEmailRequest = (pdfName: string, categoryName: string) => {
-    const subject = `Request for ${categoryName} Projects PDF`;
-    const body = `Hi,%0D%0A%0D%0AI would like to request the ${categoryName} projects PDF (${pdfName}).%0D%0A%0D%0APlease send me the detailed project list and information.%0D%0A%0D%0AThank you!`;
-    window.open(`mailto:integer.io.ai@gmail.com?subject=${subject}&body=${body}`);
-  };
 
   return (
     <div className="relative min-h-screen pt-20">
-      <SEO 
-        title="Student Projects | Final Year Projects Overall TamilNadu by Integer.IO Solutions"
+      <SEO
+        title="Student Projects in Madurai, Coimbatore & Chennai | Final Year Projects by Integer.IO Solutions"
         description="Download and explore final year projects overall TamilNadu provided by Integer.IO Solutions. We help students with AI, ML, Data Science, and cost efficient web development projects."
         page="projects"
       />
@@ -199,10 +136,7 @@ const Projects = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-8 sm:mb-16"
         >
-          <h1 className={`text-2xl sm:text-4xl md:text-6xl font-bold mb-3 sm:mb-6 ${isDark
-            ? 'bg-gradient-to-r from-emerald-400 via-purple-400 to-pink-400 bg-clip-text text-transparent'
-            : 'bg-gradient-to-r from-purple-900 via-indigo-800 to-emerald-800 bg-clip-text text-transparent'
-            }`}>
+          <h1 className={`text-2xl sm:text-4xl md:text-6xl font-bold mb-3 sm:mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Our Projects
           </h1>
           <p
@@ -219,187 +153,130 @@ const Projects = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-12 sm:mb-20"
         >
-          <h2 className={`text-xl sm:text-3xl md:text-4xl font-bold text-center mb-6 sm:mb-12 bg-gradient-to-r bg-clip-text text-transparent ${isDark
-            ? 'from-emerald-400 to-purple-400'
-            : 'from-purple-800 to-emerald-700'
-            }`}>
+          <h2 className={`text-xl sm:text-3xl md:text-4xl font-bold text-center mb-6 sm:mb-12 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Our Client Projects
           </h2>
 
           <ModernProjectCarousel projects={portfolioProjects} />
         </motion.div>
 
+        {/* ── Need a Custom Project? CTA ── */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.97 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="mb-12 sm:mb-20"
+        >
+          <InteractiveCard className="!p-6 sm:!p-10 md:!p-12 hover-3d text-center">
+            <h2 className={`text-xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+              Need a Custom Project?
+            </h2>
+            <p className={`text-sm sm:text-lg md:text-xl mb-6 sm:mb-10 max-w-2xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+              Let's discuss your requirements and create something amazing together.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button
+                onClick={() => navigate('/contact#contact-form')}
+                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-6 py-3 sm:px-10 sm:py-4 rounded-xl font-bold text-sm sm:text-lg transition-all duration-300 shadow-lg hover:scale-105"
+              >
+                <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5" />
+                Get in Touch
+              </button>
+              <a
+                href="mailto:integer.io.ai@gmail.com"
+                className={`inline-flex items-center justify-center gap-2 border-2 border-purple-500 px-6 py-3 sm:px-10 sm:py-4 rounded-xl font-bold text-sm sm:text-lg transition-all duration-300 hover:scale-105 ${isDark ? 'text-purple-400 hover:bg-purple-500 hover:text-white' : 'text-purple-700 hover:bg-purple-500 hover:text-white'
+                  }`}
+              >
+                Email Us
+              </a>
+            </div>
+          </InteractiveCard>
+        </motion.div>
+
         {/* Rest of your existing code for PDF categories... */}
-        {/* Category Filter */}
+        {/* Infinite FYP Carousels */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-6 sm:mb-12"
+          className="mb-12 sm:mb-20 overflow-hidden"
         >
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-3 py-1.5 sm:px-6 sm:py-3 rounded-lg text-xs sm:text-base font-medium transition-all duration-300 shadow-lg ${selectedCategory === category
-                ? 'bg-emerald-500 text-white shadow-emerald-500/25'
-                : isDark
-                  ? 'bg-gray-800 text-gray-200 hover:bg-gray-700 shadow-gray-800/25'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300 shadow-gray-200/25'
-                }`}
+          <h2 className={`text-xl sm:text-3xl md:text-4xl font-bold text-center mb-6 sm:mb-12 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+            🎓 Final Year Projects
+          </h2>
+
+          {/* Carousel 1 (Moving Left) */}
+          <div className="relative overflow-hidden mb-6 sm:mb-8 pb-4 carousel-mask">
+            <div
+              className="flex gap-4 sm:gap-6 w-max animate-scroll-left transform-gpu"
             >
-              {category}
-            </button>
-          ))}
-        </motion.div>
+              {[...fypBatch1, ...fypBatch1].map((item, i) => (
+                <div
+                  key={i}
+                  className={`relative w-40 sm:w-64 flex-shrink-0 rounded-2xl overflow-hidden shadow-lg border p-1 sm:p-2 transition-transform duration-500 hover:scale-[1.02] ${isDark
+                    ? 'bg-gray-800/80 border-gray-700/50 text-white'
+                    : 'bg-white/80 border-gray-200 text-gray-800'
+                    }`}
+                >
+                  <div className="relative w-full h-28 sm:h-40 rounded-xl overflow-hidden">
+                    <img
+                      src={item.img}
+                      alt={item.domain}
+                      className="w-full h-full object-cover"
+                    />
+                    {/* Badge in the corner */}
+                    <div className="absolute top-2 right-2 bg-black/70 backdrop-blur-md text-white px-2 py-0.5 rounded text-[9px] sm:text-[11px] font-bold border border-white/20 z-10 shadow-lg">
+                      {item.domain}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
 
-        {/* Project Categories */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-16">
-          {filteredCategories.map((category, index) => (
-            <motion.div
-              key={category.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+          {/* Carousel 2 (Moving Right) */}
+          <div className="relative overflow-hidden pb-4 carousel-mask">
+            <div
+              className="flex gap-4 sm:gap-6 w-max animate-scroll-right transform-gpu"
             >
-              <InteractiveCard glowColor={category.color as 'emerald' | 'purple' | 'blue'} className="h-full">
-                <div className="mb-3 sm:mb-6">
-                  <h3
-                    className={`text-base sm:text-xl md:text-2xl font-bold mb-1.5 sm:mb-3 ${isDark ? 'text-white' : 'text-gray-800'
-                      }`}
-                  >
-                    {category.name}
-                  </h3>
-                  <p
-                    className={`text-[11px] sm:text-sm md:text-base mb-2 sm:mb-4 ${isDark ? 'text-gray-200' : 'text-gray-700'
-                      }`}
-                  >
-                    {category.description}
-                  </p>
+              {[...fypBatch2, ...fypBatch2].map((item, i) => (
+                <div
+                  key={i}
+                  className={`relative w-40 sm:w-64 flex-shrink-0 rounded-2xl overflow-hidden shadow-lg border p-1 sm:p-2 transition-transform duration-500 hover:scale-[1.02] ${isDark
+                    ? 'bg-gray-800/80 border-gray-700/50 text-white'
+                    : 'bg-white/80 border-gray-200 text-gray-800'
+                    }`}
+                >
+                  <div className="relative w-full h-28 sm:h-40 rounded-xl overflow-hidden">
+                    <img
+                      src={item.img}
+                      alt={item.domain}
+                      className="w-full h-full object-cover"
+                    />
+                    {/* Badge in the corner */}
+                    <div className="absolute top-2 right-2 bg-black/70 backdrop-blur-md text-white px-2 py-0.5 rounded text-[9px] sm:text-[11px] font-bold border border-white/20 z-10 shadow-lg">
+                      {item.domain}
+                    </div>
+                  </div>
                 </div>
+              ))}
+            </div>
+          </div>
 
-                <div className="mb-3 sm:mb-6">
-                  <h4
-                    className={`text-sm sm:text-base md:text-lg font-semibold mb-2 sm:mb-3 ${isDark ? 'text-gray-100' : 'text-gray-800'
-                      }`}
-                  >
-                    Sample Projects:
-                  </h4>
-                  <ul className="space-y-1 sm:space-y-2">
-                    {category.projects.slice(0, 4).map((project, idx) => (
-                      <li
-                        key={idx}
-                        className={`flex items-center text-[11px] sm:text-sm ${isDark ? 'text-gray-200' : 'text-gray-700'
-                          }`}
-                      >
-                        <div
-                          className={`w-1.5 h-1.5 sm:w-2 sm:h-2 bg-${category.color}-400 rounded-full mr-2 sm:mr-3`}
-                        />
-                        {project}
-                      </li>
-                    ))}
-                    {category.projects.length > 4 && (
-                      <li
-                        className={`text-[10px] sm:text-sm italic ${isDark ? 'text-gray-400' : 'text-gray-500'
-                          }`}
-                      >
-                        +{category.projects.length - 4} more projects...
-                      </li>
-                    )}
-                  </ul>
-                </div>
-
-                {/* Download Buttons */}
-                <div className="space-y-2 sm:space-y-3">
-                  <button
-                    onClick={() =>
-                      handlePdfDownload(
-                        category.pdfUrl,
-                        category.pdfName,
-                        category.name
-                      )
-                    }
-                    disabled={downloading === category.pdfName}
-                    className={`w-full flex items-center justify-center gap-1.5 sm:gap-2 px-4 py-2 sm:px-6 sm:py-3 rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 shadow-lg btn-hover-effect disabled:opacity-50 disabled:cursor-not-allowed ${category.color === 'emerald'
-                      ? 'bg-emerald-500 hover:bg-emerald-600 text-white shadow-emerald-500/25'
-                      : category.color === 'purple'
-                        ? 'bg-purple-500 hover:bg-purple-600 text-white shadow-purple-500/25'
-                        : 'bg-blue-500 hover:bg-blue-600 text-white shadow-blue-500/25'
-                      }`}
-                  >
-                    {downloading === category.pdfName ? (
-                      <>
-                        <motion.div
-                          animate={{ rotate: 360 }}
-                          transition={{
-                            duration: 1,
-                            repeat: Infinity,
-                            ease: 'linear',
-                          }}
-                          className="h-4 w-4 sm:h-5 sm:w-5 border-2 border-white border-t-transparent rounded-full"
-                        />
-                        Downloading...
-                      </>
-                    ) : (
-                      <>
-                        <Download className="h-4 w-4 sm:h-5 sm:w-5" />
-                        Download PDF
-                      </>
-                    )}
-                  </button>
-
-                  <button
-                    onClick={() =>
-                      handleEmailRequest(category.pdfName, category.name)
-                    }
-                    className={`w-full flex items-center justify-center gap-1.5 sm:gap-2 px-4 py-2 sm:px-6 sm:py-3 rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 border-2 ${isDark
-                      ? 'border-gray-600 text-gray-200 hover:border-gray-500 hover:bg-gray-800'
-                      : 'border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-gray-100'
-                      }`}
-                  >
-                    <FileText className="h-4 w-4 sm:h-5 sm:w-5" />
-                    Request via Email
-                  </button>
-                </div>
-              </InteractiveCard>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mt-8 sm:mt-16"
-        >
-          <div
-            className={`p-4 sm:p-6 md:p-8 rounded-2xl ${isDark ? 'bg-gray-800/50' : 'bg-gray-100/50'
-              } backdrop-blur-sm`}
-          >
-            <h3
-              className={`text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-4 ${isDark ? 'text-white' : 'text-gray-800'
-                }`}
-            >
-              Need a Custom Project?
-            </h3>
-            <p className={`text-xs sm:text-sm md:text-base mb-3 sm:mb-6 ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>
-              Let's discuss your requirements and create something amazing
-              together
-            </p>
+          {/* Register Button */}
+          <div className="flex justify-center mt-6 sm:mt-10">
             <a
-              href="/contact"
-              className="inline-flex items-center gap-1.5 sm:gap-2 px-5 py-2.5 sm:px-8 sm:py-4 bg-gradient-to-r from-emerald-500 to-purple-500 hover:from-emerald-600 hover:to-purple-600 text-white text-sm sm:text-base font-medium rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
-              onClick={(e) => {
-                e.preventDefault();
-                window.location.href = '/contact#contact-form';
-              }}
+              href="https://integer-io-projectportal.netlify.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-emerald-500 to-purple-500 hover:from-emerald-600 hover:to-purple-600 text-white text-sm sm:text-base font-bold rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] transform hover:-translate-y-1"
             >
-              <ExternalLink className="h-4 w-4 sm:h-5 sm:w-5" />
-              Get in Touch
+              Register for a Project
+              <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 ml-1" />
             </a>
           </div>
         </motion.div>
+
       </div>
     </div>
   );

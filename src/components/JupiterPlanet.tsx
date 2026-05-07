@@ -44,7 +44,7 @@ const SaturnPlanet: React.FC = () => {
     <div
       className={`fixed top-1/2 transform -translate-y-1/2 z-0 
         ${isMobile ? '-right-32 opacity-60' : 'right-10'} 
-        ${isDark ? 'opacity-50 lg:opacity-60' : 'opacity-70 lg:opacity-80'}`}
+        ${isDark ? 'opacity-50 lg:opacity-60' : 'opacity-70 lg:opacity-550'}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

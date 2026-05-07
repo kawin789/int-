@@ -139,10 +139,7 @@ const Students = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className={`text-4xl md:text-6xl font-bold mb-6 ${isDark
-              ? 'bg-gradient-to-r from-emerald-400 via-purple-400 to-pink-400 bg-clip-text text-transparent'
-              : 'text-gray-900'
-            }`}>
+          <h1 className={`text-4xl md:text-6xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Final-Year Student Corner
           </h1>
           <p
@@ -220,7 +217,10 @@ const Students = () => {
 
                 <div className="relative z-10">
                   <motion.div
-                    className={`text-${pkg.color}-400 mb-6`}
+                    className={`${isDark
+                      ? `text-${pkg.color}-400`
+                      : ({ emerald: 'text-emerald-700', blue: 'text-blue-700', purple: 'text-purple-700', pink: 'text-violet-700', indigo: 'text-indigo-700' }[pkg.color] ?? 'text-gray-700')
+                    } mb-6`}
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     transition={{ type: 'spring', stiffness: 300 }}
                   >
@@ -243,7 +243,10 @@ const Students = () => {
                         transition={{ delay: idx * 0.1 }}
                       >
                         <div
-                          className={`w-2 h-2 rounded-full mr-3 flex-shrink-0 bg-${pkg.color}-400`}
+                          className={`w-2 h-2 rounded-full mr-3 flex-shrink-0 ${isDark
+                            ? `bg-${pkg.color}-400`
+                            : ({ emerald: 'bg-emerald-700', blue: 'bg-blue-700', purple: 'bg-purple-700', pink: 'bg-violet-700', indigo: 'bg-indigo-700' }[pkg.color] ?? 'bg-gray-700')
+                          }`}
                         />
                         {project}
                       </motion.li>
@@ -270,14 +273,14 @@ const Students = () => {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 bg-gradient-to-r from-emerald-400 to-purple-400 bg-clip-text text-transparent">
+          <h2 className={`text-3xl md:text-4xl font-bold text-center mb-12 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Professional Resume Services
           </h2>
 
           <InteractiveCard glowColor="indigo" className="p-8">
             <div className="grid lg:grid-cols-2 gap-8 items-center">
               <div>
-                <FileText className="h-16 w-16 text-indigo-400 mb-6" />
+                <FileText className={`h-16 w-16 mb-6 ${isDark ? 'text-indigo-400' : 'text-indigo-700'}`} />
                 <h3
                   className={`text-3xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-800'
                     }`}
@@ -299,7 +302,7 @@ const Students = () => {
                       className={`flex items-center ${isDark ? 'text-gray-200' : 'text-gray-700'
                         }`}
                     >
-                      <div className="w-2 h-2 bg-indigo-400 rounded-full mr-3" />
+                      <div className={`w-2 h-2 rounded-full mr-3 ${isDark ? 'bg-indigo-400' : 'bg-indigo-700'}`} />
                       {feature}
                     </div>
                   ))}
@@ -357,7 +360,7 @@ const Students = () => {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 bg-gradient-to-r from-emerald-400 to-purple-400 bg-clip-text text-transparent">
+          <h2 className={`text-3xl md:text-4xl font-bold text-center mb-12 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             What You Get
           </h2>
 
@@ -370,7 +373,7 @@ const Students = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 <InteractiveCard glowColor="emerald">
-                  <div className="text-emerald-400 mb-4">{feature.icon}</div>
+                  <div className={`mb-4 ${isDark ? 'text-emerald-400' : 'text-emerald-700'}`}>{feature.icon}</div>
                   <h3
                     className={`text-lg font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-800'
                       }`}
@@ -396,13 +399,13 @@ const Students = () => {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 bg-gradient-to-r from-emerald-400 to-purple-400 bg-clip-text text-transparent">
+          <h2 className={`text-3xl md:text-4xl font-bold text-center mb-12 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Special Student Offers
           </h2>
 
           <div className="grid md:grid-cols-2 gap-8">
             <InteractiveCard glowColor="emerald" className="p-8">
-              <GraduationCap className="h-16 w-16 text-emerald-400 mb-6" />
+              <GraduationCap className={`h-16 w-16 mb-6 ${isDark ? 'text-emerald-400' : 'text-emerald-700'}`} />
               <h3
                 className={`text-2xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-800'
                   }`}
@@ -423,13 +426,13 @@ const Students = () => {
                 <li>• Collaborative documentation</li>
                 <li>• Group presentation training</li>
               </ul>
-              <div className="text-emerald-400 font-bold text-xl">
+              <div className={`font-bold text-xl ${isDark ? 'text-emerald-400' : 'text-emerald-700'}`}>
                 Contact for Group Rates
               </div>
             </InteractiveCard>
 
             <InteractiveCard glowColor="purple" className="p-8">
-              <Award className="h-16 w-16 text-purple-400 mb-6" />
+              <Award className={`h-16 w-16 mb-6 ${isDark ? 'text-purple-400' : 'text-purple-700'}`} />
               <h3
                 className={`text-2xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-800'
                   }`}
@@ -450,7 +453,7 @@ const Students = () => {
                 <li>• Multiple revision rounds</li>
                 <li>• Detailed progress tracking</li>
               </ul>
-              <div className="text-purple-400 font-bold text-xl">
+              <div className={`font-bold text-xl ${isDark ? 'text-purple-400' : 'text-purple-700'}`}>
                 Special Discount Available
               </div>
             </InteractiveCard>
@@ -465,7 +468,7 @@ const Students = () => {
           className="text-center"
         >
           <InteractiveCard className="p-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-emerald-400 to-purple-400 bg-clip-text text-transparent">
+            <h2 className={`text-3xl md:text-4xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
               Ready to Excel in Your Final Year?
             </h2>
             <p
@@ -518,7 +521,7 @@ const Students = () => {
                   🎓
                 </motion.div>
                 <h3
-                  className={`text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent`}
+                  className={`text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-700 bg-clip-text text-transparent ${isDark ? '!from-blue-400 !to-purple-400' : ''}`}
                 >
                   Your Success is Our Mission
                 </h3>

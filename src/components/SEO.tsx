@@ -12,9 +12,9 @@ interface SEOProps {
 }
 
 const SEO: React.FC<SEOProps> = ({
-  title = "Integer.IO Solutions | Top Madurai IT Companies for SaaS Products & Web Development",
-  description = "Integer.IO Solutions is a leading IT company in Madurai. We provide cost efficient web development, SaaS products, and assist with final year projects overall TamilNadu.",
-  keywords = "Integer.IO Solutions, Integer.IO, madurai it companies, final year projects overall tamilnadu, SaaS products, cost efficient web development, web development Madurai, AI automation Tamil Nadu, custom software, digital marketing Madurai, student projects, React development, AI chatbot",
+  title = "Integer.IO Solutions | AI Automation & Web Development Company in Madurai, Coimbatore & Chennai",
+  description = "Integer.IO Solutions is a leading AI automation company and web development company in Madurai. We provide SaaS products, React development, business automation, custom software, digital transformation and final year projects across Tamil Nadu.",
+  keywords = "Integer.IO Solutions, Integer.IO, AI automation company, web development company, React development, SaaS solutions, software company, digital transformation, business automation, madurai it companies, coimbatore it companies, chennai it companies, final year projects tamilnadu, SaaS products, web development Madurai, web development Coimbatore, web development Chennai, AI automation Tamil Nadu, custom software, digital marketing Madurai, student projects, AI chatbot, Node.js development, full stack development",
   image = logoAsset,
   url = "https://integerio.com",
   page = ""
