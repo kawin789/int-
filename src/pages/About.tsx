@@ -8,9 +8,9 @@ import {
   Rocket,
   Lightbulb,
   Heart,
-  Briefcase,
-  LineChart,
-  Megaphone,
+  // Briefcase,
+  // LineChart,
+  // Megaphone,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import InteractiveCard from '../components/InteractiveCard';
@@ -40,7 +40,7 @@ const About = () => {
       color: 'indigo',
     },
     {
-      name: 'Hemanth.K',
+      name: 'Hemanth K',
       role: 'COO / Sales',
       quotes: [
         'Client handling & deals — building lasting partnerships.',
@@ -48,8 +48,8 @@ const About = () => {
       ],
       email: 'integeriohemanth@gmail.com',
       phone: '+91 63852 79258',
-      linkedin: '#',
-      portfolio: '#',
+      linkedin: 'https://www.linkedin.com/in/hemanth-k-iykyk',
+      portfolio: 'https://project-rl7ny.vercel.app/',
       image: hemanth,
       color: 'indigo',
     },
@@ -259,10 +259,10 @@ const About = () => {
                   initial={{ opacity: 0, x: isEven ? 50 : -50 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.7, delay: index * 0.1 }}
-                  className={`relative pt-16 sm:pt-0 mx-3 sm:mx-0 ${isEven ? 'sm:pr-24 md:pr-32' : 'sm:pl-24 md:pl-32'}`}
+                  className={`relative ${index === 0 ? 'mt-20 sm:mt-0' : ''} pt-20 sm:pt-0 mx-3 sm:mx-0 ${isEven ? 'sm:pr-24 md:pr-32' : 'sm:pl-24 md:pl-32'}`}
                 >
                   {/* Larger Offset Profile Circle */}
-                  <div className={`absolute ${isEven ? 'right-1/2 translate-x-1/2 sm:translate-x-0 sm:right-[-40px] md:right-[-60px]' : 'left-1/2 -translate-x-1/2 sm:translate-x-0 sm:left-[-40px] md:left-[-60px]'} top-4 sm:top-1/2 -translate-y-1/2 z-20 w-36 h-36 sm:w-48 sm:h-48 md:w-64 md:h-64 rounded-full flex items-center justify-center text-4xl sm:text-6xl md:text-8xl font-bold text-white shadow-[0_0_30px_rgba(99,102,241,0.3)] dark:shadow-[0_0_40px_rgba(255,255,255,0.05)] overflow-hidden border-4 sm:border-8 ${isDark ? 'bg-[#0f172a] border-white/10' : 'bg-white border-white shadow-xl'}`}>
+                  <div className={`absolute ${isEven ? 'right-1/2 translate-x-1/2 sm:translate-x-0 sm:right-[-40px] md:right-[-60px]' : 'left-1/2 -translate-x-1/2 sm:translate-x-0 sm:left-[-40px] md:left-[-60px]'} top-10 sm:top-1/2 -translate-y-1/2 z-20 w-40 h-40 sm:w-48 sm:h-48 md:w-64 md:h-64 rounded-full flex items-center justify-center text-4xl sm:text-6xl md:text-8xl font-bold text-white shadow-[0_0_30px_rgba(99,102,241,0.3)] dark:shadow-[0_0_40px_rgba(255,255,255,0.05)] overflow-hidden border-4 sm:border-8 ${isDark ? 'bg-[#0f172a] border-white/10' : 'bg-white border-white shadow-xl'}`}>
                     {member.image ? (
                       <div className="w-full h-full p-1.5 sm:p-2">
                         <img src={member.image} alt={member.name} className="w-full h-full object-contain rounded-full" />
@@ -273,7 +273,7 @@ const About = () => {
                   </div>
 
                   <InteractiveCard glowColor="indigo" className={`!p-0 overflow-visible ${isDark ? 'bg-gray-800/40 backdrop-blur-md border-white/5' : 'bg-white/60 backdrop-blur-md border-gray-100 shadow-xl'}`}>
-                    <div className={`flex flex-col lg:flex-row items-center gap-4 sm:gap-8 p-4 sm:p-10 md:p-12 pt-16 sm:pt-10 ${isEven ? 'sm:pr-32 lg:pr-40' : 'sm:pl-32 lg:pl-40'}`}>
+                    <div className={`flex flex-col lg:flex-row items-center gap-4 sm:gap-8 p-4 sm:p-10 md:p-12 pt-24 sm:pt-10 ${isEven ? 'sm:pr-32 lg:pr-40' : 'sm:pl-32 lg:pl-40'}`}>
                       
                       {/* Name & Quotes Column (Middle) */}
                       <div className={`flex-1 text-center sm:text-left w-full ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>

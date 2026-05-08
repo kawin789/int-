@@ -117,7 +117,7 @@
   width: 100%;
   height: 450px;
   margin: 0 auto;
-  perspective: 1000px;
+  perspective: 2000px;
   perspective-origin: center center;
   max-width: 100%;
   transform-style: preserve-3d;
@@ -179,17 +179,23 @@
 /* Image Container */
 .service-image-container {
   width: 100%;
-  height: 160px;
+  height: 140px;
   overflow: hidden;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: rgba(16, 185, 129, 0.03);
 }
 
 .service-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  transform: scale(1.1);
   transition: transform 0.4s ease;
 }
 
@@ -266,7 +272,7 @@
 
   .carousel-container {
     height: 480px;
-    perspective: 1100px;
+    perspective: 2200px;
   }
 
   .carousel__face {
@@ -303,19 +309,16 @@
   .carousel-container {
     height: 400px;
     /* Reduced from 460px */
-    perspective: 1400px;
+    perspective: 2500px;
     max-width: 1400px;
   }
 
   .carousel__face {
-    width: 260px;
-    /* Reduced from 300px */
-    height: 350px;
-    /* Reduced from 400px */
-    left: calc(50% - 130px);
-    top: calc(50% - 175px);
+    width: 340px;
+    height: 310px;
+    left: calc(50% - 170px);
+    top: calc(50% - 155px);
     --translateZ: 340px;
-    /* Reduced from 380px */
     border-radius: 20px;
   }
 
@@ -340,8 +343,9 @@
   .service-description {
     font-size: 0.95rem;
     padding: 0 1.2rem 1.2rem 1.2rem;
-    line-height: 1.5;
-    -webkit-line-clamp: 4;
+    line-height: 1.4;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
   }
 }
 
@@ -354,18 +358,15 @@
   .carousel-container {
     height: 440px;
     /* Reduced from 500px */
-    perspective: 1600px;
+    perspective: 3000px;
   }
 
   .carousel__face {
-    width: 290px;
-    /* Reduced from 320px */
-    height: 380px;
-    /* Reduced from 420px */
-    left: calc(50% - 145px);
-    top: calc(50% - 190px);
+    width: 380px;
+    height: 340px;
+    left: calc(50% - 190px);
+    top: calc(50% - 170px);
     --translateZ: 380px;
-    /* Reduced from 420px */
   }
 
   .service-image-container {
@@ -407,7 +408,7 @@
     height: 230px;
     left: calc(50% - 85px);
     top: calc(50% - 115px);
-    --translateZ: 140px;
+    --translateZ: 160px;
     border-radius: 14px;
     transition: none;
   }

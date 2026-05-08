@@ -257,7 +257,7 @@ const SpaceBackground: React.FC = () => {
       style={{
         background: isDark
           ? 'radial-gradient(ellipse at 20% 30%, rgba(30, 50, 100, 0.3) 0%, transparent 60%), radial-gradient(ellipse at 80% 70%, rgba(40, 30, 80, 0.3) 0%, transparent 60%), linear-gradient(135deg, #050510 0%, #0a1025 35%, #101530 70%, #050510 100%)'
-          : 'radial-gradient(ellipse at 30% 40%, rgba(199, 210, 254, 0.2) 0%, transparent 70%), radial-gradient(ellipse at 70% 60%, rgba(221, 214, 254, 0.10) 0%, transparent 70%), linear-gradient(135deg, #e2e8ffff 10%, #f2f5ffff 40%, #e7ecffff 80%)'
+          : 'radial-gradient(ellipse at 30% 40%, rgba(215, 225, 255, 0.12) 0%, transparent 70%), radial-gradient(ellipse at 70% 60%, rgba(235, 230, 255, 0.06) 0%, transparent 70%), linear-gradient(135deg, #e9efffff 10%, #f9fbffff 40%, #e5eaffff 80%)'
       }}
     />
   );

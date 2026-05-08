@@ -120,7 +120,7 @@ const ServiceCarousel = () => {
     if (!isIntersecting || !carouselRef.current || isPaused) return;
 
     let lastTime = performance.now();
-    const speed = isMobile ? 0.12 : 0.25;
+    const speed = isMobile ? 0.3 : 0.25;
     const frameLimit = isMobile ? 33 : 16; // 30 fps on mobile, 60 fps on desktop
 
     const step = (now: number) => {

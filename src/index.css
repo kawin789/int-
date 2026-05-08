@@ -59,7 +59,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  background-color: #fafbff;
+  background-color: #fcfdff;
 }
 
 #root {
@@ -271,9 +271,6 @@ body {
   will-change: transform;
 }
 
-.pause-on-hover:hover {
-  /* Removed animation-play-state: paused to keep carousel moving as per user request */
-}
 
 .carousel-mask {
   mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
