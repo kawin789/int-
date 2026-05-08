@@ -14,9 +14,9 @@ const ServiceCarousel = () => {
   const [rotation, setRotation] = useState(0);
   const [isIntersecting, setIsIntersecting] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const sectionRef = useRef(null);
-  const carouselRef = useRef(null);
-  const rafRef = useRef(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number | null>(null);
   const rotationRef = useRef(0);
   const isDraggingRef = useRef(false);
   const lastMouseXRef = useRef(0);
@@ -186,7 +186,7 @@ const ServiceCarousel = () => {
                 style={{
                   transform: `rotateY(${theta}deg) translateZ(var(--translateZ))`,
                   '--theta': `${theta}deg`,
-                }}
+                } as React.CSSProperties}
               >
                 <div className="carousel-content">
                   <div className="service-image-container">
