@@ -159,7 +159,7 @@ const Contact = () => {
     'Digital Marketing',
     'Video/Logo Designing',
     'Portfolio (Students/Employees)',
-    'Billing Software',
+    'ERP That can include: Billing software, CRM, HR, Inventory',
     'Mobile App Development',
     'Data Analytics'
   ];
@@ -167,8 +167,8 @@ const Contact = () => {
   return (
     <div className="relative min-h-screen pt-20">
       <SEO 
-        title="Contact Us | Integer.IO Solutions - Madurai, Coimbatore & Chennai"
-        description="Get in touch with Integer.IO Solutions for cost efficient web development, SaaS products, and final year projects overall TamilNadu. Based in Madurai, serving clients globally."
+        title="Contact Us | Integer.IO Systems - Madurai, Coimbatore & Chennai"
+        description="Get in touch with Integer.IO Systems for cost efficient web development, SaaS products, and final year projects overall TamilNadu. Based in Madurai, serving clients globally."
         page="contact"
       />
       <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-4 py-6 sm:py-12">
@@ -183,7 +183,7 @@ const Contact = () => {
           </h1>
           <p className={`text-sm sm:text-lg md:text-xl font-medium ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
             Ready to transform your ideas into reality? Get in touch with
-            Integer.IO Solutions today!
+            Integer.IO Systems today!
           </p>
         </motion.div>
 

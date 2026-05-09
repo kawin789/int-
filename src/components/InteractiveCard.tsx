@@ -43,7 +43,7 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({
     >
       {/* Enhanced glow effect */}
       <div className={`
-        absolute inset-0 rounded-xl opacity-0 hover:opacity-80 transition-opacity duration-300
+        absolute inset-0 rounded-xl opacity-0 hover:opacity-25 sm:hover:opacity-80 transition-opacity duration-300
         ${isDark
           ? 'bg-gradient-to-r from-transparent via-gray-600/8 to-transparent'
           : 'bg-gradient-to-r from-transparent via-gray-200/15 to-transparent'

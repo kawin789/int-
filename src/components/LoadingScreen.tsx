@@ -84,16 +84,16 @@ const LoadingScreen: React.FC<{ onComplete: () => void }> = ({
               />
 
               <motion.h1
-                className="text-5xl md:text-6xl font-bold text-center mb-8 py-4 leading-none"
+                className={`text-4xl md:text-5xl font-bold text-center mb-8 py-4 leading-none bg-gradient-to-r bg-clip-text text-transparent drop-shadow-sm ${
+                  isDark
+                    ? 'from-emerald-300 via-purple-300 to-pink-300'
+                    : 'from-purple-900 via-indigo-800 to-emerald-800'
+                }`}
                 initial={{ scale: 0.7, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 1, delay: 0.4, ease: 'easeOut' }}
                 style={{
                   backgroundSize: '200% 200%',
-                  background: 'linear-gradient(90deg, #10b981, #8b5cf6)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
                 }}
               >
                 <motion.span
@@ -107,13 +107,9 @@ const LoadingScreen: React.FC<{ onComplete: () => void }> = ({
                   }}
                   style={{
                     backgroundSize: '200% 200%',
-                    background: 'linear-gradient(90deg, #10b981, #8b5cf6)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
                   }}
                 >
-                  Integer.IO
+                  Integer.IO Systems
                 </motion.span>
               </motion.h1>
 
@@ -221,7 +217,7 @@ const LoadingScreen: React.FC<{ onComplete: () => void }> = ({
                 className={`text-xs font-light tracking-wider ${isDark ? 'text-slate-500' : 'text-slate-400'
                   }`}
               >
-                © 2025 Integer.IO Solutions - Professional Technology Solutions
+                © 2025 Integer.IO Systems - Professional Technology Solutions
               </p>
             </motion.div>
           </div>

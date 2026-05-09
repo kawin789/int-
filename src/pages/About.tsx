@@ -20,6 +20,7 @@ import ReviewCarousel from '../components/ReviewCarousel';
 import kawin from '../assets/team/kawin.webp'
 import livan from '../assets/team/livan.webp'
 import hemanth from '../assets/team/hemanth.webp'
+import SEO from '../components/SEO';
 
 const About = () => {
   const { isDark } = useTheme();
@@ -110,6 +111,11 @@ const About = () => {
 
   return (
     <div className="relative min-h-screen pt-20">
+      <SEO 
+        title="About Us | Integer.IO Systems - AI & Web Development Experts"
+        description="Learn about Integer.IO Systems, our mission, values, and the expert team dedicated to providing top-tier AI automation, SaaS products, ERP and web development."
+        page="about"
+      />
 
       <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-4 py-6 sm:py-12">
         {/* Page Title */}
@@ -153,7 +159,7 @@ const About = () => {
                 >
                   <img
                     src={logo}
-                    alt="Integer.IO Solutions Logo"
+                    alt="Integer.IO Systems Logo"
                     className="w-full h-full object-cover rounded-full"
                   />
                 </div>
@@ -165,9 +171,9 @@ const About = () => {
                     Empowering Digital Transformation
                   </h3>
                   <p className={`text-xs sm:text-base lg:text-lg leading-relaxed mb-3 sm:mb-4 ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>
-                    Integer.IO Solutions is a leading digital solutions provider founded with a vision to
+                    Integer.IO Systems is a leading digital solutions provider founded with a vision to
                     <span className={`font-semibold ${isDark ? 'text-emerald-400' : 'text-emerald-700'}`}> democratize technology</span> for
-                    businesses of all sizes. We specialize in web development, AI Automation solutions, billing software,
+                    businesses of all sizes. We specialize in web development, AI Automation solutions, ERP That can include: Billing software, CRM, HR, Inventory,
                     and digital marketing.
                   </p>
                   <p className={`text-xs sm:text-base lg:text-lg leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>

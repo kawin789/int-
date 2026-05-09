@@ -5,9 +5,9 @@ import {
   Globe,
   Users,
   Award,
-  Shield,
-  Zap,
-  HeadphonesIcon,
+  // Shield,
+  // Zap,
+  // HeadphonesIcon,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import InteractiveCard from '../components/InteractiveCard';
@@ -24,6 +24,7 @@ import imgGenImg from '../assets/products/img_gen.webp';
 import acImg from '../assets/services/ac.webp';
 import sasImg from '../assets/services/sas.webp';
 import karpagamImg from '../assets/services/karpagam.webp';
+import whycardImg from '../assets/serivice caosel/whycard.png';
 
 // Import company logo
 import halfLogo from '../assets/company_logo/half_logo.webp';
@@ -85,44 +86,7 @@ const Home = () => {
     },
   ];
 
-  const whyPoints = [
-    {
-      title: 'Cost-Efficient Solutions',
-      description: 'Premium quality at startup-friendly prices — no hidden fees, no compromises.',
-      icon: <Zap className="h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
-      color: 'emerald' as const,
-    },
-    {
-      title: 'End-to-End Delivery',
-      description: 'From concept to deployment — we handle design, development, and support.',
-      icon: <Award className="h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
-      color: 'purple' as const,
-    },
-    {
-      title: '24/7 Expert Support',
-      description: 'Round-the-clock WhatsApp & email support for all your technical needs.',
-      icon: <HeadphonesIcon className="h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
-      color: 'blue' as const,
-    },
-    {
-      title: 'Proven Track Record',
-      description: '110+ projects delivered with 100% client satisfaction across Tamil Nadu.',
-      icon: <Users className="h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
-      color: 'pink' as const,
-    },
-    {
-      title: 'Secure & Scalable',
-      description: 'Enterprise-grade security with cloud-ready architectures that grow with you.',
-      icon: <Shield className="h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
-      color: 'emerald' as const,
-    },
-    {
-      title: 'Student-Friendly Pricing',
-      description: 'Affordable final year project packages with full documentation & presentation support.',
-      icon: <Sparkles className="h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
-      color: 'cyan' as const,
-    },
-  ];
+
 
   const slideL = {
     hidden: { opacity: 0, x: typeof window !== 'undefined' && window.innerWidth < 640 ? -12 : -20 },
@@ -137,8 +101,8 @@ const Home = () => {
   return (
     <div className="relative min-h-screen pt-16">
       <SEO
-        title="Integer.IO Solutions | AI Automation & Web Development Company in Madurai, Coimbatore & Chennai"
-        description="Integer.IO Solutions is a leading AI automation company and web development company in Madurai. We provide SaaS products, React development, business automation, digital transformation and final year projects across Tamil Nadu."
+        title="Integer.IO Systems | AI Automation & Web Development Company in Madurai, Coimbatore & Chennai"
+        description="Integer.IO Systems is a leading AI automation company and web development company in Madurai. We provide SaaS products, React development, business automation, digital transformation and final year projects across Tamil Nadu."
         page=""
       />
       {/* Hero Section with Enhanced Effects */}
@@ -163,29 +127,29 @@ const Home = () => {
               </span>
             </motion.div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold mb-2 sm:mb-3">
+            <h1 className="flex flex-col items-center justify-center gap-1 sm:gap-2 text-3xl sm:text-4xl md:text-7xl font-bold mb-4 sm:mb-8">
               <motion.span variants={slideR} className="flex items-center justify-center gap-2 sm:gap-4">
-                <img src={halfLogo} alt="Integer.IO Solutions - Top Madurai IT Companies" className="h-16 sm:h-14 md:h-24 w-auto object-contain" />
-                <span className={`bg-gradient-to-r bg-clip-text text-transparent pb-1 sm:pb-2 text-xl sm:text-3xl md:text-5xl drop-shadow-sm ${isDark
+                <img src={halfLogo} alt="Integer.IO Systems - Top Madurai IT Companies" className="h-16 sm:h-14 md:h-24 w-auto object-contain" />
+                <span className={`bg-gradient-to-r bg-clip-text text-transparent pb-0 sm:pb-1 text-xl sm:text-3xl md:text-5xl drop-shadow-sm ${isDark
                   ? 'from-emerald-300 via-purple-300 to-pink-300'
                   : 'from-purple-900 via-indigo-800 to-emerald-800'
-                  }`} style={{ lineHeight: '1.3' }}>
-                  Integer.IO Solutions
+                  }`} style={{ lineHeight: '1.2' }}>
+                  Integer.IO Systems
                 </span>
               </motion.span>
-              <br />
+              <div className="h-3 sm:h-6"></div>
               <motion.span
                 variants={slideL}
                 className={`text-base sm:text-2xl md:text-4xl font-bold ${isDark ? 'text-gray-200' : 'text-gray-900'
                   }`}
               >
-                AI Automation & Web Development Company
+                Web Development & AI Automation Company
               </motion.span>
             </h1>
 
             <motion.p
               variants={slideR}
-              className={`text-sm sm:text-xl md:text-2xl mb-2 sm:mb-4 max-w-4xl mx-auto font-bold ${isDark ? 'text-gray-200' : 'text-gray-900'
+              className={`text-sm sm:text-xl md:text-2xl mb-3 sm:mb-6 mt-4 sm:mt-6 max-w-4xl mx-auto font-bold ${isDark ? 'text-gray-200' : 'text-gray-900'
                 }`}
             >
               Helping startups & businesses build scalable AI-powered digital products
@@ -193,7 +157,7 @@ const Home = () => {
 
             <motion.p
               variants={slideL}
-              className={`text-xs sm:text-lg mb-4 sm:mb-8 max-w-3xl mx-auto font-medium ${isDark ? 'text-gray-300' : 'text-gray-800'
+              className={`text-xs sm:text-lg mb-4 sm:mb-6 max-w-3xl mx-auto font-medium ${isDark ? 'text-gray-300' : 'text-gray-800'
                 }`}
             >
               We specialize in React development, AI automation solutions,
@@ -275,53 +239,70 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Why Integer.IO Solutions Section */}
-      <section className="py-10 sm:py-20 px-3 sm:px-4 relative z-10 overflow-hidden">
+      {/* Why Integer.IO Systems Section */}
+      <section className="py-12 sm:py-24 px-4 relative z-10 overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <motion.h2
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={slideR}
-            className={`text-xl sm:text-3xl md:text-4xl font-bold text-center mb-6 sm:mb-16 ${isDark ? 'text-white' : 'text-gray-900'}`}
-          >
-            Why Integer.IO Solutions?
-          </motion.h2>
+          <div className={`p-8 sm:p-12 md:p-16 rounded-[2.5rem] backdrop-blur-xl border shadow-2xl transition-all duration-500 ${isDark ? 'bg-white/5 border-white/10' : 'bg-white/60 border-emerald-500/10'}`}>
+            <motion.h2
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={slideL}
+              className={`text-2xl sm:text-3xl md:text-4xl font-extrabold text-center mb-10 sm:mb-14 ${isDark ? 'text-white' : 'text-gray-900'}`}
+            >
+              Why Integer.IO Systems?
+            </motion.h2>
 
-          <div className="force-cols-2-mobile force-cols-3-desktop gap-2 sm:gap-6 lg:gap-8">
-            {whyPoints.map((point, index) => (
-              <motion.div
-                key={point.title}
-                className={index >= 4 ? 'hidden sm:block' : ''}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={index % 2 === 0 ? slideL : slideR}
-              >
-                <InteractiveCard
-                  glowColor={point.color}
-                  className="text-center !p-4 sm:!p-6 md:!p-8 h-full"
+          <div className="flex flex-row gap-4 sm:gap-12 lg:gap-20 items-center">
+            
+            {/* Left Side: Points List */}
+            <div className="w-3/5 lg:w-1/2 flex flex-col gap-4 sm:gap-8">
+              {[
+                { title: 'Time Management', description: 'Projects delivered precisely within 150 - 200 hours.' },
+                { title: '24x7 Available', description: 'Always here to support you, any time of the day.' },
+                { title: 'Modern AI Integration', description: 'Seamlessly incorporating the latest AI into your systems.' },
+                { title: 'Maximum Security', description: 'Your project details and data must be fully secure.' },
+                { title: 'Scalable Architecture', description: 'Future-proof solutions designed to grow with your business.' }
+              ].map((point, index) => (
+                <motion.div
+                  key={index}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={slideL}
+                  custom={index}
+                  className="flex flex-col border-l-4 border-emerald-500 pl-4 sm:pl-6"
                 >
-                  <div
-                    className={`${isDark
-                      ? `text-${point.color}-400`
-                      : ({ emerald: 'text-emerald-700', purple: 'text-purple-700', blue: 'text-blue-700', pink: 'text-violet-700', cyan: 'text-teal-700' }[point.color] ?? 'text-gray-700')
-                      } mb-3 sm:mb-5 flex justify-center`}
-                  >
-                    {point.icon}
-                  </div>
-                  <h3
-                    className={`text-sm sm:text-lg md:text-xl font-bold mb-1.5 sm:mb-3 ${isDark ? 'text-white' : 'text-gray-800'
-                      }`}
-                  >
+                  <h3 className={`text-base sm:text-xl font-bold mb-0.5 sm:mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>
                     {point.title}
                   </h3>
-                  <p className={`text-xs sm:text-sm md:text-base ${isDark ? 'text-gray-200' : 'text-gray-600'}`}>
+                  <p className={`text-xs sm:text-base ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                     {point.description}
                   </p>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Right Side: Image Placeholder */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={slideR}
+              className="w-2/5 lg:w-1/2 flex justify-center"
+            >
+              <div className="w-full max-w-sm sm:max-w-md">
+                <InteractiveCard glowColor="emerald" className="!p-0 overflow-hidden">
+                  <img
+                    src={whycardImg}
+                    alt="Why Integer.IO Systems - AI & Web Development"
+                    className="w-full h-auto object-contain"
+                  />
                 </InteractiveCard>
-              </motion.div>
-            ))}
+              </div>
+            </motion.div>
+
+          </div>
           </div>
         </div>
       </section>
@@ -361,7 +342,7 @@ const Home = () => {
                 <div className={`relative rounded-t-xl ${isDark ? 'bg-gray-800/40' : 'bg-gray-50/50'}`}>
                   <img
                     src={chatzImg}
-                    alt="Chatz.IO - SaaS Products by Integer.IO Solutions for Students"
+                    alt="Chatz.IO - SaaS Products by Integer.IO Systems for Students"
                     loading="lazy"
                     className="w-full h-36 sm:h-48 md:h-64 object-contain p-2"
                   />
@@ -398,7 +379,7 @@ const Home = () => {
                 <div className={`relative rounded-t-xl ${isDark ? 'bg-gray-800/40' : 'bg-gray-50/50'}`}>
                   <img
                     src={imgGenImg}
-                    alt="Dips.IO - Next-Gen SaaS Products by Integer.IO Solutions"
+                    alt="Dips.IO - Next-Gen SaaS Products by Integer.IO Systems"
                     loading="lazy"
                     className="w-full h-36 sm:h-48 md:h-64 object-contain p-2"
                   />
@@ -457,7 +438,7 @@ const Home = () => {
                   <div className="relative overflow-hidden rounded-lg mb-1 sm:mb-4">
                     <img
                       src={project.image}
-                      alt={`${project.title} - Cost efficient web development by Integer.IO Solutions`}
+                      alt={`${project.title} - Cost efficient web development by Integer.IO Systems`}
                       loading="lazy"
                       className="w-full h-24 sm:h-44 md:h-48 object-cover transition-transform duration-300 group-hover:scale-110"
                     />

@@ -96,7 +96,7 @@ const Services = () => {
       color: 'blue' as const,
       description: 'We create custom software and SaaS platforms tailored to real business needs',
       features: [
-        'Billing Software',
+        'ERP That can include: Billing software, CRM, HR, Inventory',
         'CRM Solutions',
         'SaaS Platforms',
         'Data Analytics Dashboards',
@@ -206,7 +206,7 @@ const Services = () => {
     <div className="relative min-h-screen pt-20">
       <SEO
         title="Our Services in Madurai, Coimbatore & Chennai | SaaS Products & Web Development"
-        description="Integer.IO Solutions offers cost efficient web development, custom SaaS products, AI automation, and final year projects overall TamilNadu."
+        description="Integer.IO Systems offers cost efficient web development, custom SaaS products, AI automation, and final year projects overall TamilNadu."
         page="services"
       />
 

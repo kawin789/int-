@@ -12,9 +12,9 @@ interface SEOProps {
 }
 
 const SEO: React.FC<SEOProps> = ({
-  title = "Integer.IO Solutions | AI Automation & Web Development Company in Madurai, Coimbatore & Chennai",
-  description = "Integer.IO Solutions is a leading AI automation company and web development company in Madurai. We provide SaaS products, React development, business automation, custom software, digital transformation and final year projects across Tamil Nadu.",
-  keywords = "Integer.IO Solutions, Integer.IO, AI automation company, web development company, React development, SaaS solutions, software company, digital transformation, business automation, madurai it companies, coimbatore it companies, chennai it companies, final year projects tamilnadu, SaaS products, web development Madurai, web development Coimbatore, web development Chennai, AI automation Tamil Nadu, custom software, digital marketing Madurai, student projects, AI chatbot, Node.js development, full stack development",
+  title = "Integer.IO Systems | AI Automation & Web Development Company in Madurai, Coimbatore & Chennai",
+  description = "Integer.IO Systems is a leading AI automation company and web development company in Madurai. We provide SaaS products, React development, business automation, custom software, digital transformation and final year projects across Tamil Nadu.",
+  keywords = "Integer.IO Systems, Integer.IO, AI automation company, web development company, React development, SaaS solutions, software company, digital transformation, business automation, madurai it companies, coimbatore it companies, chennai it companies, final year projects tamilnadu, SaaS products, web development Madurai, web development Coimbatore, web development Chennai, AI automation Tamil Nadu, custom software, digital marketing Madurai, student projects, AI chatbot, Node.js development, full stack development",
   image = logoAsset,
   url = "https://integerio.com",
   page = ""
@@ -28,7 +28,7 @@ const SEO: React.FC<SEOProps> = ({
       <meta name="title" content={title} />
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
-      <meta name="author" content="Kawin M.S. - Integer.IO Solutions" />
+      <meta name="author" content="Kawin M.S. - Integer.IO Systems" />
       <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 
       {/* Geo Meta Tags */}
@@ -43,7 +43,7 @@ const SEO: React.FC<SEOProps> = ({
       <meta property="og:image" content={image} />
       <meta property="og:url" content={fullUrl} />
       <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="Integer.IO Solutions" />
+      <meta property="og:site_name" content="Integer.IO Systems" />
       <meta property="og:locale" content="en_US" />
 
       {/* Twitter */}
@@ -62,8 +62,8 @@ const SEO: React.FC<SEOProps> = ({
         {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
-          "name": "Integer.IO Solutions",
-          "alternateName": ["Integer IO", "Integer.IO Solutions", "IntegerIO"],
+          "name": "Integer.IO Systems",
+          "alternateName": ["Integer IO", "Integer.IO Systems", "IntegerIO"],
           "description": "Professional web development, AI automation, SaaS products, digital marketing, and student project services based in Madurai, Tamil Nadu, India.",
           "url": url,
           "logo": image,
@@ -129,7 +129,7 @@ const SEO: React.FC<SEOProps> = ({
               "itemOffered": {
                 "@type": "Service",
                 "name": "Custom Software & SaaS Development",
-                "description": "Custom software and SaaS platforms including billing software, analytics dashboards, and business automation tools"
+                "description": "Custom software and SaaS platforms including ERP That can include: Billing software, CRM, HR, Inventory, analytics dashboards, and business automation tools"
               }
             },
             {
@@ -166,9 +166,9 @@ const SEO: React.FC<SEOProps> = ({
         {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
-          "name": "Integer.IO Solutions",
+          "name": "Integer.IO Systems",
           "image": image,
-          "description": "IT company in Madurai specializing in web development, AI automation, SaaS products, billing software, digital marketing, and student project services.",
+          "description": "IT company in Madurai specializing in web development, AI automation, SaaS products, ERP That can include: Billing software, CRM, HR, Inventory, digital marketing, and student project services.",
           "@id": url,
           "url": url,
           "telephone": "+91-8015355914",
