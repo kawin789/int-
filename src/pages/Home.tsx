@@ -24,7 +24,7 @@ import imgGenImg from '../assets/products/img_gen.webp';
 import acImg from '../assets/services/ac.webp';
 import sasImg from '../assets/services/sas.webp';
 import karpagamImg from '../assets/services/karpagam.webp';
-import whycardImg from '../assets/serivice caosel/whycard.png';
+import whycardImg from '../assets/serivice caosel/whycard.webp';
 
 // Import company logo
 import halfLogo from '../assets/company_logo/half_logo.webp';
