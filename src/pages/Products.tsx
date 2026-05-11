@@ -173,7 +173,7 @@ const Products = () => {
             logo: chatzLogo,
             subtitle: 'AI Chat Assistant for Students',
             images: [chatzImg, chatzImg2],
-            description: 'An intelligent AI-powered chat assistant designed specifically for students. Get instant help with your studies, research assistance, exam preparation, and academic guidance. Features smart conversation, knowledge base integration, and study support tools.',
+            description: 'Chatz.IO is a sophisticated AI-powered chat assistant meticulously designed to support students in their academic journey. It offers instant, high-quality assistance with complex study topics, research methodology, exam preparation, and comprehensive academic guidance. With its deep knowledge base and smart conversational capabilities, Chatz.IO acts as a 24/7 personal tutor, helping students achieve their learning goals with confidence.',
             features: [
                 'AI-powered study assistance and tutoring',
                 'Research and academic writing support',
@@ -191,7 +191,7 @@ const Products = () => {
             logo: crmLogo,
             subtitle: 'Comprehensive Project Management',
             images: [crmImg1, crmImg2],
-            description: 'A powerful Project Management System designed to streamline your workflow. Manage projects, track progress, collaborate with teams, and handle client communications all in one place. Perfect for agencies and development teams.',
+            description: 'Project-Portal.IO is a robust, all-in-one Project Management and CRM system engineered to optimize business workflows and enhance team productivity. It provides a centralized hub for managing complex projects, tracking real-time progress, facilitating seamless team collaboration, and maintaining professional client communications. Designed specifically for development agencies and modern teams, it ensures every project stage is executed with precision.',
             features: [
                 'Project Lifecycle Management',
                 'Client & Team Collaboration Tools',
@@ -209,7 +209,7 @@ const Products = () => {
             logo: dispLogo,
             subtitle: 'AI Image Generation & Documentation',
             images: [imgGenImg, imgGenImg2],
-            description: 'An innovative AI-powered platform for image generation and documentation management. Dips.IO combines cutting-edge AI technology with intuitive documentation tools to streamline your creative and organizational workflows.',
+            description: 'Dips.IO represents the next generation of creative tools, combining state-of-the-art AI image generation with advanced documentation management. This innovative platform allows users to transform text into stunning visual assets while simultaneously organizing project technicalities. Whether you are a designer, developer, or content creator, Dips.IO streamlines your creative workflow by bridging the gap between artistic vision and structured documentation.',
             features: [
                 'AI-Powered Image Generation',
                 'Smart Documentation Management',

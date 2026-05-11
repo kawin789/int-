@@ -64,7 +64,7 @@ const Services = () => {
       category: 'Web Application Development',
       icon: <Code className="h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
       color: 'emerald' as const,
-      description: 'We design and develop secure, scalable web solutions for businesses and startups',
+      description: 'We design and develop secure, scalable, and high-performance web solutions tailored to the unique needs of modern businesses and ambitious startups. Our team leverages the latest frameworks like React and Next.js to build intuitive interfaces that engage users and drive conversions.',
       features: [
         'Static websites',
         'Dynamic web applications',
@@ -79,7 +79,7 @@ const Services = () => {
       category: 'AI Product & Automation Services',
       icon: <Brain className="h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
       color: 'purple' as const,
-      description: 'We build intelligent AI solutions to automate workflows and improve business efficiency',
+      description: 'We build intelligent, future-ready AI solutions designed to automate complex workflows, enhance decision-making, and significantly improve overall business efficiency. From custom GPT models to automated data pipelines, we help you leverage AI for a competitive advantage.',
       features: [
         'AI chatbots',
         'Voice assistants',
@@ -94,7 +94,7 @@ const Services = () => {
       category: 'Custom Software & SaaS Product Development',
       icon: <FileText className="h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
       color: 'blue' as const,
-      description: 'We create custom software and SaaS platforms tailored to real business needs',
+      description: 'We create robust custom software and comprehensive SaaS platforms meticulously tailored to solve real-world business challenges. Our solutions focus on long-term scalability, data security, and seamless integration, ensuring your technical infrastructure grows alongside your company.',
       features: [
         'ERP That can include: Billing software, CRM, HR, Inventory',
         'CRM Solutions',
@@ -110,7 +110,7 @@ const Services = () => {
       category: 'Digital Marketing & Branding Services',
       icon: <Megaphone className="h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
       color: 'pink' as const,
-      description: 'We help brands grow their online presence and generate high-quality leads',
+      description: 'We empower brands to dominate their digital space by building strong online presences and generating high-quality leads through targeted marketing strategies. Our creative team combines data-driven SEO insights with impactful design to deliver measurable growth for your brand.',
       features: [
         'SEO optimization',
         'Social media marketing',
@@ -124,7 +124,7 @@ const Services = () => {
       category: 'Education & Student Services',
       icon: <Globe className="h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
       color: 'indigo' as const,
-      description: 'We support students and working professionals with industry-ready solutions',
+      description: 'We provide specialized support for students and working professionals, offering industry-ready solutions and guidance that bridge the gap between academic learning and career success. Our comprehensive services ensure you have the technical foundation and professional edge needed to excel.',
       features: [
         'Final year projects',
         'Student portfolios',
@@ -139,7 +139,7 @@ const Services = () => {
       category: 'Cloud Deployment & Technical Support',
       icon: <Shield className="h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
       color: 'cyan' as const,
-      description: 'We provide reliable cloud hosting and ongoing technical support for your applications',
+      description: 'We deliver reliable, enterprise-grade cloud hosting and comprehensive technical support to ensure your digital applications remain secure, fast, and always accessible to your users. Our proactive monitoring and maintenance minimize downtime and optimize your server infrastructure.',
       features: [
         'Cloud deployment',
         'Server configuration',

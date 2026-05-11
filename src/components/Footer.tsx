@@ -384,14 +384,15 @@ const Footer: React.FC = () => {
               Crafted with{' '}
               <Heart className={`h-2.5 w-2.5 sm:h-3 sm:w-3 mx-1 animate-pulse ${isDark ? 'text-red-400' : 'text-red-600'}`} /> by
               <Link
-                to="/admin"
-                className={`ml-1 hover:text-emerald-400 transition-colors ${isDark ? 'text-gray-400' : 'text-gray-500'}`}
+                to="/"
+                className={`ml-1 hover:text-emerald-400 transition-colors font-bold ${isDark ? 'text-gray-400' : 'text-gray-500'}`}
               >
-                MS Kawin
+                Integer.IO Systems
               </Link>
             </p>
           </div>
         </motion.div>
+
       </div>
     </footer>
   );

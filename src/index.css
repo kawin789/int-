@@ -41,7 +41,7 @@ html {
 /* 15% overall scale optimization for mobile view */
 @media (max-width: 768px) {
   html {
-    font-size: 85%; /* Reduced from 90% to 85% for better fitting */
+    font-size: 95%; /* Increased for better mobile readability as per user request */
   }
   
   .container {

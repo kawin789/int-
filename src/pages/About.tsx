@@ -171,17 +171,16 @@ const About = () => {
                     Empowering Digital Transformation
                   </h3>
                   <p className={`text-xs sm:text-base lg:text-lg leading-relaxed mb-3 sm:mb-4 ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>
-                    Integer.IO Systems is a leading digital solutions provider founded with a vision to
+                    Integer.IO Systems is a leading digital solutions provider based in Madurai, founded with a clear vision to
                     <span className={`font-semibold ${isDark ? 'text-emerald-400' : 'text-emerald-700'}`}> democratize technology</span> for
-                    businesses of all sizes. We specialize in web development, AI Automation solutions, ERP That can include: Billing software, CRM, HR, Inventory,
-                    and digital marketing.
+                    businesses of all sizes. We specialize in high-performance web development, custom AI Automation solutions, enterprise-grade ERP systems including Billing software, CRM, and digital marketing strategies tailored for growth. Our expertise lies in building secure, scalable, and user-centric digital products that solve real-world problems.
                   </p>
                   <p className={`text-xs sm:text-base lg:text-lg leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
                     Our mission is to make cutting-edge technology
                     <span className={`font-semibold ${isDark ? 'text-purple-400' : 'text-purple-700'}`}> accessible and affordable</span> for
-                    everyone—from startups and small businesses to students working on their final year projects.
-                    Founded in <span className={`font-bold ${isDark ? 'text-violet-400' : 'text-violet-700'}`}>2024</span>, our team brings <span className={`font-bold px-2 py-0.5 rounded-md ${isDark ? 'text-emerald-400 bg-emerald-400/10' : 'text-emerald-700 bg-emerald-700/10'}`}>2+ Years</span> of expertise in the field.
-                    We transform ideas into reality with innovation, excellence, and personalized support.
+                    everyone—from ambitious startups and small local businesses to students seeking professional guidance for their final year projects.
+                    Founded in <span className={`font-bold ${isDark ? 'text-violet-400' : 'text-violet-700'}`}>2024</span>, we have quickly grown into a trusted technology partner, bringing <span className={`font-bold px-2 py-0.5 rounded-md ${isDark ? 'text-emerald-400 bg-emerald-400/10' : 'text-emerald-700 bg-emerald-700/10'}`}>2+ Years</span> of collective technical expertise.
+                    We don't just build software; we build partnerships, transforming complex ideas into intuitive digital realities with a focus on innovation, excellence, and personalized support.
                   </p>
                 </div>
 

@@ -152,17 +152,15 @@ const Home = () => {
               className={`text-sm sm:text-xl md:text-2xl mb-3 sm:mb-6 mt-4 sm:mt-6 max-w-4xl mx-auto font-bold ${isDark ? 'text-gray-200' : 'text-gray-900'
                 }`}
             >
-              Helping startups & businesses build scalable AI-powered digital products
+              Empowering Startups & Enterprises with Scalable AI-Driven Digital Solutions
             </motion.p>
 
             <motion.p
               variants={slideL}
-              className={`text-xs sm:text-lg mb-4 sm:mb-6 max-w-3xl mx-auto font-medium ${isDark ? 'text-gray-300' : 'text-gray-800'
+              className={`text-xs sm:text-lg mb-4 sm:mb-10 max-w-4xl mx-auto font-medium leading-relaxed px-4 ${isDark ? 'text-gray-300' : 'text-gray-800'
                 }`}
             >
-              We specialize in React development, AI automation solutions,
-              custom software, SaaS products, and digital transformation for businesses,
-              institutions across the globe.
+              We specialize in high-performance React development, AI automation solutions, and custom SaaS products. Based in Madurai and serving clients globally, Integer.IO Systems bridges the gap between vision and technology, delivering future-ready solutions that drive efficiency and growth for modern businesses.
             </motion.p>
           </motion.div>
 

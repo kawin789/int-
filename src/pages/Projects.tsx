@@ -140,10 +140,10 @@ const Projects = () => {
             Our Projects
           </h1>
           <p
-            className={`text-xs sm:text-lg md:text-xl max-w-3xl mx-auto font-medium ${isDark ? 'text-gray-200' : 'text-gray-800'
+            className={`text-xs sm:text-lg md:text-xl max-w-4xl mx-auto font-medium leading-relaxed ${isDark ? 'text-gray-200' : 'text-gray-800'
               }`}
           >
-            Explore our portfolio and download comprehensive project collections
+            Explore our diverse portfolio of client success stories and download comprehensive project collections designed for technical excellence. From enterprise-grade web applications to cutting-edge AI research projects, we demonstrate our commitment to delivering high-impact digital solutions that solve real-world business challenges and academic requirements.
           </p>
         </motion.div>
 

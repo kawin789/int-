@@ -14,6 +14,7 @@ const TermsOfService = () => {
       <SEO 
         title="Terms of Service - Integer.IO Systems"
         description="Read our terms of service and understand our policies for using Integer.IO Systems."
+        page="terms"
       />
       
       <div className="relative z-10 max-w-4xl mx-auto px-4 py-12">

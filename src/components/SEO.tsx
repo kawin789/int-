@@ -1,6 +1,5 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import logoAsset from '../assets/company_logo/half_logo.webp';
 
 interface SEOProps {
   title?: string;
@@ -11,15 +10,69 @@ interface SEOProps {
   page?: string;
 }
 
+// Page-specific SEO configurations
+const PAGE_SEO: Record<string, { keywords: string; schemaType: string; schemaName: string }> = {
+  '': {
+    keywords: 'Integer.IO Systems, Integer IO, integerio.com, IT company Madurai, web development Madurai, AI automation Madurai, React development Tamil Nadu, SaaS products India, digital transformation Madurai, AI chatbot development, software company Madurai, Thirunagar IT company, best web developer Madurai, web development company Tamil Nadu, app development Madurai, full stack development India, startup software solutions, business automation Tamil Nadu',
+    schemaType: 'WebPage',
+    schemaName: 'Home',
+  },
+  about: {
+    keywords: 'Integer.IO Systems team, about Integer IO, IT company founders Madurai, Kawin MS Integer IO, software company team Tamil Nadu, digital solutions provider Madurai, web development experts, AI company about us, IT startup Madurai 2024',
+    schemaType: 'AboutPage',
+    schemaName: 'About Us',
+  },
+  services: {
+    keywords: 'web development services Madurai, AI automation services Tamil Nadu, SaaS development company, custom software development India, digital marketing Madurai, branding services Tamil Nadu, final year projects Madurai, cloud deployment services, student project help Tamil Nadu, React development services, Node.js development, ERP software Madurai, billing software development, CRM development India',
+    schemaType: 'WebPage',
+    schemaName: 'Services',
+  },
+  products: {
+    keywords: 'Chatz.IO AI chatbot, Integer IO SaaS products, AI student assistant, Dips IO image generation, CRM project portal, IT products Madurai, SaaS platform Tamil Nadu, AI software products India, web app products Integer IO',
+    schemaType: 'WebPage',
+    schemaName: 'Products',
+  },
+  projects: {
+    keywords: 'Integer IO projects portfolio, final year projects Madurai, student projects Tamil Nadu, AI ML projects, web development portfolio, React projects, data science projects, B.Tech final year project, MCA projects Madurai, computer science projects Tamil Nadu, project download, FYP portfolio',
+    schemaType: 'WebPage',
+    schemaName: 'Projects',
+  },
+  contact: {
+    keywords: 'contact Integer IO, Integer IO phone number, Integer IO email, IT company contact Madurai, hire web developer Madurai, get quote web development Tamil Nadu, web development enquiry, WhatsApp Integer IO, software company contact Tamil Nadu',
+    schemaType: 'ContactPage',
+    schemaName: 'Contact Us',
+  },
+  careers: {
+    keywords: 'Integer IO careers, jobs at Integer IO Madurai, IT jobs Tamil Nadu, software developer jobs Madurai, web developer jobs, AI developer jobs Tamil Nadu, IT company hiring Madurai, tech jobs Tamil Nadu 2025',
+    schemaType: 'WebPage',
+    schemaName: 'Careers',
+  },
+  privacy: {
+    keywords: 'Integer IO privacy policy, data protection Integer IO, privacy policy IT company Madurai, user data security Integer IO',
+    schemaType: 'WebPage',
+    schemaName: 'Privacy Policy',
+  },
+  terms: {
+    keywords: 'Integer IO terms of service, terms and conditions IT company, Integer IO legal, service agreement Integer IO Madurai',
+    schemaType: 'WebPage',
+    schemaName: 'Terms of Service',
+  },
+};
+
+const BASE_URL = 'https://integerio.com';
+const OG_IMAGE = 'https://integerio.com/og-image.webp';
+
 const SEO: React.FC<SEOProps> = ({
   title = "Integer.IO Systems | AI Automation & Web Development Company in Madurai, Coimbatore & Chennai",
   description = "Integer.IO Systems is a leading AI automation company and web development company in Madurai. We provide SaaS products, React development, business automation, custom software, digital transformation and final year projects across Tamil Nadu.",
-  keywords = "Integer.IO Systems, Integer.IO, AI automation company, web development company, React development, SaaS solutions, software company, digital transformation, business automation, madurai it companies, coimbatore it companies, chennai it companies, final year projects tamilnadu, SaaS products, web development Madurai, web development Coimbatore, web development Chennai, AI automation Tamil Nadu, custom software, digital marketing Madurai, student projects, AI chatbot, Node.js development, full stack development",
-  image = logoAsset,
-  url = "https://integerio.com",
+  keywords,
+  image = OG_IMAGE,
+  url = BASE_URL,
   page = ""
 }) => {
-  const fullUrl = page ? `${url}/${page}` : url;
+  const fullUrl = page ? `${BASE_URL}/${page}` : BASE_URL;
+  const pageConfig = PAGE_SEO[page] ?? PAGE_SEO[''];
+  const finalKeywords = keywords ?? pageConfig.keywords;
 
   return (
     <Helmet>
@@ -27,7 +80,7 @@ const SEO: React.FC<SEOProps> = ({
       <title>{title}</title>
       <meta name="title" content={title} />
       <meta name="description" content={description} />
-      <meta name="keywords" content={keywords} />
+      <meta name="keywords" content={finalKeywords} />
       <meta name="author" content="Kawin M.S. - Integer.IO Systems" />
       <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 
@@ -57,6 +110,29 @@ const SEO: React.FC<SEOProps> = ({
       <meta name="theme-color" content="#10b981" />
       <link rel="canonical" href={fullUrl} />
 
+      {/* Page Schema */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": pageConfig.schemaType,
+          "name": title,
+          "description": description,
+          "url": fullUrl,
+          "isPartOf": {
+            "@type": "WebSite",
+            "name": "Integer.IO Systems",
+            "url": BASE_URL
+          },
+          "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": BASE_URL },
+              ...(page ? [{ "@type": "ListItem", "position": 2, "name": pageConfig.schemaName, "item": fullUrl }] : [])
+            ]
+          }
+        })}
+      </script>
+
       {/* Organization Structured Data */}
       <script type="application/ld+json">
         {JSON.stringify({
@@ -65,9 +141,9 @@ const SEO: React.FC<SEOProps> = ({
           "name": "Integer.IO Systems",
           "alternateName": ["Integer IO", "Integer.IO Systems", "IntegerIO"],
           "description": "Professional web development, AI automation, SaaS products, digital marketing, and student project services based in Madurai, Tamil Nadu, India.",
-          "url": url,
-          "logo": image,
-          "image": image,
+          "url": BASE_URL,
+          "logo": OG_IMAGE,
+          "image": OG_IMAGE,
           "founder": {
             "@type": "Person",
             "name": "Kawin M.S.",
@@ -91,7 +167,9 @@ const SEO: React.FC<SEOProps> = ({
           },
           "sameAs": [
             "https://wa.me/918015355914",
-            "https://www.linkedin.com/in/kawin-m-s-570961285/"
+            "https://www.linkedin.com/in/kawin-m-s-570961285/",
+            "https://www.youtube.com/@integer-io",
+            "https://www.facebook.com/profile.php?id=61588744035428"
           ],
           "areaServed": {
             "@type": "Country",
@@ -167,10 +245,10 @@ const SEO: React.FC<SEOProps> = ({
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
           "name": "Integer.IO Systems",
-          "image": image,
+          "image": OG_IMAGE,
           "description": "IT company in Madurai specializing in web development, AI automation, SaaS products, ERP That can include: Billing software, CRM, HR, Inventory, digital marketing, and student project services.",
-          "@id": url,
-          "url": url,
+          "@id": BASE_URL,
+          "url": BASE_URL,
           "telephone": "+91-8015355914",
           "email": "integer.io.ai@gmail.com",
           "address": {
@@ -210,17 +288,18 @@ const SEO: React.FC<SEOProps> = ({
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": url },
-            { "@type": "ListItem", "position": 2, "name": "Services", "item": `${url}/services` },
-            { "@type": "ListItem", "position": 3, "name": "Products", "item": `${url}/products` },
-            { "@type": "ListItem", "position": 4, "name": "Projects", "item": `${url}/projects` },
-            { "@type": "ListItem", "position": 5, "name": "About", "item": `${url}/about` },
-            { "@type": "ListItem", "position": 6, "name": "Contact", "item": `${url}/contact` },
-            { "@type": "ListItem", "position": 7, "name": "Careers", "item": `${url}/careers` }
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": BASE_URL },
+            { "@type": "ListItem", "position": 2, "name": "Services", "item": `${BASE_URL}/services` },
+            { "@type": "ListItem", "position": 3, "name": "Products", "item": `${BASE_URL}/products` },
+            { "@type": "ListItem", "position": 4, "name": "Projects", "item": `${BASE_URL}/projects` },
+            { "@type": "ListItem", "position": 5, "name": "About", "item": `${BASE_URL}/about` },
+            { "@type": "ListItem", "position": 6, "name": "Contact", "item": `${BASE_URL}/contact` },
+            { "@type": "ListItem", "position": 7, "name": "Careers", "item": `${BASE_URL}/careers` }
           ]
         })}
       </script>
     </Helmet>
+
   );
 };
 

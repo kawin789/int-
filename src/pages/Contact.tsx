@@ -181,9 +181,8 @@ const Contact = () => {
           <h1 className={`text-2xl sm:text-4xl md:text-6xl font-bold mb-3 sm:mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Contact Us
           </h1>
-          <p className={`text-sm sm:text-lg md:text-xl font-medium ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
-            Ready to transform your ideas into reality? Get in touch with
-            Integer.IO Systems today!
+          <p className={`text-sm sm:text-lg md:text-xl font-medium max-w-4xl mx-auto leading-relaxed ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
+            Ready to transform your innovative ideas into high-performance digital reality? Whether you have a specific project in mind, need technical consultation, or want to explore how AI automation can scale your business, our expert team at Integer.IO Systems is here to help you every step of the way. Get in touch with us today for a personalized consultation!
           </p>
         </motion.div>
 

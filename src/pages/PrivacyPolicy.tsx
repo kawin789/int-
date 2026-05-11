@@ -14,6 +14,7 @@ const PrivacyPolicy = () => {
       <SEO 
         title="Privacy Policy - Integer.IO Systems"
         description="Learn how Integer.IO Systems protects your privacy and handles your personal information."
+        page="privacy"
       />
       
       <div className="relative z-10 max-w-4xl mx-auto px-4 py-12">
