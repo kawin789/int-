@@ -358,8 +358,8 @@ const About = () => {
           transition={{ duration: 0.6 }}
           className="mb-16 scroll-mt-24"
         >
-          <h2 className={`text-3xl md:text-4xl font-bold text-center mb-12 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            Client Reviews
+          <h2 className={`text-3xl md:text-4xl font-bold text-center mb-12 ${isDark ? 'text-white' : 'text-black'}`}>
+            Our Customer Reviews
           </h2>
           <ReviewCarousel />
         </motion.div>

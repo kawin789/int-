@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import StatusPopup from './StatusPopup';
+import { getApprovedReviews, PendingReview } from '../lib/supabase';
 
 interface Review {
   id: number;
@@ -111,10 +112,9 @@ const ReviewCarousel: React.FC = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const { getApprovedReviews } = await import('../lib/supabase');
         const approvedData = await getApprovedReviews();
 
-        const dbReviews: Review[] = approvedData.map((r: any) => ({
+        const dbReviews: Review[] = approvedData.map((r: PendingReview) => ({
           id: r.id,
           name: r.name,
           company: r.company,
@@ -133,7 +133,7 @@ const ReviewCarousel: React.FC = () => {
     };
 
     fetchReviews();
-  }, []);
+  }, [initialReviews]);
 
   useEffect(() => {
     if (reviews.length > 0 && isAutoPlay) {
@@ -289,9 +289,6 @@ const ReviewCarousel: React.FC = () => {
             getVisibleReviews().map((review) => {
               const position = review.position;
               const isCenter = position === 0;
-              const isUserReview = !initialReviews.some(
-                (ir) => ir.id === review.id
-              );
 
               return (
                 <motion.div
@@ -336,7 +333,10 @@ const ReviewCarousel: React.FC = () => {
                               }`}
                           >
                             Service:{' '}
-                            <span className="font-medium text-blue-400">
+                            <span
+                              className="font-semibold bg-clip-text text-transparent"
+                              style={{ backgroundImage: 'linear-gradient(135deg, #065f46, #0f766e, #1e40af)' }}
+                            >
                               {review.service}
                             </span>
                           </p>

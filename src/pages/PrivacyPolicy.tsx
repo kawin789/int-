@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Eye, Lock, FileText } from 'lucide-react';
+import { Shield, Lock } from 'lucide-react';
 import InteractiveCard from '../components/InteractiveCard';
 import SEO from '../components/SEO';
 import { useTheme } from '../contexts/ThemeContext';

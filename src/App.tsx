@@ -14,6 +14,7 @@ import ScrollToTop from './components/ScrollToTop';
 import ChatbotWidget from './components/ChatbotWidget';
 import Analytics from './components/Analytics';
 import { Analytics as VercelAnalytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import SEO from './components/SEO';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -51,6 +52,7 @@ function App() {
                 <SEO />
                 <Analytics />
                 <VercelAnalytics debug={false} />
+                <SpeedInsights />
                 <SpaceBackground />
                 <JupiterPlanet />
                 <Spaceship />

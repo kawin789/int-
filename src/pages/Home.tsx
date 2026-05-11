@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 import {
   ArrowRight,
   Sparkles,
-  Globe,
-  Users,
-  Award,
+  // Globe,
+  // Users,
+  // Award,
   // Shield,
   // Zap,
   // HeadphonesIcon,
@@ -65,26 +65,26 @@ const Home = () => {
 
 
 
-  const features = [
-    {
-      title: 'Global Reach',
-      description: 'Serving clients worldwide with 24/7 support',
-      icon: <Globe className="h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
-      color: 'emerald' as const,
-    },
-    {
-      title: 'Expert Team',
-      description: 'Skilled professionals with years of experience',
-      icon: <Users className="h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
-      color: 'purple' as const,
-    },
-    {
-      title: 'Quality Assured',
-      description: 'Premium solutions with guaranteed satisfaction',
-      icon: <Award className="h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
-      color: 'blue' as const,
-    },
-  ];
+  // const features = [
+  //   {
+  //     title: 'Global Reach',
+  //     description: 'Serving clients worldwide with 24/7 support',
+  //     icon: <Globe className="h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
+  //     color: 'emerald' as const,
+  //   },
+  //   {
+  //     title: 'Expert Team',
+  //     description: 'Skilled professionals with years of experience',
+  //     icon: <Users className="h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
+  //     color: 'purple' as const,
+  //   },
+  //   {
+  //     title: 'Quality Assured',
+  //     description: 'Premium solutions with guaranteed satisfaction',
+  //     icon: <Award className="h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
+  //     color: 'blue' as const,
+  //   },
+  // ];
 
 
 
@@ -206,7 +206,7 @@ const Home = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={slideL}
-            className={`text-xl sm:text-3xl md:text-4xl font-bold text-center mb-2 sm:mb-4 bg-clip-text text-transparent bg-gradient-to-r ${isDark ? 'from-white to-gray-400' : 'from-emerald-900 via-indigo-900 to-purple-900'}`}
+            className={`text-xl sm:text-3xl md:text-4xl font-bold text-center mb-2 sm:mb-4 ${isDark ? 'bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400' : 'text-black'}`}
           >
             Our Core Services
           </motion.h2>
@@ -240,9 +240,9 @@ const Home = () => {
       </section>
 
       {/* Why Integer.IO Systems Section */}
-      <section className="py-12 sm:py-24 px-4 relative z-10 overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <div className={`p-8 sm:p-12 md:p-16 rounded-[2.5rem] backdrop-blur-xl border shadow-2xl transition-all duration-500 ${isDark ? 'bg-white/5 border-white/10' : 'bg-white/60 border-emerald-500/10'}`}>
+      <section className="py-8 sm:py-16 px-4 relative z-10 overflow-hidden">
+        <div className="max-w-5xl mx-auto">
+          <div className={`p-5 sm:p-8 md:p-10 rounded-[2rem] backdrop-blur-xl border shadow-2xl transition-all duration-500 ${isDark ? 'bg-white/5 border-white/10' : 'bg-white/60 border-emerald-500/10'}`}>
             <motion.h2
               initial="hidden"
               whileInView="visible"
@@ -256,13 +256,14 @@ const Home = () => {
           <div className="flex flex-row gap-4 sm:gap-12 lg:gap-20 items-center">
             
             {/* Left Side: Points List */}
-            <div className="w-3/5 lg:w-1/2 flex flex-col gap-4 sm:gap-8">
+            <div className="w-full lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-x-8 sm:gap-y-6">
               {[
                 { title: 'Time Management', description: 'Projects delivered precisely within 150 - 200 hours.' },
                 { title: '24x7 Available', description: 'Always here to support you, any time of the day.' },
                 { title: 'Modern AI Integration', description: 'Seamlessly incorporating the latest AI into your systems.' },
                 { title: 'Maximum Security', description: 'Your project details and data must be fully secure.' },
-                { title: 'Scalable Architecture', description: 'Future-proof solutions designed to grow with your business.' }
+                { title: 'Scalable Architecture', description: 'Future-proof solutions designed to grow with your business.' },
+                { title: 'Creative Design', description: 'Beautiful, modern UI/UX that makes your brand stand out.' }
               ].map((point, index) => (
                 <motion.div
                   key={index}
@@ -271,12 +272,12 @@ const Home = () => {
                   viewport={{ once: true }}
                   variants={slideL}
                   custom={index}
-                  className="flex flex-col border-l-4 border-emerald-500 pl-4 sm:pl-6"
+                  className="flex flex-col border-l-4 border-emerald-500 pl-4 sm:pl-5"
                 >
-                  <h3 className={`text-base sm:text-xl font-bold mb-0.5 sm:mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  <h3 className={`text-sm sm:text-lg font-bold mb-0.5 ${isDark ? 'text-white' : 'text-gray-900'}`}>
                     {point.title}
                   </h3>
-                  <p className={`text-xs sm:text-base ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  <p className={`text-[10px] sm:text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                     {point.description}
                   </p>
                 </motion.div>
@@ -289,7 +290,7 @@ const Home = () => {
               whileInView="visible"
               viewport={{ once: true }}
               variants={slideR}
-              className="w-2/5 lg:w-1/2 flex justify-center"
+              className="hidden lg:flex lg:w-1/3 justify-center"
             >
               <div className="w-full max-w-sm sm:max-w-md">
                 <InteractiveCard glowColor="emerald" className="!p-0 overflow-hidden">

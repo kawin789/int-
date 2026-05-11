@@ -17,6 +17,18 @@ import {
     Mail,
     Bot,
 } from 'lucide-react';
+import { 
+    getPendingReviews, 
+    getAnalytics, 
+    getContactEnquiries, 
+    getApprovedReviews, 
+    getChatbotLeads,
+    updateEnquiryStatus,
+    deleteContactEnquiry,
+    deleteChatbotLead,
+    PendingReview,
+    ContactEnquiry
+} from '../lib/supabase';
 import {
     XAxis,
     YAxis,
@@ -60,6 +72,32 @@ interface Enquiry {
     created_at: string;
 }
 
+interface ChatbotLead {
+    id: number;
+    name?: string;
+    email?: string;
+    phone?: string;
+    message_count?: number;
+    unhandled_queries?: string;
+    session_id?: string;
+    created_at?: string;
+}
+
+interface AnalyticsUser {
+    id: number;
+    last_visit: string;
+    device_type: string;
+    browser?: string;
+    home_visits?: number;
+    services_visits?: number;
+    contact_visits?: number;
+    about_visits?: number;
+    products_visits?: number;
+    projects_visits?: number;
+    admin_visits?: number;
+    total_time_spent?: number;
+}
+
 interface AnalyticsData {
     totalVisits: number;
     todayVisits: number;
@@ -81,7 +119,7 @@ const Admin: React.FC = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
     const [activeTab, setActiveTab] = useState<'reviews' | 'analytics' | 'enquiries' | 'chatbot'>('reviews');
-    const [chatbotLeads, setChatbotLeads] = useState<any[]>([]);
+    const [chatbotLeads, setChatbotLeads] = useState<ChatbotLead[]>([]);
     const [reviews, setReviews] = useState<Review[]>([]);
     const [approvedReviews, setApprovedReviews] = useState<Review[]>([]); // Approved reviews state
     const [editingReview, setEditingReview] = useState<Review | null>(null); // Track review being edited
@@ -104,7 +142,7 @@ const Admin: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
     const [deviceFilter, setDeviceFilter] = useState<'today' | 'lastMonth' | 'overall'>('overall');
-    const [allUsers, setAllUsers] = useState<any[]>([]);
+    const [allUsers, setAllUsers] = useState<AnalyticsUser[]>([]);
     const dashboardRef = useRef<HTMLDivElement>(null);
 
     const ADMIN_PASSWORD = 'kawin235';
@@ -140,28 +178,29 @@ const Admin: React.FC = () => {
         setIsLoading(true);
         try {
             // Import Supabase functions dynamically
-            const { getPendingReviews, getAnalytics, getContactEnquiries, getApprovedReviews, getChatbotLeads } = await import('../lib/supabase');
+            // Functions already imported at top level
+            // const { getPendingReviews, getAnalytics, getContactEnquiries, getApprovedReviews, getChatbotLeads } = await import('../lib/supabase');
 
             // Load pending reviews from Supabase
             const reviewsData = await getPendingReviews();
             const approvedData = await getApprovedReviews(); // Fetch approved reviews
             const enquiriesData = await getContactEnquiries(); // Fetch enquiries
-            setReviews(reviewsData.map((r: any) => ({
+            setReviews(reviewsData.map((r: PendingReview) => ({
                 id: r.id,
                 name: r.name,
                 company: r.company,
                 email: r.email,
                 rating: r.rating,
                 review: r.review,
-                service: r.services, // Note: DB column is 'services', UI expects 'service'
+                service: r.services,
                 image: r.image_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(r.name)}`,
                 status: r.status,
             })));
             // Map enquiries data properly - filter out any invalid entries
-            const mappedEnquiries = enquiriesData
-                .filter((e: any) => e && e.id) // Only include entries with valid id
-                .map((e: any) => ({
-                    id: e.id,
+            const mappedEnquiries: Enquiry[] = enquiriesData
+                .filter((e: ContactEnquiry) => e && e.id)
+                .map((e: ContactEnquiry) => ({
+                    id: e.id!,
                     name: e.name || 'Unknown',
                     phone: e.phone || 'N/A',
                     email: e.email || 'N/A',
@@ -173,7 +212,7 @@ const Admin: React.FC = () => {
             setEnquiries(mappedEnquiries);
 
             // Map approved reviews data
-            setApprovedReviews(approvedData.map((r: any) => ({
+            setApprovedReviews(approvedData.map((r: PendingReview) => ({
                 id: r.id,
                 name: r.name,
                 company: r.company,
@@ -202,7 +241,7 @@ const Admin: React.FC = () => {
                 const uniqueVisitors = users.length;
 
                 // Calculate total visits across all pages
-                const totalVisits = users.reduce((sum: number, u: any) => {
+                const totalVisits = users.reduce((sum: number, u: AnalyticsUser) => {
                     return sum + (u.home_visits || 0) + (u.services_visits || 0) +
                         (u.contact_visits || 0) + (u.about_visits || 0) +
                         (u.products_visits || 0) + (u.projects_visits || 0) +
@@ -210,12 +249,12 @@ const Admin: React.FC = () => {
                 }, 0);
 
                 // Today's visitors (users who visited today)
-                const todayVisits = users.filter((u: any) =>
+                const todayVisits = users.filter((u: AnalyticsUser) =>
                     new Date(u.last_visit).toDateString() === today
                 ).length;
 
                 // Device breakdown
-                const mobileVisits = users.filter((u: any) =>
+                const mobileVisits = users.filter((u: AnalyticsUser) =>
                     u.device_type === 'mobile' || u.device_type === 'tablet'
                 ).length;
 
@@ -223,43 +262,43 @@ const Admin: React.FC = () => {
                 const pageViews = [
                     {
                         page: 'Home',
-                        views: users.reduce((sum: number, u: any) => sum + (u.home_visits || 0), 0),
+                        views: users.reduce((sum: number, u: AnalyticsUser) => sum + (u.home_visits || 0), 0),
                         avgTime: 0
                     },
                     {
                         page: 'Services',
-                        views: users.reduce((sum: number, u: any) => sum + (u.services_visits || 0), 0),
+                        views: users.reduce((sum: number, u: AnalyticsUser) => sum + (u.services_visits || 0), 0),
                         avgTime: 0
                     },
                     {
                         page: 'Contact',
-                        views: users.reduce((sum: number, u: any) => sum + (u.contact_visits || 0), 0),
+                        views: users.reduce((sum: number, u: AnalyticsUser) => sum + (u.contact_visits || 0), 0),
                         avgTime: 0
                     },
                     {
                         page: 'About',
-                        views: users.reduce((sum: number, u: any) => sum + (u.about_visits || 0), 0),
+                        views: users.reduce((sum: number, u: AnalyticsUser) => sum + (u.about_visits || 0), 0),
                         avgTime: 0
                     },
                     {
                         page: 'Products',
-                        views: users.reduce((sum: number, u: any) => sum + (u.products_visits || 0), 0),
+                        views: users.reduce((sum: number, u: AnalyticsUser) => sum + (u.products_visits || 0), 0),
                         avgTime: 0
                     },
                     {
                         page: 'Projects',
-                        views: users.reduce((sum: number, u: any) => sum + (u.projects_visits || 0), 0),
+                        views: users.reduce((sum: number, u: AnalyticsUser) => sum + (u.projects_visits || 0), 0),
                         avgTime: 0
                     }
                 ].sort((a, b) => b.views - a.views);
 
                 // Average time spent
-                const totalTime = users.reduce((sum: number, u: any) => sum + (u.total_time_spent || 0), 0);
+                const totalTime = users.reduce((sum: number, u: AnalyticsUser) => sum + (u.total_time_spent || 0), 0);
                 const avgTimeSpent = users.length > 0 ? Math.round(totalTime / users.length) : 0;
 
                 // Browser stats
                 const browserCounts: { [key: string]: number } = {};
-                users.forEach((u: any) => {
+                users.forEach((u: AnalyticsUser) => {
                     const browser = u.browser || 'Other';
                     browserCounts[browser] = (browserCounts[browser] || 0) + 1;
                 });
@@ -273,7 +312,7 @@ const Admin: React.FC = () => {
                     const date = new Date();
                     date.setDate(date.getDate() - i);
                     const dayStr = date.toDateString();
-                    const dayVisits = users.filter((u: any) =>
+                    const dayVisits = users.filter((u: AnalyticsUser) =>
                         new Date(u.last_visit).toDateString() === dayStr
                     ).length;
                     monthlyVisits.push({
@@ -292,7 +331,7 @@ const Admin: React.FC = () => {
                 yesterdayDate.setDate(yesterdayDate.getDate() - 1);
                 const yesterday = yesterdayDate.toDateString();
 
-                users.forEach((u: any) => {
+                users.forEach((u: AnalyticsUser) => {
                     const date = new Date(u.last_visit);
                     const dateStr = date.toDateString();
 
@@ -1347,7 +1386,7 @@ const Admin: React.FC = () => {
                                             <PieChart>
                                                 <Pie
                                                     data={(() => {
-                                                        const filteredUsers = allUsers.filter((u: any) => {
+                                                        const filteredUsers = allUsers.filter((u: AnalyticsUser) => {
                                                             if (deviceFilter === 'today') {
                                                                 return new Date(u.last_visit).toDateString() === new Date().toDateString();
                                                             } else if (deviceFilter === 'lastMonth') {
@@ -1357,7 +1396,7 @@ const Admin: React.FC = () => {
                                                             }
                                                             return true; // overall
                                                         });
-                                                        const mobile = filteredUsers.filter((u: any) => u.device_type === 'mobile' || u.device_type === 'tablet').length;
+                                                        const mobile = filteredUsers.filter((u: AnalyticsUser) => u.device_type === 'mobile' || u.device_type === 'tablet').length;
                                                         const desktop = filteredUsers.length - mobile;
                                                         return [
                                                             { name: 'Mobile', value: mobile },
@@ -1541,14 +1580,14 @@ const Admin: React.FC = () => {
                                 <InteractiveCard glowColor="emerald" className="!p-3 sm:!p-4 text-center">
                                     <TrendingUp className={`h-6 w-6 sm:h-8 sm:w-8 mx-auto mb-1 ${isDark ? 'text-emerald-400' : 'text-emerald-600'}`} />
                                     <p className={`text-lg sm:text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}>
-                                        {chatbotLeads.reduce((sum: number, l: any) => sum + (l.message_count || 0), 0)}
+                                        {chatbotLeads.reduce((sum: number, l: ChatbotLead) => sum + (l.message_count || 0), 0)}
                                     </p>
                                     <p className={`text-[10px] sm:text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Total Messages</p>
                                 </InteractiveCard>
                                 <InteractiveCard glowColor="purple" className="!p-3 sm:!p-4 text-center">
                                     <Clock className={`h-6 w-6 sm:h-8 sm:w-8 mx-auto mb-1 ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
                                     <p className={`text-lg sm:text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}>
-                                        {chatbotLeads.filter((l: any) => {
+                                        {chatbotLeads.filter((l: ChatbotLead) => {
                                             if (!l.created_at) return false;
                                             const d = new Date(l.created_at);
                                             const today = new Date();
@@ -1560,7 +1599,7 @@ const Admin: React.FC = () => {
                                 <InteractiveCard glowColor="pink" className="!p-3 sm:!p-4 text-center">
                                     <Users className={`h-6 w-6 sm:h-8 sm:w-8 mx-auto mb-1 ${isDark ? 'text-pink-400' : 'text-pink-600'}`} />
                                     <p className={`text-lg sm:text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}>
-                                        {chatbotLeads.filter((l: any) => l.name && l.email).length}
+                                        {chatbotLeads.filter((l: ChatbotLead) => l.name && l.email).length}
                                     </p>
                                     <p className={`text-[10px] sm:text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Verified Leads</p>
                                 </InteractiveCard>
@@ -1584,7 +1623,7 @@ const Admin: React.FC = () => {
 
                                     {/* Mobile Cards (shown on small screens) */}
                                     <div className="sm:hidden divide-y divide-gray-700/50">
-                                        {chatbotLeads.map((lead: any) => (
+                                        {chatbotLeads.map((lead: ChatbotLead) => (
                                             <div key={lead.id} className="p-4 space-y-3">
                                                 <div className="flex justify-between items-start">
                                                     <div className="flex-1 min-w-0">
@@ -1642,7 +1681,7 @@ const Admin: React.FC = () => {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {chatbotLeads.map((lead: any, index: number) => (
+                                                {chatbotLeads.map((lead: ChatbotLead, index: number) => (
                                                     <tr key={lead.id} className={`border-t transition-colors ${isDark ? 'border-gray-700/50 hover:bg-gray-800/30' : 'border-gray-100 hover:bg-gray-50'}`}>
                                                         <td className={`px-3 sm:px-4 py-2.5 text-xs sm:text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>{index + 1}</td>
                                                         <td className="px-3 sm:px-4 py-2.5">
