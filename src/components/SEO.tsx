@@ -59,8 +59,8 @@ const PAGE_SEO: Record<string, { keywords: string; schemaType: string; schemaNam
   },
 };
 
-const BASE_URL = 'https://integerio.com';
-const OG_IMAGE = 'https://integerio.com/og-image.webp';
+const BASE_URL = 'https://www.integerio.com';
+const OG_IMAGE = 'https://www.integerio.com/og-image.webp';
 
 const SEO: React.FC<SEOProps> = ({
   title = "Integer.IO Tech | AI Automation & Web Development Company in Madurai, Coimbatore & Chennai",
