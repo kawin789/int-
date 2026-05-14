@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Download, FileText, ExternalLink, CheckCircle2 } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import InteractiveCard from '../components/InteractiveCard';
 import ModernProjectCarousel from '../components/ModernProjectCarousel';
 import { useTheme } from '../contexts/ThemeContext';
@@ -140,10 +139,9 @@ const Projects = () => {
             Our Projects
           </h1>
           <p
-            className={`text-xs sm:text-lg md:text-xl max-w-4xl mx-auto font-medium leading-relaxed ${isDark ? 'text-gray-200' : 'text-gray-800'
-              }`}
+            className={`text-sm sm:text-lg md:text-xl max-w-3xl mx-auto font-medium ${isDark ? 'text-gray-200' : 'text-gray-800'}`}
           >
-            Explore our diverse portfolio of client success stories and download comprehensive project collections designed for technical excellence. From enterprise-grade web applications to cutting-edge AI research projects, we demonstrate our commitment to delivering high-impact digital solutions that solve real-world business challenges and academic requirements.
+            Explore some of our recent client and student projects.
           </p>
         </motion.div>
 

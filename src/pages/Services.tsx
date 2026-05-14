@@ -324,9 +324,6 @@ const Services = () => {
                         <h3 className={`text-base sm:text-xl md:text-2xl font-bold mb-1.5 sm:mb-3 text-center lg:text-left ${isDark ? 'text-white' : 'text-gray-800'}`}>
                           {service.category}
                         </h3>
-                        <p className={`text-[10px] sm:text-xs md:text-sm mb-2 sm:mb-4 font-medium text-center lg:text-left ${iconColor(service.color)}`}>
-                          {service.description}
-                        </p>
                         <ul className="space-y-1 sm:space-y-2 mb-3 sm:mb-6 flex-grow">
                           {service.features.map((feature, featureIdx) => (
                             <motion.li
