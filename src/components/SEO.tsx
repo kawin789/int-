@@ -13,12 +13,12 @@ interface SEOProps {
 // Page-specific SEO configurations
 const PAGE_SEO: Record<string, { keywords: string; schemaType: string; schemaName: string }> = {
   '': {
-    keywords: 'Integer.IO Tech, Integer.IO Systems, Integer.IO Solutions, Integer IO, integerio.com, IT company Madurai, web development Madurai, AI automation Madurai, React development Tamil Nadu, SaaS products India, digital transformation Madurai, AI chatbot development, software company Madurai, Thirunagar IT company, best web developer Madurai, web development company Tamil Nadu, app development Madurai, full stack development India, startup software solutions, business automation Tamil Nadu',
+    keywords: 'Integer.IO Tech, Integer.IO Systems, Integer.IO Solutions, Integer IO tech company, integerio.com, IT company Madurai, web development Madurai, AI automation Madurai, React development Tamil Nadu, SaaS products India, digital transformation Madurai, AI chatbot development, software company Madurai, Thirunagar IT company, best web developer Madurai, Kawin MS, Hemanth K, Livan MG, web development company Tamil Nadu, app development Madurai, full stack development India, startup software solutions, business automation Tamil Nadu',
     schemaType: 'WebPage',
     schemaName: 'Home',
   },
   about: {
-    keywords: 'Integer.IO Tech team, about Integer IO, IT company founders Madurai, Kawin MS Integer IO, software company team Tamil Nadu, digital solutions provider Madurai, web development experts, AI company about us, IT startup Madurai 2024',
+    keywords: 'Integer.IO Tech team, about Integer IO, IT company founders Madurai, Kawin MS Integer IO CEO, Hemanth K Integer IO COO, Livan MG Integer IO CMO, software company team Tamil Nadu, digital solutions provider Madurai, web development experts, AI company about us, IT startup Madurai 2024',
     schemaType: 'AboutPage',
     schemaName: 'About Us',
   },
@@ -64,7 +64,7 @@ const OG_IMAGE = 'https://www.integerio.com/og-image.webp';
 
 const SEO: React.FC<SEOProps> = ({
   title = "Integer.IO Tech | AI Automation & Web Development Company in Madurai, Coimbatore & Chennai",
-  description = "Integer.IO Tech is a leading AI automation company and web development company in Madurai. We provide SaaS products, React development, business automation, custom software, digital transformation and final year projects across Tamil Nadu.",
+  description = "Integer.IO Tech is a leading software tech company in Madurai specializing in AI automation, SaaS products, and web development. Founded by Kawin M.S, our expert team (including Hemanth K and Livan M.G) provides business automation, custom software, digital transformation, and final year projects across India.",
   keywords,
   image = OG_IMAGE,
   url = BASE_URL,
@@ -149,6 +149,23 @@ const SEO: React.FC<SEOProps> = ({
             "name": "Kawin M.S.",
             "jobTitle": "CEO / Founder"
           },
+          "employee": [
+            {
+              "@type": "Person",
+              "name": "Kawin M.S.",
+              "jobTitle": "CEO / Founder"
+            },
+            {
+              "@type": "Person",
+              "name": "Hemanth K",
+              "jobTitle": "COO / Sales"
+            },
+            {
+              "@type": "Person",
+              "name": "Livan M.G",
+              "jobTitle": "CMO / Relations"
+            }
+          ],
           "address": {
             "@type": "PostalAddress",
             "streetAddress": "Thirunagar",
@@ -246,7 +263,7 @@ const SEO: React.FC<SEOProps> = ({
           "@type": "LocalBusiness",
           "name": "Integer.IO Tech",
           "image": OG_IMAGE,
-          "description": "IT company in Madurai specializing in web development, AI automation, SaaS products, ERP That can include: Billing software, CRM, HR, Inventory, digital marketing, and student project services.",
+          "description": "IT company in Madurai specializing in web development, AI automation, SaaS products, ERP That can include: Billing software, CRM, HR, Inventory, digital marketing, and student project services. Team led by Kawin M.S, Hemanth K, and Livan M.G.",
           "@id": BASE_URL,
           "url": BASE_URL,
           "telephone": "+91-8015355914",
