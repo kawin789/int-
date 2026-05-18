@@ -268,7 +268,7 @@ const About = () => {
                   <div className={`absolute ${isEven ? 'right-1/2 translate-x-1/2 sm:translate-x-0 sm:right-[-40px] md:right-[-60px]' : 'left-1/2 -translate-x-1/2 sm:translate-x-0 sm:left-[-40px] md:left-[-60px]'} top-24 sm:top-1/2 -translate-y-1/2 z-20 w-48 h-48 sm:w-48 sm:h-48 md:w-64 md:h-64 rounded-full flex items-center justify-center text-4xl sm:text-6xl md:text-8xl font-bold text-white shadow-[0_0_40px_rgba(99,102,241,0.4)] dark:shadow-[0_0_50px_rgba(255,255,255,0.1)] overflow-hidden border-4 sm:border-8 ${isDark ? 'bg-[#0f172a] border-white/20' : 'bg-white border-white shadow-2xl'}`}>
                     {member.image ? (
                       <div className="w-full h-full p-1.5 sm:p-2">
-                        <img src={member.image} alt={member.name} className="w-full h-full object-contain rounded-full" />
+                        <img src={member.image} alt={`${member.name} - ${member.role} at Integer.IO Tech`} title={`${member.name} - ${member.role}`} className="w-full h-full object-contain rounded-full" />
                       </div>
                     ) : (
                       member.name.charAt(0)
