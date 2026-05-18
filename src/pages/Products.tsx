@@ -286,7 +286,7 @@ const Products = () => {
                                             </h2>
                                         </div>
                                         <p
-                                            className={`text-xs sm:text-sm lg:text-base leading-relaxed mb-3 sm:mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'
+                                            className={`text-xs sm:text-sm lg:text-base leading-relaxed mb-3 sm:mb-6 ${isDark ? 'text-gray-300' : 'text-gray-500'
                                                 }`}
                                         >
                                             {product.description}

@@ -125,15 +125,13 @@ const Footer: React.FC = () => {
         <div className={`absolute -bottom-16 -left-24 w-96 h-96 blur-3xl rounded-full ${isDark ? 'bg-blue-500/10' : 'bg-blue-400/10'
           }`} />
       </div>
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 py-6 sm:py-14">
         {/* Desktop: 4 columns, Mobile: 2 columns */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
           {/* Company Info - Full width on mobile */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
             className="col-span-2 lg:col-span-1 mb-0"
           >
             <div className="flex items-center space-x-2 sm:space-x-3 mb-2 sm:mb-4">
@@ -230,9 +228,6 @@ const Footer: React.FC = () => {
 
           {/* Quick Links + Legal - LEFT column on mobile */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
           >
             <h3
               className={`text-sm sm:text-[1.02rem] font-semibold tracking-wide mb-3 ${isDark ? 'text-white' : 'text-black'
@@ -283,9 +278,6 @@ const Footer: React.FC = () => {
 
           {/* Our Services - RIGHT column on mobile */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
           >
             <h3
               className={`text-xs sm:text-[1.02rem] font-semibold tracking-wide mb-2 sm:mb-3 ${isDark ? 'text-white' : 'text-black'
@@ -313,9 +305,6 @@ const Footer: React.FC = () => {
 
           {/* Contact Info LEFT + Business Hours RIGHT - on larger screens combined */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
             className="col-span-2 lg:col-span-1"
           >
             <div className="grid grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-4 lg:gap-6">
@@ -366,9 +355,6 @@ const Footer: React.FC = () => {
 
         {/* Bottom Bar */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
           className={`mt-4 sm:mt-10 pt-4 sm:pt-8 border-t flex justify-center items-center ${isDark ? 'border-gray-800' : 'border-gray-200'
             }`}
         >
