@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
-import InteractiveCard from '../components/InteractiveCard';
 import ModernProjectCarousel from '../components/ModernProjectCarousel';
 import { useTheme } from '../contexts/ThemeContext';
 import SEO from '../components/SEO';
@@ -146,6 +145,7 @@ const Projects = () => {
         </motion.div>
 
         <motion.div
+          id="client-projects"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -165,35 +165,36 @@ const Projects = () => {
           transition={{ duration: 0.5 }}
           className="mb-12 sm:mb-20"
         >
-          <InteractiveCard className="!p-6 sm:!p-10 md:!p-12 hover-3d text-center">
-            <h2 className={`text-xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+          <div className={`rounded-[2rem] border px-5 py-6 sm:px-8 sm:py-8 text-center ${isDark ? 'border-white/10 bg-white/5' : 'border-gray-200 bg-gradient-to-r from-emerald-50 via-white to-purple-50'}`}>
+            <h2 className={`text-xl sm:text-3xl md:text-4xl font-bold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>
               Need a Custom Project?
             </h2>
-            <p className={`text-sm sm:text-lg md:text-xl mb-6 sm:mb-10 max-w-2xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+            <p className={`text-sm sm:text-base md:text-lg mb-5 sm:mb-7 max-w-2xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
               Let's discuss your requirements and create something amazing together.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <button
                 onClick={() => navigate('/contact#contact-form')}
-                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-6 py-3 sm:px-10 sm:py-4 rounded-xl font-bold text-sm sm:text-lg transition-all duration-300 shadow-lg hover:scale-105"
+                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-6 py-3 sm:px-8 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 shadow-lg hover:scale-105"
               >
                 <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5" />
                 Get in Touch
               </button>
               <a
                 href="mailto:integer.io.ai@gmail.com"
-                className={`inline-flex items-center justify-center gap-2 border-2 border-purple-500 px-6 py-3 sm:px-10 sm:py-4 rounded-xl font-bold text-sm sm:text-lg transition-all duration-300 hover:scale-105 ${isDark ? 'text-purple-400 hover:bg-purple-500 hover:text-white' : 'text-purple-700 hover:bg-purple-500 hover:text-white'
+                className={`inline-flex items-center justify-center gap-2 border-2 border-purple-500 px-6 py-3 sm:px-8 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 hover:scale-105 ${isDark ? 'text-purple-400 hover:bg-purple-500 hover:text-white' : 'text-purple-700 hover:bg-purple-500 hover:text-white'
                   }`}
               >
                 Email Us
               </a>
             </div>
-          </InteractiveCard>
+          </div>
         </motion.div>
 
         {/* Rest of your existing code for PDF categories... */}
         {/* Infinite FYP Carousels */}
         <motion.div
+          id="final-year-projects"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}

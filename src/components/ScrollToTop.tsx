@@ -9,13 +9,24 @@ const ScrollToTop: React.FC = () => {
   const location = useLocation();
   const [isVisible, setIsVisible] = useState(false);
 
-  // Scroll to top when route changes
+  // Scroll to hash target when present, otherwise reset to top on route changes.
   useEffect(() => {
+    if (location.hash) {
+      const targetId = location.hash.slice(1);
+      window.setTimeout(() => {
+        document.getElementById(targetId)?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }, 120);
+      return;
+    }
+
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
-  }, [location.pathname]);
+  }, [location.pathname, location.hash]);
 
   useEffect(() => {
     const toggleVisibility = () => {

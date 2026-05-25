@@ -5,6 +5,12 @@ import { Code, Brain, FileText, Megaphone, Search, Globe, Shield, MessageCircle,
 import InteractiveCard from '../components/InteractiveCard';
 import { useTheme } from '../contexts/ThemeContext';
 import SEO from '../components/SEO';
+import webdevImg from '../assets/serivice caosel/webdev_services.webp';
+import aiImg from '../assets/serivice caosel/ai_services.webp';
+import softwareImg from '../assets/serivice caosel/software_services.webp';
+import finalYearImg from '../assets/serivice caosel/finalyr_services.webp';
+import digitalMarketingImg from '../assets/serivice caosel/digital marketing_services.webp';
+import whycardImg from '../assets/serivice caosel/whycard.webp';
 
 /* Safelist for dynamic Tailwind classes used in Services:
    from-emerald-500/10 to-emerald-500/10 text-emerald-400 bg-emerald-400
@@ -64,6 +70,7 @@ const Services = () => {
       category: 'Web Application Development',
       icon: <Code className="h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
       color: 'emerald' as const,
+      image: webdevImg,
       description: 'We design and develop secure, scalable, and high-performance web solutions tailored to the unique needs of modern businesses and ambitious startups. Our team leverages the latest frameworks like React and Next.js to build intuitive interfaces that engage users and drive conversions.',
       features: [
         'Static websites',
@@ -79,6 +86,7 @@ const Services = () => {
       category: 'AI Product & Automation Services',
       icon: <Brain className="h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
       color: 'purple' as const,
+      image: aiImg,
       description: 'We build intelligent, future-ready AI solutions designed to automate complex workflows, enhance decision-making, and significantly improve overall business efficiency. From custom GPT models to automated data pipelines, we help you leverage AI for a competitive advantage.',
       features: [
         'AI chatbots',
@@ -94,6 +102,7 @@ const Services = () => {
       category: 'Custom Software & SaaS Product Development',
       icon: <FileText className="h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
       color: 'blue' as const,
+      image: softwareImg,
       description: 'We create robust custom software and comprehensive SaaS platforms meticulously tailored to solve real-world business challenges. Our solutions focus on long-term scalability, data security, and seamless integration, ensuring your technical infrastructure grows alongside your company.',
       features: [
         'ERP That can include: Billing software, CRM, HR, Inventory',
@@ -110,6 +119,7 @@ const Services = () => {
       category: 'Digital Marketing & Branding Services',
       icon: <Megaphone className="h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
       color: 'pink' as const,
+      image: digitalMarketingImg,
       description: 'We empower brands to dominate their digital space by building strong online presences and generating high-quality leads through targeted marketing strategies. Our creative team combines data-driven SEO insights with impactful design to deliver measurable growth for your brand.',
       features: [
         'SEO optimization',
@@ -124,6 +134,7 @@ const Services = () => {
       category: 'Education & Student Services',
       icon: <Globe className="h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
       color: 'indigo' as const,
+      image: finalYearImg,
       description: 'We provide specialized support for students and working professionals, offering industry-ready solutions and guidance that bridge the gap between academic learning and career success. Our comprehensive services ensure you have the technical foundation and professional edge needed to excel.',
       features: [
         'Final year projects',
@@ -139,6 +150,7 @@ const Services = () => {
       category: 'Cloud Deployment & Technical Support',
       icon: <Shield className="h-7 w-7 sm:h-10 sm:w-10 md:h-12 md:w-12" />,
       color: 'cyan' as const,
+      image: whycardImg,
       description: 'We deliver reliable, enterprise-grade cloud hosting and comprehensive technical support to ensure your digital applications remain secure, fast, and always accessible to your users. Our proactive monitoring and maintenance minimize downtime and optimize your server infrastructure.',
       features: [
         'Cloud deployment',
@@ -256,6 +268,7 @@ const Services = () => {
 
         {/* Core Services Section */}
         <motion.div
+          id="all-services"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -273,68 +286,72 @@ const Services = () => {
           {filteredServices.length > 0 ? (
             <motion.div
               key={filteredServices.length}
-              className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8 mb-8 sm:mb-16"
+              className="space-y-4 sm:space-y-6 mb-8 sm:mb-16"
               variants={containerVariants}
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.1 }}
+              animate="visible"
             >
-              {filteredServices.map((service) => {
+              {filteredServices.map((service, index) => {
+                const isImageFirst = index % 2 === 0;
+
                 return (
                   <motion.div
                     key={service.key}
+                    id={service.key}
                     ref={(el) => { serviceRefs.current[service.key] = el; }}
                     variants={itemVariants}
-                    whileHover={{
-                      y: -2,
-                      scale: 1.008,
-                      rotateX: 0.8,
-                      rotateY: 0.8,
-                      transition: { type: "spring", stiffness: 300, damping: 20 }
-                    }}
-                    className="group"
+                    className={`rounded-[1.75rem] border overflow-hidden ${highlightedService === service.key ? 'ring-4 ring-emerald-500/50' : ''} ${isDark ? 'border-white/10 bg-white/5' : 'border-gray-200/80 bg-white/85'} shadow-[0_20px_60px_-44px_rgba(16,24,40,0.45)]`}
                   >
-                    <div className={`
-                    relative p-4 sm:p-6 md:p-8 rounded-2xl backdrop-blur-xl border transition-all duration-500 h-full
-                    ${isDark
-                        ? 'bg-white/5 border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:bg-white/10'
-                        : 'bg-white/40 border-white/50 shadow-[0_8px_32px_0_rgba(31,38,135,0.15)] hover:bg-white/60'
-                      }
-                    ${highlightedService === service.key
-                        ? 'ring-4 ring-emerald-500 ring-opacity-50'
-                        : ''
-                      }
-                    hover:shadow-2xl
-                    transform-gpu will-change-transform
-                  `}>
-                      {/* Glow effect */}
-                      <div className={`
-                      absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500
-                      bg-gradient-to-r from-${service.color}-500/10 via-transparent to-${service.color}-500/10
-                    `} />
-
-                      <div className="relative z-10 flex flex-col h-full">
-                        <motion.div
-                          className={`${iconColor(service.color)} mb-3 sm:mb-6 flex justify-center lg:justify-start`}
-                          whileHover={{ scale: 1.1, rotate: 5 }}
-                          transition={{ type: "spring", stiffness: 300 }}
-                        >
-                          {service.icon}
-                        </motion.div>
-                        <h3 className={`text-base sm:text-xl md:text-2xl font-bold mb-1.5 sm:mb-3 text-center lg:text-left ${isDark ? 'text-white' : 'text-gray-800'}`}>
-                          {service.category}
-                        </h3>
-                        <ul className="space-y-1 sm:space-y-2 mb-3 sm:mb-6 flex-grow">
+                    <div className={`grid grid-cols-1 items-stretch ${isImageFirst
+                      ? 'lg:grid-cols-[minmax(320px,0.72fr)_minmax(0,1.28fr)]'
+                      : 'lg:grid-cols-[minmax(0,1.28fr)_minmax(320px,0.72fr)]'
+                      }`}>
+                      <div className={`relative h-[180px] sm:h-[220px] lg:h-auto lg:min-h-[280px] ${isDark ? 'bg-black/20' : 'bg-gray-50'} ${isImageFirst ? 'lg:order-1' : 'lg:order-2'}`}>
+                        <img
+                          src={service.image}
+                          alt={service.category}
+                          className="absolute inset-0 h-full w-full object-contain p-4 sm:p-5 lg:p-6"
+                          loading="lazy"
+                        />
+                        <div className={`absolute inset-0 ${isImageFirst
+                          ? isDark
+                            ? 'bg-gradient-to-r from-black/18 via-transparent to-transparent'
+                            : 'bg-gradient-to-r from-white/30 via-transparent to-transparent'
+                          : isDark
+                            ? 'bg-gradient-to-l from-black/18 via-transparent to-transparent'
+                            : 'bg-gradient-to-l from-white/30 via-transparent to-transparent'
+                          }`} />
+                      </div>
+                      <div className={`flex flex-col justify-center p-4 sm:p-6 md:p-7 lg:p-8 ${isImageFirst ? 'lg:order-2' : 'lg:order-1'}`}>
+                        <div>
+                        <div className={`mb-3 flex items-center gap-3 ${iconColor(service.color)}`}>
+                          <div className={`flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl ${isDark ? 'bg-white/6' : 'bg-gray-100'}`}>
+                            {service.icon}
+                          </div>
+                          <div>
+                            <p className={`text-xs font-semibold uppercase tracking-[0.24em] ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                              Core Service
+                            </p>
+                            <h3 className={`text-lg sm:text-xl md:text-2xl font-bold leading-tight ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                              {service.category}
+                            </h3>
+                          </div>
+                        </div>
+                        <p className={`mb-4 max-w-4xl text-sm sm:text-base leading-8 sm:leading-8 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                          {service.description}
+                        </p>
+                        </div>
+                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 pt-1">
                           {service.features.map((feature, featureIdx) => (
                             <motion.li
                               key={featureIdx}
-                              className={`flex items-center text-xs sm:text-sm md:text-base ${isDark ? 'text-gray-200' : 'text-gray-700'}`}
+                              className={`min-h-[36px] flex items-start text-sm sm:text-base ${isDark ? 'text-gray-200' : 'text-gray-700'}`}
                               initial={{ opacity: 0, x: -10 }}
-                              whileInView={{ opacity: 1, x: 0 }}
+                              animate={{ opacity: 1, x: 0 }}
                               transition={{ delay: featureIdx * 0.1 }}
                             >
-                              <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full mr-2 sm:mr-3 flex-shrink-0 ${dotColor(service.color)}`} />
-                              {feature}
+                              <div className={`mt-1.5 h-1.5 w-1.5 rounded-full mr-2.5 flex-shrink-0 ${dotColor(service.color)}`} />
+                              <span>{feature}</span>
                             </motion.li>
                           ))}
                         </ul>
@@ -395,6 +412,7 @@ const Services = () => {
         {/* Student Project Packages */}
         {showStudentSection && (
           <motion.div
+            id="student-services"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -466,6 +484,7 @@ const Services = () => {
 
         {/* Project Deliverables Section */}
         <motion.div
+          id="project-deliverables"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
